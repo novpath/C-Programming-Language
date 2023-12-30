@@ -1,0 +1,58 @@
+<mxfile host="Electron" modified="2023-12-29T03:42:29.891Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/22.1.11 Chrome/114.0.5735.289 Electron/25.9.8 Safari/537.36" etag="tPr1215h8I4FbG2Nngmf" version="22.1.11" type="device">
+  <diagram id="C5RBs43oDa-KdzZeNtuy" name="Page-1">
+    <mxGraphModel dx="794" dy="519" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="WIyWlLk6GJQsqaUBKTNV-0" />
+        <mxCell id="WIyWlLk6GJQsqaUBKTNV-1" parent="WIyWlLk6GJQsqaUBKTNV-0" />
+        <mxCell id="i4a9FqG0ybNxiutWN6Q0-2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" edge="1" parent="WIyWlLk6GJQsqaUBKTNV-1" target="i4a9FqG0ybNxiutWN6Q0-1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="360" y="130" as="sourcePoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="i4a9FqG0ybNxiutWN6Q0-4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="WIyWlLk6GJQsqaUBKTNV-1" source="i4a9FqG0ybNxiutWN6Q0-1" target="i4a9FqG0ybNxiutWN6Q0-3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="i4a9FqG0ybNxiutWN6Q0-1" value="输出“你的年龄是”+age" style="shape=parallelogram;perimeter=parallelogramPerimeter;whiteSpace=wrap;html=1;fixedSize=1;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="300" y="180" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="i4a9FqG0ybNxiutWN6Q0-6" value="YES" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="WIyWlLk6GJQsqaUBKTNV-1" source="i4a9FqG0ybNxiutWN6Q0-3" target="i4a9FqG0ybNxiutWN6Q0-5">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="i4a9FqG0ybNxiutWN6Q0-8" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="WIyWlLk6GJQsqaUBKTNV-1" source="i4a9FqG0ybNxiutWN6Q0-3" target="i4a9FqG0ybNxiutWN6Q0-7">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="i4a9FqG0ybNxiutWN6Q0-13" value="NO" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="i4a9FqG0ybNxiutWN6Q0-8">
+          <mxGeometry x="-0.06" y="2" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="i4a9FqG0ybNxiutWN6Q0-3" value="age&amp;lt;MINOR?" style="rhombus;whiteSpace=wrap;html=1;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="310" y="280" width="100" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="i4a9FqG0ybNxiutWN6Q0-9" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" edge="1" parent="WIyWlLk6GJQsqaUBKTNV-1" source="i4a9FqG0ybNxiutWN6Q0-5">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="360" y="420" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="510" y="420" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="i4a9FqG0ybNxiutWN6Q0-5" value="输出“年轻是美好的，”" style="shape=parallelogram;perimeter=parallelogramPerimeter;whiteSpace=wrap;html=1;fixedSize=1;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="430" y="340" width="160" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="i4a9FqG0ybNxiutWN6Q0-12" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="WIyWlLk6GJQsqaUBKTNV-1" source="i4a9FqG0ybNxiutWN6Q0-7" target="i4a9FqG0ybNxiutWN6Q0-11">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="i4a9FqG0ybNxiutWN6Q0-7" value="输出“年龄决定了你的精神境界，好好珍惜吧。”" style="shape=parallelogram;perimeter=parallelogramPerimeter;whiteSpace=wrap;html=1;fixedSize=1;size=20;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="275" y="440" width="170" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="i4a9FqG0ybNxiutWN6Q0-10" value="开始" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="315" y="100" width="90" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="i4a9FqG0ybNxiutWN6Q0-11" value="结束" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="325" y="585" width="70" height="30" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

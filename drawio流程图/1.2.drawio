@@ -1,0 +1,47 @@
+<mxfile host="app.diagrams.net" modified="2023-12-26T00:58:27.242Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36" etag="kLMbutZQWAqZk5p-6_Tm" version="22.1.11" type="device">
+  <diagram id="C5RBs43oDa-KdzZeNtuy" name="Page-1">
+    <mxGraphModel dx="794" dy="420" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="WIyWlLk6GJQsqaUBKTNV-0" />
+        <mxCell id="WIyWlLk6GJQsqaUBKTNV-1" parent="WIyWlLk6GJQsqaUBKTNV-0" />
+        <mxCell id="56hphzgkDGlAzmUiiJmS-0" value="Windows OS" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="371" y="330" width="120" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="56hphzgkDGlAzmUiiJmS-1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;" edge="1" parent="WIyWlLk6GJQsqaUBKTNV-1" source="56hphzgkDGlAzmUiiJmS-2">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="340" y="301" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="341" y="320" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="56hphzgkDGlAzmUiiJmS-2" value="Unix Library" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="391" y="310" width="80" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="56hphzgkDGlAzmUiiJmS-3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;" edge="1" parent="WIyWlLk6GJQsqaUBKTNV-1" source="56hphzgkDGlAzmUiiJmS-4">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="340" y="301" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="56hphzgkDGlAzmUiiJmS-4" value=".c文件" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="441" y="255" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="56hphzgkDGlAzmUiiJmS-5" value="Cygwin下的gcc" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="341" y="240" width="90" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="56hphzgkDGlAzmUiiJmS-6" value="" style="endArrow=classic;html=1;rounded=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="WIyWlLk6GJQsqaUBKTNV-1" target="56hphzgkDGlAzmUiiJmS-0">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="340" y="301" as="sourcePoint" />
+            <mxPoint x="290" y="301" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="300" y="301" />
+              <mxPoint x="300" y="341" />
+              <mxPoint x="300" y="391" />
+              <mxPoint x="430" y="391" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
