@@ -160,6 +160,34 @@ int main()
 
 ​		C程序中，{ }括起的许多语句成为<u>复合</u>语句。
 
+​		下面是本课程个人喜欢的程序框架，注释之间有空行代表代码有空行。
+
+```c
+//头文件区start
+#include<stdio.h>
+#include<math.h>
+//end
+int main()
+{
+    /*
+		定义区
+    */
+    
+    /*
+    	初始化区(包括一些scanf()也可以放这里)
+    */
+    /*
+    	程序核心算法区
+    */
+    
+    /*
+    	输出区
+    */
+
+    return 0;
+}
+```
+
 **输出 `printf()`**
 
 ```c
@@ -1136,6 +1164,52 @@ int main()
 }
 ```
 
+​		(多选题)以下程序段（ ）的功能是：输入一批整数，用负数作为输入的结束标志，统计其中大于85的数据个数。
+
+```c
+//A
+int count = 0, score;
+while(score >= 0){
+     scanf ("%d", &score);
+     if(score > 85){
+         count++;
+     }
+}
+printf("%d\n", count);
+//B
+int count = 0, score;
+scanf ("%d", &score);
+while(score >= 0){
+     scanf ("%d", &score);
+     if(score > 85){
+         count++;
+     }
+}
+printf("%d\n", count);
+//C
+int count = 0, score;
+while(1){
+      scanf ("%d", &score);
+      if(score < 0) break;
+      if(score > 85){
+          count++;
+      }
+}
+printf("%d\n", count);
+//D
+int count = 0, score;
+scanf ("%d", &score);
+while(score >= 0){
+     if(score > 85){
+         count++;
+     }
+     scanf ("%d", &score);
+}
+printf("%d\n", count);
+```
+
+​		解析：第一个选项进循环前没有对score赋值，有可能出问题。第二个选项无法只读入一个合法成绩，而且读入两个或更多合法成绩时第一个成绩会被覆盖，不会被统计，由于是多选题，所以选CD。
+
 **课后讨论3.1.1：为什么强调if和else后面要用{ }**
 
 答：
@@ -1404,6 +1478,32 @@ double factorial_b(int n)
 
     return product;
 }
+```
+
+​		除了调用函数外，还有两种常见的计算阶乘的方法。（假设下列变量都已经正确定义）
+
+```c
+//二重循环写法
+sum = 0;
+for(i = 1; i <= n; i++){
+     item = 1;
+     for (j = 1; j <= i; j++){
+         item = item * j;
+     }
+     sum = sum + item;
+}
+printf("%.0f\n", sum)
+```
+
+```c
+//单重循环写法
+sum = 0;
+item = 1;
+for(i = 1; i <= n; i++){
+    item = item * i;
+    sum = sum + item;
+}
+printf("%.0f\n", sum);
 ```
 
 **课后讨论3.2.2：为什么老师说for循环很怪？**
@@ -2901,6 +3001,25 @@ int main()
 ```
 
 ​		第一个while的目的是获取和原来数一样位数的mask，第二个while目的是通过原数除以mask依次获取各个数位的值，这个过程中记得修改相应的变量的值，为下一轮循环做准备。
+
+**章末习题**
+
+1.若变量已正确定义，以下while循环正常结束时，**累加到pi的最后一项**item的值满足____
+
+```c
+flag = 1;
+denominator = 1;
+item = 1.0;
+pi = 0;
+while(fabs(item) >= 0.0001){
+    pi = pi + item;
+    flag = -flag;
+    denominator = denominator + 2;
+    item = flag * 1.0 / denominator;
+}
+```
+
+​		解析：注意item在累加到pi的语句前还是后是有区别，这里累加到pi的最后一项item的值满足item>=0.0001，如果item<0.0001，下一次条件判断就会出循环，不会累加到pi上。
 
 **章末习题：素数和（5分）**
 
