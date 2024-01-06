@@ -1,0 +1,73 @@
+<mxfile host="Electron" modified="2024-01-06T03:26:24.970Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/22.1.11 Chrome/114.0.5735.289 Electron/25.9.8 Safari/537.36" etag="66I-EyLW4wPiSK_hBQSw" version="22.1.11" type="device">
+  <diagram name="第 1 页" id="uvdw8C7Pj2RHH-Ta3kOJ">
+    <mxGraphModel dx="794" dy="519" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="hpMT2MMkw6sfcmrBMDNq-8" value="" style="shape=ext;double=1;rounded=1;whiteSpace=wrap;html=1;fillColor=#99FFFF;opacity=30;" vertex="1" parent="1">
+          <mxGeometry x="81" y="190" width="340" height="45" as="geometry" />
+        </mxCell>
+        <mxCell id="hpMT2MMkw6sfcmrBMDNq-5" value="" style="shape=ext;double=1;rounded=1;whiteSpace=wrap;html=1;fillColor=#FF00FF;opacity=30;" vertex="1" parent="1">
+          <mxGeometry x="91" y="200" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="hpMT2MMkw6sfcmrBMDNq-6" value="" style="shape=ext;double=1;rounded=1;whiteSpace=wrap;html=1;fillColor=#007FFF;opacity=30;" vertex="1" parent="1">
+          <mxGeometry x="151" y="200" width="50" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="hpMT2MMkw6sfcmrBMDNq-7" value="" style="shape=ext;double=1;rounded=1;whiteSpace=wrap;html=1;fillColor=#33FF33;opacity=30;" vertex="1" parent="1">
+          <mxGeometry x="201" y="200" width="210" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="hpMT2MMkw6sfcmrBMDNq-9" value="" style="shape=ext;double=1;rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;opacity=30;strokeColor=#d6b656;" vertex="1" parent="1">
+          <mxGeometry x="111" y="260" width="550" height="220" as="geometry" />
+        </mxCell>
+        <mxCell id="hpMT2MMkw6sfcmrBMDNq-12" value="" style="shape=flexArrow;endArrow=classic;html=1;rounded=0;fillColor=none;strokeWidth=2;width=9;endSize=6.19;exitX=0.25;exitY=0;exitDx=0;exitDy=0;" edge="1" parent="1" source="hpMT2MMkw6sfcmrBMDNq-5">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="121" y="200" as="sourcePoint" />
+            <mxPoint x="106" y="150" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="hpMT2MMkw6sfcmrBMDNq-13" value="" style="shape=flexArrow;endArrow=classic;html=1;rounded=0;fillColor=none;strokeWidth=2;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="175.5" y="200" as="sourcePoint" />
+            <mxPoint x="175.5" y="150" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="hpMT2MMkw6sfcmrBMDNq-14" value="" style="shape=flexArrow;endArrow=classic;html=1;rounded=0;fillColor=none;strokeWidth=2;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="349.5" y="200" as="sourcePoint" />
+            <mxPoint x="349.5" y="150" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="hpMT2MMkw6sfcmrBMDNq-15" value="&lt;font style=&quot;font-size: 18px;&quot; face=&quot;Comic Sans MS&quot;&gt;返回类型&lt;/font&gt;" style="text;html=1;strokeColor=default;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="57" y="120" width="80" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="hpMT2MMkw6sfcmrBMDNq-16" value="&lt;font style=&quot;font-size: 18px;&quot; face=&quot;Comic Sans MS&quot;&gt;函数名&lt;/font&gt;" style="text;html=1;strokeColor=default;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="141" y="120" width="70" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="hpMT2MMkw6sfcmrBMDNq-18" value="&lt;font style=&quot;font-size: 18px;&quot; face=&quot;Comic Sans MS&quot;&gt;参数表&lt;/font&gt;" style="text;html=1;strokeColor=default;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="299" y="120" width="100" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="hpMT2MMkw6sfcmrBMDNq-21" value="" style="shape=flexArrow;endArrow=classic;html=1;rounded=0;fillColor=none;strokeWidth=2;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="hpMT2MMkw6sfcmrBMDNq-8" target="hpMT2MMkw6sfcmrBMDNq-24">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="431" y="230" as="sourcePoint" />
+            <mxPoint x="462" y="215" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="hpMT2MMkw6sfcmrBMDNq-24" value="&lt;font style=&quot;font-size: 18px;&quot; face=&quot;Comic Sans MS&quot;&gt;函数头&lt;/font&gt;" style="text;html=1;strokeColor=default;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="481" y="197.5" width="100" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="hpMT2MMkw6sfcmrBMDNq-25" value="" style="shape=flexArrow;endArrow=classic;html=1;rounded=0;fillColor=none;strokeWidth=2;exitX=0;exitY=0.5;exitDx=0;exitDy=0;" edge="1" parent="1" source="hpMT2MMkw6sfcmrBMDNq-9">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="431" y="225" as="sourcePoint" />
+            <mxPoint x="71" y="370" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="hpMT2MMkw6sfcmrBMDNq-26" value="&lt;font style=&quot;font-size: 18px;&quot; face=&quot;Comic Sans MS&quot;&gt;函数体&lt;/font&gt;" style="text;html=1;strokeColor=default;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="41" y="325" width="30" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="hpMT2MMkw6sfcmrBMDNq-2" value="&lt;div style=&quot;font-size: 24px;&quot;&gt;&lt;font face=&quot;Comic Sans MS&quot; style=&quot;font-size: 24px;&quot;&gt;&lt;font color=&quot;#990099&quot;&gt;void&lt;/font&gt; sum(int begin, int end)&lt;/font&gt;&lt;/div&gt;&lt;div style=&quot;font-size: 24px;&quot;&gt;&lt;font face=&quot;Comic Sans MS&quot; style=&quot;font-size: 24px;&quot;&gt;{&lt;/font&gt;&lt;/div&gt;&lt;div style=&quot;font-size: 24px;&quot;&gt;&lt;font face=&quot;xACl1y8IwL1d1qaUPaY2&quot; style=&quot;font-size: 24px;&quot;&gt;&amp;nbsp; &amp;nbsp; &lt;/font&gt;&lt;font face=&quot;Comic Sans MS&quot; style=&quot;font-size: 24px;&quot;&gt;int i;&lt;span style=&quot;&quot;&gt;&lt;/span&gt;&lt;/font&gt;&lt;/div&gt;&lt;div style=&quot;font-size: 24px;&quot;&gt;&lt;font style=&quot;font-size: 24px;&quot;&gt;&lt;span style=&quot;white-space: pre;&quot;&gt;&lt;font face=&quot;CrxjSpKiX8y0JePpM5ks&quot;&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;/font&gt;&lt;font face=&quot;Comic Sans MS&quot;&gt;&amp;nbsp;&lt;/font&gt;&lt;/span&gt;&lt;font face=&quot;Comic Sans MS&quot;&gt;i&lt;/font&gt;&lt;font face=&quot;Comic Sans MS&quot;&gt;nt sum = 0;&lt;/font&gt;&lt;/font&gt;&lt;/div&gt;&lt;div style=&quot;font-size: 24px;&quot;&gt;&lt;span style=&quot;&quot;&gt;&lt;font style=&quot;font-size: 24px;&quot;&gt;&lt;span style=&quot;white-space: pre;&quot;&gt;&lt;font face=&quot;CrxjSpKiX8y0JePpM5ks&quot;&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;/font&gt;&lt;font face=&quot;Comic Sans MS&quot;&gt;&amp;nbsp;&lt;/font&gt;&lt;/span&gt;&lt;font face=&quot;Comic Sans MS&quot;&gt;for(i = begin; i &amp;lt;= end; i ++)&lt;/font&gt;&lt;/font&gt;&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;font-size: 24px;&quot;&gt;&lt;span style=&quot;&quot;&gt;&lt;font style=&quot;font-size: 24px;&quot;&gt;&lt;span style=&quot;font-family: CrxjSpKiX8y0JePpM5ks;&quot;&gt;&lt;span style=&quot;white-space: pre;&quot;&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;/span&gt;&lt;/span&gt;&lt;font face=&quot;Comic Sans MS&quot;&gt;{&lt;/font&gt;&lt;/font&gt;&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;font-size: 24px;&quot;&gt;&lt;span style=&quot;&quot;&gt;&lt;font style=&quot;font-size: 24px;&quot;&gt;&lt;span style=&quot;font-family: CrxjSpKiX8y0JePpM5ks; white-space: pre;&quot;&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;white-space: pre;&quot;&gt;&lt;font face=&quot;CrxjSpKiX8y0JePpM5ks&quot;&gt;&amp;nbsp;&amp;nbsp;&lt;/font&gt;&lt;font face=&quot;Comic Sans MS&quot;&gt;&amp;nbsp;&amp;nbsp;&lt;/font&gt;&lt;/span&gt;&lt;font face=&quot;Comic Sans MS&quot;&gt;sum += i;&lt;/font&gt;&lt;/font&gt;&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;font-size: 24px;&quot;&gt;&lt;span style=&quot;&quot;&gt;&lt;font style=&quot;font-size: 24px;&quot;&gt;&lt;span style=&quot;font-family: CrxjSpKiX8y0JePpM5ks;&quot;&gt;&lt;span style=&quot;white-space: pre;&quot;&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;/span&gt;&lt;/span&gt;&lt;font face=&quot;Comic Sans MS&quot;&gt;}&lt;/font&gt;&lt;/font&gt;&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;font-size: 24px;&quot;&gt;&lt;span style=&quot;&quot;&gt;&lt;font style=&quot;font-size: 24px;&quot;&gt;&lt;span style=&quot;font-family: CrxjSpKiX8y0JePpM5ks;&quot;&gt;&lt;span style=&quot;white-space: pre;&quot;&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;/span&gt;&lt;/span&gt;&lt;font face=&quot;Comic Sans MS&quot;&gt;printf(&quot;%d + ... + %d = %d\n&quot;, begin, end, sum);&lt;/font&gt;&lt;/font&gt;&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;font-size: 24px;&quot;&gt;&lt;font face=&quot;CrxjSpKiX8y0JePpM5ks&quot; style=&quot;font-size: 24px;&quot;&gt;}&lt;/font&gt;&lt;/div&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="99" y="170" width="630" height="360" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
