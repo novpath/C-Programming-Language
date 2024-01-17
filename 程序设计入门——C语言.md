@@ -138,7 +138,7 @@
 
 ​		源程序中的每条可执行语句最终都将被转换成二进制机器指令，而像注释这样的非执行语句将会在编译时就被忽略。
 
-![1.0.drawio](笔记插图/1.0.drawio.png)
+![1.0.drawio](笔记插图/1.0 编辑-编译-连接.png)
 
 <center style="color:#C0C0C0">图1.0 编辑-编译-连接</center>
 
@@ -252,7 +252,7 @@ printf("%02f", x);   //保留两位宽度，不足前面补零
 
 ②移植library库
 
-![1.1.drawio](笔记插图/1.1.drawio.png)
+![1.1.drawio](笔记插图/1.1 连接的过程.png)
 
 <center style="color:#C0C0C0">图1.1 连接的过程</center>
 
@@ -262,7 +262,7 @@ a.使用Cygwin(一个在Windows平台上运行的类UNIX模拟环境)
 
 ​		在Windows上给一个Unix Lib.，Cygwin下gcc编译的.c文件在和Unix lib.共同努力下，变成一个可以在Windows上运行的Unix程序
 
-![1.2.drawio](笔记插图/1.2.drawio.png)
+![1.2.drawio](笔记插图/1.2 利用Cygwin移植library.png)
 
 <center style="color:#C0C0C0">图1.2 利用Cygwin移植library</center>
 
@@ -274,7 +274,7 @@ b.使用MinGW(Minimalist GNU for Windows——Windows上可以跑的最小GNU的
 
 ​		MinGW(读音“民基W”，不要读成“明W”)，MinGW的做法如下
 
-![1.3.drawio](笔记插图/1.3.drawio.png)
+![1.3.drawio](笔记插图/1.3 利用MinGW移植library.png)
 
 <center style="color:#C0C0C0">图1.3 利用MinGW移植library</center>
 
@@ -1080,7 +1080,7 @@ int main()
 }
 ```
 
-![3.0.drawio](笔记插图/3.0.drawio.png)
+![3.0.drawio](笔记插图/3.0 年龄判断流程图.png)
 
 <center style="color:#C0C0C0">图3.0 年龄判断流程图</center>
 
@@ -1090,7 +1090,7 @@ int main()
 
 ​		C语言提供了一种方法，可以在if条件不满足时，执行另外的动作，这就是else()语句，else表示否则。
 
-![3.1.drawio](笔记插图/3.1.drawio.png)
+![3.1.drawio](笔记插图/3.1 找零计算器流程图.png)
 
 <center style="color:#C0C0C0">图3.1 找零计算器流程图</center>
 
@@ -1876,7 +1876,7 @@ else
 
 ​		这里把它称为级联的else if语句，执行流程图如下所示。
 
-![4.0.drawio](笔记插图/4.0.drawio.png)
+![4.0.drawio](笔记插图/4.0 else if 流程图.png)
 
 <center style="color:#C0C0C0">图4.0 else if 流程图</center>
 
@@ -1942,7 +1942,7 @@ else
 printf("Tha max number is %d", max);
 ```
 
-![4.0.drawio](笔记插图/4.1.drawio.png)
+![4.0.drawio](笔记插图/4.1 比较三个数的大小 流程图.png)
 
 <center style="color:#C0C0C0">图4.1 比较三个数的大小 流程图</center>
 
@@ -2011,7 +2011,7 @@ case n % 3: printf("one");
 
 ​		由此可见，在switch语句的所有语句段的末尾使用break，可以简单、清晰地实现多分支选择，这也是switch语句的主要使用方法。
 
-![4.2.drawio](笔记插图/4.2.drawio.png)
+![4.2.drawio](笔记插图/4.2 swich语句 流程图.png)
 
 <center style="color:#C0C0C0">图4.2 swich语句 流程图</center>
 
@@ -2184,7 +2184,7 @@ printf("发射！\n");
 
 ​		④一个记录累加次数的变量。
 
-![4.3.drawio](笔记插图/4.3.drawio.png)
+![4.3.drawio](笔记插图/4.3 求平均数 流程图.png)
 
 <center style="color:#C0C0C0">图4.3 求平均数 流程图</center>
 
