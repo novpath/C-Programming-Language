@@ -4484,6 +4484,52 @@ for(i = 0; i < number; i ++){
 
 **数组例子：素数**
 
+​		最初，我们判断一个数是否是素数，就利用循环从2开始到这个数减1是否能整除这个数。后来，我们发现，只要不是2的偶数都不是素数，所以循环次数可以减为一半。再后来，利用数学知识可以知道，只需要循环到这个数的平方根即可，又提升了程序的运行效率，还有没有其他更有效方法呢？就是这一节的内容——判断素数，即判断该数**x能否被已知的且<x的素数整除**。
+
+```c
+#include<stdio.h>
+
+int isPrime(int x, int knownPrimes[], int numberOfKnownPrimes)
+{
+	int ret = 1;
+	int i;
+	for(i = 0; i < numberOfKnownPrimes; i ++)
+	{
+		if(x % knownPrimes[i] == 0)
+		{
+			ret = 0;
+			break;
+		}
+	}
+}
+
+int main(void)
+{
+	const int number = 100;
+	int prime[number] = {2};
+	int count = 1;
+	int i = 3;
+	while(count < number )
+	{
+		if(isPrime(i, prime, count))
+		{
+			prime[count++] = i;
+		}
+		i ++;
+	}
+	for(i = 0; i < number; i ++)
+	{
+		printf("%d", prime[i]);
+		if((i + 1) % 5) printf("\t");
+		else printf("\n");
+	}
+	
+	return 0;
+}
+```
+
+
+
 #### 2.搜索
 
 **线性搜索**
