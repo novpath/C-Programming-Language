@@ -4505,16 +4505,34 @@ int isPrime(int x, int knownPrimes[], int numberOfKnownPrimes)
 
 int main(void)
 {
-	const int number = 100;
+	const int number = 10;
 	int prime[number] = {2};
 	int count = 1;
 	int i = 3;
+//    {
+//        int i;
+//        printf("\t\t\t\t");
+//        for(i = 0; i < number; i ++)
+//        {
+//            printf("%d\t", i);
+//        }
+//        printf("\n");
+//    }
 	while(count < number )
 	{
 		if(isPrime(i, prime, count))
 		{
 			prime[count++] = i;
 		}
+//        {
+//            printf("i=%d \tcnt=%d", i, count);
+//            int i;
+//            for(i = 0; i < number; i ++)
+//            {
+//                printf("%d\t", prime[i]);
+//            }
+//            printf("\n");
+//        }
 		i ++;
 	}
 	for(i = 0; i < number; i ++)
@@ -4528,7 +4546,65 @@ int main(void)
 }
 ```
 
+​		根据上面算法的逆向思路，我们可以按如下思路**构造素数表**。
 
+欲构造n以内的素数表：
+
+①.令x为2
+
+②.将2x、3x、4x、...直至ax<n的数标记为非素数
+
+③.令x为下一个没有被标记为非素数的数，重复②；直到所有数都已经尝试完毕。
+
+伪代码表示：
+
+①.开辟prime[n]，初始化其所有元素为1， prime[x]为1表示x是素数
+
+②. 令x=2
+
+③.如果x是素数，则对于`(i=2;x*i<n;i++)`令`prime[i*x]=0`
+
+④. 令x++，如果x<n，重复③，否则结束
+
+代码实现如下：
+
+```c
+#include<stdio.h>
+
+int main()
+{
+	const int maxNumber = 25;
+	int isPrime[maxNumber];
+	int i;
+	int x;
+	for(i = 0; i < maxNumber; i ++)
+	{
+		isPrime[i] = 1;
+	}
+	for(x = 2; x < maxNumber; x ++)
+	{
+		if(isPrime[x])
+		{
+			for(i = 2; i * x < maxNumber; i ++)
+			{
+				isPrime[i * x] = 0;
+			}
+		}
+	}
+	for(i = 2; i < maxNumber; i ++)
+	{
+		if(isPrime[i])
+		{
+			printf("%d\t", i);
+		}
+	}
+	printf("\n");
+	
+	return 0;
+}
+```
+
+​		人的思维可能是直接从素数定义入手，但计算机可能更擅长排除掉不是素数的数，留下的数即为素数。可见算法不一定和人的思维相同，
 
 #### 2.搜索
 
