@@ -4645,6 +4645,107 @@ int main()
 
 **搜索的例子**
 
+​		有时候，搜索并不是查找某一个值，而是查找某一个值输出**对应的英文单词**，这种搜索怎么做呢？数据结构这门课里会讲到，使用**散列表**（Hash Table）比较适合做这件事。
+
+​		如果我们仅仅使用C语言的知识来解决这个问题，可以利用两个数组，a数组记录面额，查找a数组返回对应下标的位置，再输出b数组对应位置存放对应的单词即可。
+
+| 面额 |    名词     |
+| ---- | :---------: |
+| 1    |    penny    |
+| 5    |   nickel    |
+| 10   |    dime     |
+| 25   |   quarter   |
+| 50   | half-dollar |
+
+```c
+#include<stdio.h>
+
+int amount[] = {1, 5, 10, 25, 50};
+char *name[] = {"penny", "nickel", "dime", "quarter", "half-dollar"};
+
+int search(int key, int a[], int len)
+{
+	int ret = -1;
+	for(int i = 0; i < len; i ++)
+	{
+		if(key == a[i])
+		{
+			ret = i;
+			break;
+		}
+	}
+	
+	return ret;  
+}
+
+int main()
+{
+	int k = 25;
+	int r = search(k, amount, sizeof(amount) / sizeof(amount[0]));
+	if(r > -1)
+	{
+		printf("%s\n", name[r]);
+	}
+	
+	return 0;
+}
+```
+
+​		当然，这样做简单，但是有问题，因为这段程序用到的两个数组是割裂的，对于cache是不友好的（详情见计算机组成原理），所以我们希望面额和名词放在一起。即定义一个结构体，将面额和对于的名词放在一起，这种做法是对cache更为友好的一个方法。
+
+​		(如果用`char *name[]`，编译器会报warning——`deprecated conversion from string constant to 'char*'`，这里仅需要对字符串指针`char *name[]`进行读取，所以设置成不能修改的常量指针即可。)
+
+```c
+#include<stdio.h>
+
+int amount[] = {1, 5, 10, 25, 50};
+const char *name[] = {"penny", "nickel", "dime", "quarter", "half-dollar"};
+
+struct{
+	int amount;
+	const char *name;
+} coins[] = 
+{
+	{1, "penny"},
+	{5, "nickel"},
+	{10, "dime"},
+	{25, "quarter"},
+	{50, "half-dollar"},
+};
+
+int search(int key, int a[], int len)
+{
+	int ret = -1;
+	for(int i = 0; i < len; i ++)
+	{
+		if(key == a[i])
+		{
+			ret = i;
+			break;
+		}
+	}
+	
+	return ret;  
+}
+
+int main()
+{
+	int k = 25;
+	for(int i = 0; i < sizeof(coins) / sizeof(coins[0]); i ++)
+	{
+		if(k == coins[i].amount)
+		{
+			printf("%s\n", coins[i].name);
+			break;
+		}
+	}
+	
+	return 0;
+}
+```
+
+
+
 **二分搜索**
 
 #### 3.排序初步
