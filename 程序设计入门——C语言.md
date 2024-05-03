@@ -4744,9 +4744,51 @@ int main()
 }
 ```
 
-
-
 **二分搜索**
+
+​		线性搜索最大的问题就是**没有效率**。
+
+```c
+#include<stdio.h>
+
+int search(int key, int a[], int len)
+{
+	int ret = -1;
+	int left = 0;
+	int right = len - 1;
+	while(left <= right)
+	{
+		int mid = (left + right) / 2;
+		if(a[mid] == key)
+		{
+			ret = mid;
+			break;
+		}else if(a[mid] > key)
+		{
+			right = mid - 1;
+		}else{
+			left = mid + 1;
+		}
+	}
+	
+	return ret;
+}
+
+int main()
+{
+	int a[] = {1, 2, 3, 5, 12, 14, 23, 45};
+	int x;
+	scanf("%d", &x);
+	int r = search(x, a, sizeof(a) / sizeof(a[0]));
+	printf("%d\n", r);
+	
+	return 0;
+}
+```
+
+​		注意，while的条件为`left <= right`，不可忽略等于号，因为相等时有可能正好是满足条件的值，需要进while循环利用ret变量将结果返回。
+
+​		在给出序列**有序**的情况下，二分搜索的时间复杂度仅为$O(log_2n)$
 
 #### 3.排序初步
 
