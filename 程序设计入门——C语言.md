@@ -4792,7 +4792,46 @@ int main()
 
 #### 3.排序初步
 
+​		前面介绍了二分法这一高效的搜索方式，但是这种方法只适用于有序数组，如果是无序数组怎么办呢？就需要我们自行先用某些方法将无序的序列排好序。
+
 **选择排序**
+
+​		下面介绍选择排序法来对序列进行处理。
+
+```c
+#include<stdio.h>
+
+void select_sort(int a[], int len)
+{
+    int temp;
+    for(int i = 0; i < len - 1; i ++)
+    {
+        int minid = i;
+        for(int j = i + 1; j < len; j ++)
+        {
+            if(a[j] < a[minid])
+            {
+                minid = j;
+            }
+        }
+        temp = a[minid];
+        a[minid] = a[i];
+        a[i] = temp;
+    }
+}
+
+int main()
+{
+    int a[] = {2, 45, 6, 12, 87, 34, 90, 24, 23, 11, 65};
+    select_sort(a, sizeof(a) / sizeof(a[0]));
+    
+    for(int i = 0; i < sizeof(a) / sizeof(a[0]); i ++)
+        printf("%d ", a[i]);
+	printf("\n");
+    
+    return 0;
+}
+```
 
 **章末习题：多项式加法（5分）**
 
