@@ -5782,6 +5782,101 @@ void g(int k)
 
 **指针与数组：为什么数组传进函数后的sizeof不对了**
 
+​		**传入函数的数组变成了什么？**
+
+```c
+#include<stdio.h>
+
+void minmax(int a[], int lenm, int *max, int *min);
+
+int main(void)
+{
+	int a[] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 12, 13, 14, 16, 17, 21, 23, 55, };
+	int min, max;
+	printf("main sizeof(a)=%lu\n", sizeof(a));
+	printf("main a=%p\n", a);
+	minmax(a, sizeof(a)/sizeof(a[0]), &min, &max);
+	printf("a[0]=%d\n", a[0]);
+	printf("min=%d,max=%d\n", min, max);
+	
+	return 0;
+}
+
+void minmax(int a[], int len, int *min, int *max)
+{
+	int i;
+	printf("minmax sizeof(a)=%lu\n", sizeof(a));
+	printf("minmax a=%p\n", a);
+	a[0] = 1000;
+	*min = *max = a[0];
+	for(i = 1; i < len; i ++)
+	{
+		if(a[i] < *min)
+			*min = a[i];
+		if(a[i] > *max)
+			*max = a[i]; 
+	}
+}
+/*
+main sizeof(a)=68
+main a=000000000062FDD0
+minmax sizeof(a)=8
+minmax a=000000000062FDD0
+a[0]=1000
+min=2,max=1000
+*/
+```
+
+​		函数参数表中的数组实际上是**指针**`：sizeof(a) == sizeof(int*)`
+
+​		但是可以用数组的运算符`[]`进行运算
+
+​		**数组参数**
+
+​		以下四种函数原型是等价的：
+
+```c
+int sum(int *ar, int n);
+
+int sum(int *, int);
+
+int sum(int ar[], int n);
+
+int sum(int [], int);
+```
+
+​		**数组变量是特殊的指针**
+
+​		数组变量本身表达地址，所以
+
+```c
+int a[10]; int*p=a; //无需用&取地址
+```
+
+​		但是数组的单元表达的是变量，需要用&取地址
+
+```c
+a == &a[0]
+```
+
+​		`[]`运算符可以对数组做，也可以对指针做：
+
+```c
+p[0] <==> a[0]
+```
+
+​		`*`运算符可以对指针做，也可以对数组做：
+
+```c
+*a = 25;
+```
+
+​		数组变量是const的指针，所以不能被赋值
+
+```c
+int a[] <==> int * const a=....
+```
+
 **课后讨论8.1.1：数组变量和指针的关系**
 
 > 老师说数组变量可以被看作是const的指针变量，到底是“**可以被看作**”，还是“**就是**”指针呢？
