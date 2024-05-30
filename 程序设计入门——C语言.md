@@ -4988,7 +4988,7 @@ void swap_sort(int a[], int len)
 <center style="color:#C0C0C0">图7.3 冒泡排序（第一轮）</center>
 
 ```c
-void buble_sort(int a[], int len)
+void bubble_sort(int a[], int len)
 {
     int i, j, temp;
     for(i = 1; i < n; i++ )
@@ -6275,14 +6275,18 @@ char word[] = {'H', 'e', 'l', 'l', 'o', '!', '\0'};
 **字符串变量**
 
 ```c
-char *str = "Hello";   //①指向某个地方的字符串
-char word[] = "Hello";  //②定义一个字符串
-char line[10] = "Hello";//③
+char *str = "Hello";   //⑴指向某个地方的字符串
+char word[] = "Hello";  //⑵定义一个字符串
+char line[10] = "Hello";//⑶
 ```
 
-​		字符串常量“Hello”会被编译器变成一个字符数组放在某处（见[内存模型](#3.函数的参量和变量)），
-
 ​		这个数组的长度是6，结尾还有表示结束的0
+
+​		字符串常量“Hello”会被编译器变成一个字符数组放在某处（见[内存模型](#3.函数的参量和变量)）
+
+​		与数组存储类似，字符串常量中的所有字符在内存中**连续存放**，显然，该起始地址代表了存放字符串常量首字符的存储单元的地址，被称为**字符串常量**的值。也就是说，字符串常量实质上是一个**指向该字符串首字符的指针常量**。
+
+​		可以使用`printf("%s", str + 3);`让`s[3]`作为起始地址输出字符串直到`'\0'`为止。
 
 ```c
 #include<stdio.h>
