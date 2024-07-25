@@ -326,13 +326,13 @@ Visual Studio Code官网：code.visualstudio.com
 
 ​		main函数的返回值用于说明程序的退出状态。如果返回0，则代表程序正常退出。返回其它数字的含义则由系统决定。通常，返回非零代表程序异常退出。
 
-1.void main（）
+**1.void main（）**
 
 ​		有一些书上的，都使用了void main( ) ，其实这是错误的。C/C++ 中从来没有定义过`void main( ) `。C++ 之父 Bjarne Stroustrup 在他的主页上的 FAQ 中明确地写着 “The definition void main( ) { /* … */ } is not and never has been C++, nor has it even been C.”
 
 　　这可能是因为 在 C 和 C++ 中，不接收任何参数也不返回任何信息的函数原型为“void foo(void);”。可能正是因为这个，所以很多人都误认为如果不需要程序返回值时可以把main函数定义成void main(void) 。然而这是错误的！main 函数的返回值应该定义为 int 类型，C 和 C++ 标准中都是这样规定的。虽然在一些编译器中，void main（） 可以通过编译，但并非所有编译器都支持 `void main（）` ，因为标准中从来没有定义过 void main 。g++3.2 中如果 main 函数的返回值不是 int 类型，就根本通不过编译。而 gcc3.2 则会发出警告。所以，为了程序拥有很好的可移植性，一定要用` int main （）`。
 
-2.main（）
+**2.main（）**
 
 ​		那既然main函数只有一种返回值类型，那么是不是可以不写？规定：不明确标明返回值的，默认返回值为int，也就是说 main()等同于`int main()`，而不是等同于`void main()`。在C99中，标准要求编译器至少给` main() `这种用法来个警告，而在c98中这种写法是被允许的。但为了程序的规范性和可读性，还是应该明确的指出返回值的类型。
 
@@ -366,6 +366,8 @@ Visual Studio Code官网：code.visualstudio.com
 >
 
 ---
+
+解答：
 
 ```c
 #include<stdio.h>
@@ -1816,30 +1818,44 @@ scanf("%lf%c%lf", &value1, &op, &value2);
 
 **字符型数据的输入与输出**
 
-​		调用字符输入函数`getchar()`可以从键盘输入**一个**字符，设ch是字符变量，函数`getchar()`的一般调用格式为：
+​		调用字符输入函数`getchar()`可以从**标准输入**读入**一个**字符，设ch是字符变量，函数`getchar()`的一般调用格式为：
 
 ```c
+//调用格式
 ch = getchar();
-//下面的表达式可以实现输入和比较两种运算
+//下面的表达式可以实现输入和比较两种运算，注意，下式不可以省略括号写成ch= getchar() != '\n';
 (ch = getchar()) != '\n';
-//注意，上式不可以省略括号写成c h= getchar() != '\n';
+//函数原型
+int getchar(void);
 ```
 
-​		功能是从键盘输入一个字符，并赋值给变量ch。
+​		功能是从标准输入读入一个字符，并赋值给变量ch
 
-​		由于`getchar()`每次只能读入一个字符，要输入多个字符一般采用**循环调用**的方式。
+​		返回类型是`int`是为了返回`EOF`(-1)
 
-​		输入多个字符时，这些字符之间不能有间隔，因为间隔符（如空格）本身也是字符，会被作为输入字符。
+```c
+Windows → ctrl + Z
+Unix → ctrl + D
+```
+
+​		由于`getchar()`每次只能读入一个字符，要输入多个字符一般采用**循环调用**的方式
+
+​		输入多个字符时，这些字符之间不能有间隔，因为间隔符（如空格）本身也是字符，会被作为输入字符
 
 ​		调用字符输出函数`putchar()`可以输出一个字符，函数`putchar()`的一般调用格式为：
 
 ```c
+//调用格式
 putchar(输出参数);
+//函数原型
+int putchar(int c);//注意输出参数是int类型而不是char类型，但一次也只能接收一个字符。
 ```
 
-​		其功能是输出字符型变量或字符型常量
+​		其功能是向标准输出写一个字符型变量或字符型常量
 
-​		字符常量在程序中有单引号，但用户输入输出时，字符两侧没有单引号。
+​		返回写了几个字符(正常情况返回1)，EOF(这个宏的值为-1)表示写失败
+
+​		字符常量在程序中有单引号，但用户输入输出时，字符两侧没有单引号
 
 ​		下列程序顺序输入`'Q'`后，输出`'`
 
@@ -1985,7 +2001,9 @@ printf("请分别输入身高的英尺和英寸，"
 
 ​		实际上，不同的shell会对不同的控制字符做出不同的处理，所以呈现给用户的输出结果是不一样的。
 
-例如Sublime text是以`BS`字符呈现给用户来表示`\b`，而在Macintosh中，是把光标移动到后退一格来表示`\b`，如果不继续输出，在用户看来什么都没发生，如果输出新的字符，则新的字符会覆盖掉前一个字符。`\b`通常在shell中被解释为“回退但不删除”，当然也不否认会存在一个终端shell将`\b`解释为删除。
+​		Shell对用户的标准输入执行**行编辑**，当用户按下回车之后，内容会被送入缓冲区中，`getchar()`、`scanf()`就是从缓冲区中读内容并执行后续操作的。
+
+​		例如Sublime text是以`BS`字符呈现给用户来表示`\b`，而在Macintosh中，是把光标移动到后退一格来表示`\b`，如果不继续输出，在用户看来什么都没发生，如果输出新的字符，则新的字符会覆盖掉前一个字符。`\b`通常在shell中被解释为“回退但不删除”，当然也不否认会存在一个终端shell将`\b`解释为删除。
 
 ![4.1逃逸字符](笔记插图/4.1逃逸字符.png)
 
@@ -6578,6 +6596,90 @@ printf("请分别输入身高的英尺和英寸，\
 
 ​		②只有它所指的字符数组有结尾的0，才能说它所指的是字符串
 
+**字符串数组**
+
+​		**`char **a`**是一个指针，指向另一个指针，那个指针指向一个字符（串）
+
+​		**`char a[][10]`**定义了一个二维数组，其中a[0]、a[1]、... ...都指向一个长度为10的一维数组
+
+​		**`char *a[]`**其本质是指针组成的数组，即数组里的每个元素都是指针，并可以指向其他某个字符或者字符串
+
+```c
+/*利用指针数组，可以把switch-case的月份写法改写得更简单*/
+#include<stdio.h>
+void fun1();
+void fun2();
+
+int main()
+{
+    fun1();
+    fun2();
+    return 0;
+}
+
+void fun1()
+{
+    printf("Please input month:");
+    int month;
+    scanf("%d", &month);
+    switch(month)
+    {
+        case 1:printf("January\n"); break;
+        case 2:printf("February\n"); break;
+        case 3:printf("March\n"); break;
+        case 4:printf("April\n"); break;
+        case 5:printf("May\n"); break;
+        case 6:printf("June\n"); break;
+        case 7:printf("July\n"); break;
+        case 8:printf("August\n"); break;
+        case 9:printf("September\n"); break;
+        case 10:printf("October\n"); break;
+        case 11:printf("November\n"); break;
+        case 12:printf("December\n"); break;
+    }
+}
+
+void fun2()
+{
+    printf("Please input month:");
+    int month;
+    const char *month_string[13] = {"","January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};  
+    scanf("%d", &month);
+    printf("%s", month_string[month]);
+}
+```
+
+​		注意：警告信息表明你的代码中存在一个不推荐的用法，即从字符串常量转换到`char*`。在C和C++中，字符串常量是有类型的，即`const char[]`数组，而`char*`是一个指向字符的指针，通常用来指向可修改的字符数组。从字符串常量转换到`char*`通常会导致未定义行为，因为字符串常量是不可修改的。
+
+​		`fun2()`推荐加`const`不要修改字符串常量，这样不会导致未定义行为；如果要修改，可以创建一个可修改的字符数组，比如`char month_may[] = "May"`;
+
+​		**程序参数** **`int main(int argc, char const * argv[])`**
+
+​		`argc`这个参数，提示了后面那个字符串数组有多少个字符串（因为C语言的数组无法判断自己的大小）
+
+​		`argc[0]`是命令本身，或者说是你输入的那个可执行程序的名字
+
+​		①当使用Unix的符号链接时，反应符号链接的名字。
+
+​		②main()函数可以读到你执行这个程序的时候，在命令行名字后面所跟上的语句
+
+​		③建议参考busy box的运行模式，来理解为什么这些命令对Unix特别有用；不过Window很少情况是在命令行键入程序名字来运行程序的，但是如果创建一个快捷方式，可以指定这些可执行程序的参数，所以也是有意义的。
+
+```c
+#include<stdio.h>
+
+int main(int argc, char const *argv[])
+{
+	int i;
+	for(i = 0; i < argc; i ++)
+	{
+		printf("%d:%s\n", i, argv[i]);
+	}
+	
+	return 0;
+}
+```
+
 #### 3.字符串计算
 
 **字符串输入输出**
@@ -6620,7 +6722,7 @@ int main(void)
 */
 ```
 
-​		**讨论：如果将上述两段scanf替换成如下两段代码**
+​		**9.3.1课后讨论：如果将上述两段scanf替换成如下两段代码**
 
 ```c
 scanf("%s", word);
@@ -6770,7 +6872,7 @@ char buffer[100] = "";
 
 **字符串函数**
 
-​		**string.h标准库**
+​		**Ⅰ. string.h标准库**
 
 ```c
 strlen();
@@ -6781,7 +6883,7 @@ strchr();
 strstr();
 ```
 
-​		**字符串长度函数strlen(s)**
+​		**Ⅱ. 字符串长度函数strlen(s)**
 
 ```c
 size_t strlen(const char *s);
@@ -6793,19 +6895,31 @@ size_t strlen(const char *s);
 
 ​		①参数s可以是字符数组名或字符串常量
 
-​		②不包括结尾的0，sizeof()会包含'\0'
+​		②**不包括结尾的0**，sizeof()会包含'\0'
 
-​		**字符串比较函数strcmp(s1, s2)**
+```c
+//模拟实现
+size_t mylen(const char *s)
+{
+    int idx = 0;
+    while(s[idx] != '\0')
+		idx ++;
+    
+    return idx;
+}
+```
+
+​		**Ⅲ. 字符串比较函数strcmp(s1, s2)**
 
 ```c
 int strcmp(const char *s1, const char *s2);
 ```
 
-​		作用：比较两个字符串，返回 0(s1 == s2)、1(s1 > s2)、-1(s1 < s2)。
+​		作用：比较两个字符串，返回 0(s1 == s2)、x(s1 > s2)、-x(s1 < s2)。
 
 ​		注意：
 
-​		①数组变量不能直接比较，因为永远是false，比较数组变量的实质是比较它们的地址。
+​		①数组变量不能直接比较，因为永远是false，比较数组变量的实质是比较它们的**地址**。
 
 ​		②不相等时，返回值其实是两个字符串中第一个不相同字符的**ASCII码的差值**，不一定是1或者-1。
 
@@ -6815,17 +6929,30 @@ int strcmp(const char *s1, const char *s2);
 
 ​		⑤C语言中，`str1 == str2`、`str1 > str2`比较的是**两个字符串的起始地址**，而`strcmp(str1, str2) == 0`、`strcmp(str1, str2) > 0`才是比较**两个字符串的内容**。
 
-​		**字符串复制函数strcpy(dst, src)**
-
 ```c
-char strcpy(char *restrict dst, const char *restrict srç);
+//strcmp模拟实现-指针版
+int mycmp(const char *s1, const char *s2)
+{
+    while( *s1 == *s2 && s1 != '\0')
+    {
+        s1 ++;
+        s2 ++;
+    }
+    return *s1 - *s2;
+}
 ```
 
-​		作用：把src的字符串复制到dst，直到遇到src中的`'\0'`为止。
+​		**Ⅳ. 字符串复制函数strcpy(dst, src)**
+
+```c
+char strcpy(char *restrict dst, const char *restrict src);
+```
+
+​		作用：把src的字符串复制到dst，直到复制到src中的`'\0'`为止。
 
 ​		注意：
 
-​		①restrict表明src和dst不重叠(C99) 
+​		①restrict表明src和dst不重叠(C99) （不重叠，指的是比如src是在第3个单元开始的`"Hello"`，要拷贝到dst第0个单元，这时相当于把长度为5的`"Hello"`字符串前移3个单元，就会产生重叠现象）
 
 ​		②函数返回dst
 
@@ -6833,7 +6960,39 @@ char strcpy(char *restrict dst, const char *restrict srç);
 
 ​		④参数dst必须是字符型数组的基地址，参数src可以是字符数组名或字符串常量。
 
-​		**字符串连接函数strcat(s1, s2)**
+​		**复制一个字符串**
+
+```c
+char *dst = (char *)malloc(strlen(src) + 1);
+strcpy(dst, src);
+```
+
+```c
+//strcpy模拟实现-数组版本
+char *mycpy(char* dst, const char* src)
+{
+    int idx = 0;
+    while(src[idx])
+    {
+        dst[idx] = src[idx];
+        idx ++;
+    }
+    dst[idx] = '\0';
+    
+    return dst;
+}
+//strcpy模拟实现-指针版本
+char *mycpy(char* dst, const char* src)
+{
+    char* ret = dst;
+    while(*dst++ = *src++);
+    *dst = '\0';
+    
+    return ret;
+}
+```
+
+​		**Ⅴ. 字符串连接函数strcat(s1, s2)**
 
 ```c
 char strcat(char *restrict s1, const char *restrict s2);
@@ -6852,6 +7011,23 @@ char strcat(char *restrict s1, const char *restrict s2);
 ​		④参数s1必须是字符型数组的基地址，参数s2可以是字符数组名或字符串常量。
 
 ​		⑤C语言不允许使用算术运算加将字符数组直接连接，即`s1 = s1 + t`和`s1 = s1 + "!"`都是非法的。连接两个字符串可以使用`strcat()`，或者逐个元素赋值。
+
+```c
+//mycat模拟实现-指针版
+char* mycat(char* s1, const char* s2)
+{
+    while (*++s1);
+    while (*s2 != '\0') 
+    {
+        *s1 = *s2;
+        *s1++;
+        *s2++;
+    }
+    *s1 = '\0';
+
+	return s1;
+}
+```
 
 ​		**安全版本**
 
@@ -6877,7 +7053,38 @@ char * strrchr(const char *s, int c);
 
 ​		返回NULL表示没有找到，返回非NULL，说明找到了，且位置为返回指针所指位置。
 
-​		如何寻找第2个？ 
+​		如何寻找第2个？ →可以从找到部分指针+1之后部分继续调用`strchr()`函数
+
+```c
+char s[] = "hello";
+char *p = strchr(s, 'l');
+p = strchr(p + 1, 'l');
+printf("%s", p);
+```
+
+​		如何将寻找到的字符后面的串复制到其他字符串中？
+
+```c
+char s[] = "hello";
+char *p = strchr(s, 'l');
+char *t = (char *)malloc(strlen(p) + 1);
+strcpy(t, p);
+printf("%s", t);
+free(t); //注意malloc和free在<stdlib.h>这个库里
+```
+
+​		如何将寻找到的字符前面的串复制到其他字符串中？→利用一个*p指针记录位置
+
+```c
+char s[] = "hello";
+char *p = strchr(s, 'l');
+char c = *p;
+*p = '\0';
+char *t = (char *)malloc(strlen(s) + 1);
+strcpy(t, s);  //t拷贝完可以用*p = c将字符串s恢复原样
+printf("%s", t);
+free(t);
+```
 
 ​		**字符串中找字符串的函数**
 
@@ -6890,7 +7097,7 @@ char * strcasestr(const char *s1, const char *s2);
 
 ​		程序中需要使用各种变量来保存被处理的数据和各种状态信息，变量在使用前必须被定义且安排好存储空间（包括**内存起始地址**和**存储单元大小**）。C语言的**全局变量**、**静态局部变量**的存储是在编译时确定的，其存储空间的实际分配在程序开始执行前完成。对于局部自动变量，在执行进入变量定义所在的复合语句时为它们分配存储单元，这种变量的大小也是静态确定的。
 
-​		以静态方式安排存储的好处主要是实现比较方便，效率高，程序执行过程中需要做的事情比较简单。但这种做法也有限制，某些问题不太好解决，比如运行中很多存储要求在写程序时无法确定，因此C语言提供了**动态存储管理机制**，允许程序动态申请和释放存储空间，可以根据运行时的实际存储需求分配适当的存储区，用于存放那些在运行中才能确定数量的数据。
+​		以静态方式安排存储的好处主要是实现比较方便，效率高，程序执行过程中需要做的事情比较简单。但这种做法也有限制，某些问题不太好解决，比如运行中很多存储要求在写程序时无法确定，因此C语言提供了**动态存储管理机制**，允许程序动态申请和释放存储空间，可以根据运行时的实际存储需求分配适当的存储区，用于存放那些在运行中才能确定数量的数据（C99之后可以使用变量作为数组定义时的数组长度）。
 
 ​		C语言中主要用两种方法使用内存：一种是**由编译系统分配的内存区**；另一种是**用内存动态分配方式，留给程序动态分配的内存区**。使用动态内存分配能有效地使用内存，同一段内存区域可以被多次使用，使用时申请，用完就释放。
 
@@ -6914,7 +7121,7 @@ void * malloc(unsigned size);
 
 ​		功能：在内存动态存储区中分配一连续空间，其长度为size。若申请成功，则返回指向所分配内存空间的起始地址的指针；若申请内存空间不成功，则返回NULL。
 
-​		malloc()的返回值为(void *)类型（这是**通用指针**的一个重要用途）。在具体使用中，将malloc()的返回值转换为特定指针类型，赋给一个指针。
+​		向malloc申请的空间大小是以字节为单位的，malloc()的返回值为(void *)类型（这是**通用指针**的一个重要用途）。在具体使用中，将malloc()的返回值转换为特定指针类型，赋给一个指针。
 
 ```c
 /*动态分配n个整数类型大小的空间*/
@@ -6929,6 +7136,46 @@ if((p = (int *)malloc(n * sizeof(int))) == NULL)
 
 ​		TIPS：动态分配存储块，它的大小在**分配后也是确定的**。不要越界使用，尤其不能越界赋值，否则可能引起非常严重的错误。
 
+​		**课后讨论9.3.2：你能malloc得到多少内存？**
+
+按照老师上课的方法，写程序探测你能malloc得到多少内存，告诉大家你的计算机、操作系统、编译器。
+
+```c
+#include<stdio.h>
+#include<stdlib.h>
+
+int main(void)
+{
+	void *p;
+	int cnt = 0;
+	while((p = malloc(100 * 1024 * 1024)))
+	{
+		cnt ++;
+	}
+	printf("分配了%d00MB的空间\n", cnt);
+	
+	return 0;
+}
+```
+
+​		**课后讨论9.3.3：malloc得到的空间是连续的吗？**
+
+相邻两次malloc得到的空间是否是连续的呢？你得到的空间的实际大小是否就是你要求的大小呢？如果你malloc零长度会得到什么结果呢？试试看，然后尝试对结果开展猜测和解释。
+
+答：
+
+​		不一定。malloc函数从堆中分配内存，但并不能保证连续分配的内存块在物理内存或虚拟内存中是连续的。堆内存管理系统会跟踪哪些内存块是空闲的，并尝试以有效的方式分配内存，但并不保证连续性。
+
+得到的空间的实际大小是否是要求的大小？
+
+通常是的。当你调用malloc并请求特定数量的内存时，它会尝试分配至少那么多内存。但是，由于内存管理系统可能需要额外的空间来存储有关分配的信息（例如，用于跟踪和释放内存的数据结构），因此实际分配的内存可能会稍微多一些。然而，这不会影响你的程序，因为你只能通过malloc返回的指针来访问你请求的内存量。
+
+如果malloc零会得到什么呢？
+
+如果你请求0字节的内存（即调用malloc(0)），C标准规定这个调用是有效的，并且返回一个唯一的指针，这个指针可以被传递给free函数来释放内存。然而，这个指针不应该被解引用，因为它可能不指向任何实际的内存。这个行为的具体实现可能依赖于你的库和操作系统。
+
+需要注意的是，尽管malloc(0)不会失败，但试图通过返回的指针访问内存可能是未定义的行为。在某些实现中，malloc(0)可能返回一个NULL指针，但在C标准中，NULL指针和唯一的有效指针都是可能的返回值。
+
 ​		⑵计数动态存储分配函数calloc()
 
 ```c
@@ -6939,7 +7186,7 @@ void * calloc(unsigned n, unsigned size);
 
 ​		TIPS： malloc()对所分配的存储块不做任何事情，calloc()对整个区域进行**初始化**。
 
-​		⑶动态存储释法函数free()
+​		⑶动态存储释放函数free()
 
 ```c
 void free(void * ptr);
@@ -6948,6 +7195,12 @@ void free(void * ptr);
 ​		功能：释放由动态存储分配函数申请到的整块内存空间，ptr为指向要释放空间的首地址。如果ptr的值是空指针，则free什么都不做。该函数无返回值。
 
 ​		为了保证动态存储区的有效利用，在知道某个动态分配的存储块不再用时，就应及时将它释放。
+
+​		只能还申请来的空间的首地址（比如p指针申请了一部分内存空间，然后p++，此时不能释放p）
+
+​		`free()`函数可以“释放”NULL，实际上`free(NULL)`意味着不做任何事，只是一种free接指针的良好习惯。
+
+​		申请了内存空间没free→长时间运行内存下降（内存泄露），新手往往是忘了，而老手是找不到合适的free时机。
 
 ​		TIPS： 释放后不允许再通过该指针去访问已释放的块，否则也可能引起灾难性错误。
 
