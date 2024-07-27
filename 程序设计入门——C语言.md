@@ -7531,3 +7531,89 @@ ACLLib是一个纯教学用途的纯C语言图形库，它并非任何产业界�
 ACLLib在github上开源，网址是：https://github.com/wengkai/ACLLib ，可以从这个网址下载ACLLib，也欢迎对ACLLib提出修改和改进。
 
 首先学习的是关于ACLLib最基础的静态图形绘制的内容，后面还有关于ACLLib中如何响应用户鼠标、键盘动作的内容，在那之后才能用ACLLib作出完整的Windows桌面程序来。
+
+**ACLLib介绍**
+
+是一个基于Win32API的函数库，提供了相对较为简单的方式来做Windows程序
+
+实际提供了一个.c和两个.h，可以在MSVC和Dev C++(MinGW)中使用
+
+以GPL方式开源放在github上
+
+纯教学用途，但是编程模型和思想可以借鉴
+
+**Win32API简单介绍**
+
+从第一个32位的Windows开始就出现了，就叫做Win32API
+
+它是一个纯C的函数库，就和C标准库一样，使你可以写Windows应用程序
+
+过去很多Windows程序是用这个方式做出来的
+
+​		**main()**
+
+​		main（）成为C语言的入口函数其实和C语言本身无关，你的代码是被一小段叫做启动代码的程序所调用的，它需要一个叫做main的地方
+
+​		操作系统把你的可执行程序装载到内存里，启动运行，然后调用你的main函数
+
+​		**WinMain()**
+
+​		As main() is the entry function of an ordinary C program, WinMain() is the one in Win32API program.
+
+​		Windows applications have a different "startup" code that needs a function "WinMain()"
+
+```c
+#include <windows.h> 
+int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR LpCmdLine, int nCmdShow)
+{
+MessageBox(NULL, "Goodbye, cruel world!", "Note", MB_OK);
+return 0; 
+}
+```
+
+​		如何产生一个窗口？→填充**窗口结构**
+
+```c
+WNDCLASSEX wc; 
+wc.cbSize = sizeof(WNDCLASSEX); 
+wc.style = 0; 
+wc.lpfnWndProc = WndProc; 
+wc.cbClsExtra = 0; 
+wc.cbWndExtra = 0; 
+wc.hInstance = hInstance; 
+wc.hIcon = LoadIcon(NULL, 
+IDI_APPLICATION); 
+wc.hCursor = LoadCursor(NULL, IDC_ARROW); 
+wc.hbrBackground = (HBRUSH)(COLOR_WINDOW
++1); 
+wc.lpszMenuName = NULL; 
+wc.lpszClassName = g_szClassName; 
+wc.hIconSm = LoadIcon(NULL, 
+IDI_APPLICATION); 
+```
+
+​		如何在窗口中画东西？→DC（设备上下文）
+
+​		如何获得用户的鼠标和键盘动作？→消息循环和消息处理代码 
+
+```c
+while(GetMessage(&Msg, NULL, 0, 0)) { 
+ TranslateMessage(&Msg); 
+ DispatchMessage(&Msg);
+}
+```
+
+```c
+LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM IParam){
+switch(msg){
+case WM LBUTTONDOWN: char szFileName[MAX PATH];
+HINSTANCE hInstance GetModuleHandle(NULL); GetModuleFileName(hInstance, szFileName, MAX_PATH);
+MessageBox(hwnd, szFileName, "This program is:", MB OK MB_ICONINFORMATION);
+}
+break; 
+```
+
+​		如何画出标准的界面：菜单、按钮、输入框 → ACLLib目前不能做
+
+**DEV C++建ACLLib项目**
+
