@@ -1,0 +1,5 @@
+安装了Dev C++之后，你的Windows电脑上就有了一个MinGW编译器，这是GNU的C语言编译器的Windows版本。除了可以使用Dev C++这个IDE，你也可以像在Linux和MacOS一样，在Windows的命令行里使用gcc来编译C语言程序。
+
+下面的视频展示了如何在Windows中配置并使用gcc来编译C语言程序。在命令行中编译ACLLib程序比较方便，因为有关的库文件的选择和设置已经经由Makefile文件中的配置做好了。
+
+如果你在2015年11月26日之前下载过ACLLib，请重新从本周的第一个富文本或GitHub下载一遍，因为我们调整了一下其中的samples目录中的Makefile的内容，以适应目录结构的变化。

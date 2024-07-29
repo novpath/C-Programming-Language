@@ -1,0 +1,51 @@
+在Win7或Win8上正常安装的Dev C++，无论是用的MinGW编译器还是TDM编译器都是可以正常使用ACLLib的，但是要注意以下几点：
+
+1. 如果还在使用4.9.9.2的Dev C++，一定要升级到5以上，建议都升级到最新的5.10的版本；
+
+2. 在新建项目的时候选择Windows Application类型；
+
+3. 根据自己机器是32位还是64位来选择编译类型，如果是32位的机器选择MinGW32位方式，如果是64位的机器建议选择TDM的64位方式；
+
+4. 在配置项目的时候，根据32位还是64位选择正确目录下的库文件来加入：
+
+	1. 32位下，库文件是：
+
+"C:/Program Files/Dev-Cpp/MinGW32/lib/libwinmm.a"
+
+"C:/Program Files/Dev-Cpp/MinGW32/lib/libmsimg32.a"
+
+"C:/Program Files/Dev-Cpp/MinGW32/lib/libkernel32.a"
+
+"C:/Program Files/Dev-Cpp/MinGW32/lib/libuser32.a"
+
+"C:/Program Files/Dev-Cpp/MinGW32/lib/libgdi32.a"
+
+"C:/Program Files/Dev-Cpp/MinGW32/lib/libole32.a"
+
+"C:/Program Files/Dev-Cpp/MinGW32/lib/liboleaut32.a"
+
+"C:/Program Files/Dev-Cpp/MinGW32/lib/libuuid.a"
+
+	2. 64位下，库文件是：
+
+C:/Program Files/Dev-Cpp/MinGW64/x86_64-w64-mingw32/lib/libwinmm.a
+
+C:/Program Files/Dev-Cpp/MinGW64/x86_64-w64-mingw32/lib/libmsimg32.a
+
+C:/Program Files/Dev-Cpp/MinGW64/x86_64-w64-mingw32/lib/libkernel32.a
+
+C:/Program Files/Dev-Cpp/MinGW64/x86_64-w64-mingw32/lib/libuser32.a
+
+C:/Program Files/Dev-Cpp/MinGW64/x86_64-w64-mingw32/lib/libgdi32.a
+
+C:/Program Files/Dev-Cpp/MinGW64/x86_64-w64-mingw32/lib/libole32.a
+
+C:/Program Files/Dev-Cpp/MinGW64/x86_64-w64-mingw32/lib/liboleaut32.a
+
+C:/Program Files/Dev-Cpp/MinGW64/x86_64-w64-mingw32/lib/libuuid.a
+
+5. 最后，如果出现“undefined reference to `TransparentBlt' ”这个错误，两个解决方案：
+
+	1. 偷懒的，打开acllib.c，找到“TransparentBlt”所在的行，把整行注释掉；
+
+	2. 打开工程配置，找到编译器选项，加入-DWINVER=0x0500。
