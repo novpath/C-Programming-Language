@@ -7532,7 +7532,7 @@ ACLLib在github上开源，网址是：https://github.com/wengkai/ACLLib ，可�
 
 首先学习的是关于ACLLib最基础的静态图形绘制的内容，后面还有关于ACLLib中如何响应用户鼠标、键盘动作的内容，在那之后才能用ACLLib作出完整的Windows桌面程序来。
 
-**ACLLib介绍**
+#### 1.ACLLib介绍
 
 是一个基于Win32API的函数库，提供了相对较为简单的方式来做Windows程序
 
@@ -7615,5 +7615,188 @@ break;
 
 ​		如何画出标准的界面：菜单、按钮、输入框 → ACLLib目前不能做
 
-**DEV C++建ACLLib项目**
+#### 2.DEV C++建ACLLib项目
 
+​		①新建项目和文件夹(见代码示例-ACLLib 项目 文件夹)
+
+​		②添加ACLLib文件到项目
+
+​		③设置项目属性参数
+
+​		④修改代码并编译运行
+
+​		⑤在窗口中绘制图形
+
+​		⑥在窗口中使用`printf()`和`scanf()`
+
+#### 3.ACLLib的基本绘图函数
+
+​		**你的第一个ACLLib程序**
+
+```c
+void initWindow(const char title[], int left, int top, int width, int height);
+void beginPaint();
+void endPaint();
+```
+
+```c
+void initWindow(const char *name, int left, int top, int width, int height);
+int setup()
+{
+    initWindow("Hello World", 100, 100, 200, 200); //两个100可以替换为DEFAULT，windows会把它放在合适位置
+    return 0;
+}
+```
+
+​		**坐标系**
+
+​		在Windows中，坐标是以像素点的数字来定义的。对于你创建出来的窗口，**左上角**是(0,0)，x轴自左向右增长，y轴自上向下增长（类似早期文本键入习惯，从左往右，从上往下）。
+
+​		**终端窗口**
+
+​		如果需要使用`scanf()`和`printf()`，则需要首先
+
+```c
+initConsole();
+```
+
+​		然后就可以在哪个窗口上使用`scanf()`和`printf()`了
+
+​		**启动/结束绘图**
+
+```c
+void beginPaint();
+void endPaint();
+```
+
+​		任何绘图函数的调用必须在这一对函数调用之间
+
+​		**绘制“点”**
+
+```c
+void putPixel(int x, int y, ACL_Color color);
+ACL_Color getPixel(int x, int y);
+```
+
+​		**颜色**
+
+```c
+RGB(r, g, b);
+红色→RGB(255, 0, 0)
+BLACK, RED, GREEN, BULE, CYAN, MAGENTA, YELLOW, WHITE
+```
+
+​		**线**
+
+```c
+void moveTo(int x, int y);
+void moveRel(int dx, int dy);
+void line(int x0, int y0, int x1, int y1);
+void lineTo(int x, int y);
+void lineRel(int dx, int dy);
+void arc(int nLeftRect, int nTopRect, int nRightRect, 
+int nBottomRect, int nXStartArc, int nYStartArc, 
+int nXEndArc, int nYEndArc);
+```
+
+​		**画笔**
+
+```c
+void setPenColor(ACL_Color color);
+void setPenWidth(int width);
+void setPenStyle(ACL_Pen_Style style);
+PEN_STYLE_SOLID,
+PEN_STYLE_DASH,	 	 	 /* ------- */
+PEN_STYLE_DOT,		 	 /* ....... */
+PEN_STYLE_DASHDOT,		 /* _._._._ */
+PEN_STYLE_DASHDOTDOT, /* _.._.._ */
+PEN_STYLE_NULL
+```
+
+​		**面**
+
+```c
+void chrod(int nLeftRect, int nTopRect, int nRightRect, int nBottomRect, int 
+nXRadial1, int nYRadial1, int nXRadial2, int nYRadial2);
+void ellipse( int nLeftRect, int nTopRect, int nRightRect, int nBottomRect);
+void pie(int nLeftRect, int nTopRect, int nRightRect, int nBottomRect, int 
+nXRadial1, int nYRadial1, int nXRadial2, int nYRadial2);
+void rectangle(int nLeftRect, int nTopRect, int nRightRect, int nBottomRect);
+void roundrect(int nLeftRect, int nTopRect, int nRightRect, int nBottomRect, int 
+nWidth, int nHeight);
+```
+
+​		**刷子**
+
+画笔负责线及面的边缘，刷子负责面的内部
+
+```c
+void setBrushColor(ACL_Color color);
+void setBrushStyle(ACL_Brush_Style style);
+BRUSH_STYLE_SOLID = -1,
+BRUSH_STYLE_HORIZONTAL,	 	 /* ----- */
+BRUSH_STYLE_VERTICAL,		 /* ||||| */
+BRUSH_STYLE_FDIAGONAL,	 	 /* \\\\\ */
+BRUSH_STYLE_BDIAGONAL,	 	 /* ///// */
+BRUSH_STYLE_CROSS,	 	 	 /* +++++ */
+BRUSH_STYLE_DIAGCROSS,	 	 /* xxxxx */
+```
+
+​		**文字**
+
+```c
+void setTextColor(ACL_Color color);
+void setTextBkColor(ACL_Color color);
+void setTextSize(int size);
+void setTextFont(char *pFontName);
+void paintText(int x, int y, const char *pStr);
+```
+
+**在Windows中用命令行编译ACLLib的程序**
+
+​		可以在Windows中用命令行编译ACLLib的程序，这样就不用再Dev C++中配置了。
+
+​		命令行编辑ACLLib程序有个好处，就是有一个工具叫做make file，它可以帮我们以一个文本文件的形式来确定所有在编译时需要注意细节的东西，往往会更简单，步骤如下：
+
+​		①打开Dev cpp安装目录，MingGW64→bin→gcc.exe
+
+​		②复制bin所在的目录路径，点开此电脑的属性→高级系统设置→环境变量→系统变量→(双击)path→变量值→粘贴之前复制的路径，并添加英文分号
+
+​		③开始界面→命令提示符→如果敲如gcc，返回no input files说明之前操作是正确的。编辑工作可以使用sublime text或者pspad
+
+​		④做完上述步骤后，证明我们可以使用gcc在命令行底下编译了，下载acllib.c和acllib.h文件到桌面。
+
+​		⑤在desktop可以cd Desktop（命令提示符中的 "cd" 代表 "change directory"，‌即改变当前目录），顺着目录逐层cd到mingw下的mm.bat文件，运行该文件，会使用make file帮我们做一些编译，每一个.c文件都会产生一个对应的.exe文件，将其中某个.c文件改成自己想做的程序时，就可以用mm来编译了（会把目录下所有文件都编译一遍，但是也可以让它做得更简单一点，只编译某个文件）
+
+​		用命令行方法编译，好处是不在需要在dev c++中配置很复杂的.a文件，会用系统默认的方式去找到那些对应的库文件，所以不存在找错的问题，一定能让你的程序能够编译出来。
+
+**课后讨论：画个图吧**
+
+用ACLLib写个程序来画图，不能直接往窗口里贴图片！把你的程序和画出的图都贴出来晒一晒吧。
+
+---
+
+解答：
+
+```c
+#include"acllib.h"
+#include"stdio.h"
+
+int Setup(){
+	int width = 255,i,j;
+	initWindow("RainBow", DEFAULT, DEFAULT, width, width);
+	beginPaint();
+	for(j = 0; j <= width; j ++)	
+		for(i = 0; i <= width; ++i)
+		{
+			putPixel(i, j, RGB(i % 255, j % 255, (j + i) * (j - i) % 255));
+		}
+	endPaint();
+	
+	return 0;
+}	
+```
+
+![10.3 ACLLib绘图](笔记插图/10.3 ACLLib绘图.png)
+
+<center style="color:#C0C0C0">图10.3 ACLLib绘图</center>
