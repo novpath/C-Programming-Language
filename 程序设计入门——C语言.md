@@ -7762,11 +7762,11 @@ void paintText(int x, int y, const char *pStr);
 
 ​		②复制bin所在的目录路径，点开此电脑的属性→高级系统设置→环境变量→系统变量→(双击)path→变量值→粘贴之前复制的路径，并添加英文分号
 
-​		③开始界面→命令提示符→如果敲如gcc，返回no input files说明之前操作是正确的。编辑工作可以使用sublime text或者pspad
+​		③开始界面→命令提示符→如果敲入gcc，返回no input files说明之前操作是正确的。编辑工作可以使用sublime text或者pspad。
 
 ​		④做完上述步骤后，证明我们可以使用gcc在命令行底下编译了，下载acllib.c和acllib.h文件到桌面。
 
-​		⑤在desktop可以cd Desktop（命令提示符中的 "cd" 代表 "change directory"，‌即改变当前目录），顺着目录逐层cd到mingw下的mm.bat文件，运行该文件，会使用make file帮我们做一些编译，每一个.c文件都会产生一个对应的.exe文件，将其中某个.c文件改成自己想做的程序时，就可以用mm来编译了（会把目录下所有文件都编译一遍，但是也可以让它做得更简单一点，只编译某个文件）
+​		⑤在desktop可以cd Desktop（命令提示符中的 "cd" 代表 "change directory"，‌即改变当前目录），顺着目录逐层cd到mingw下的mm.bat文件，运行该文件，会使用make file帮我们做一些编译，每一个.c文件都会产生一个对应的.exe文件，将其中某个.c文件改成自己想做的程序时，就可以用mm来编译了（虽然会把目录下所有文件都编译一遍，但是也可以让它做得更简单一点，只编译某个文件）
 
 ​		用命令行方法编译，好处是不在需要在dev c++中配置很复杂的.a文件，会用系统默认的方式去找到那些对应的库文件，所以不存在找错的问题，一定能让你的程序能够编译出来。
 
@@ -7783,7 +7783,7 @@ void paintText(int x, int y, const char *pStr);
 #include"stdio.h"
 
 int Setup(){
-	int width = 255,i,j;
+	int width = 255, i, j;
 	initWindow("RainBow", DEFAULT, DEFAULT, width, width);
 	beginPaint();
 	for(j = 0; j <= width; j ++)	
@@ -7800,3 +7800,142 @@ int Setup(){
 ![10.3 ACLLib绘图](笔记插图/10.3 ACLLib绘图.png)
 
 <center style="color:#C0C0C0">图10.3 ACLLib绘图</center>
+
+
+
+### 第十一章：结构类型
+
+#### 1.枚举
+
+**常量符号化**
+
+用符号而不是具体数字来表示程序中的数字
+
+```c
+#include <stdio.h>
+
+const int red = 0; 
+const int yellow = 1; 
+const int green = 2;
+
+int main(int argc, char const *argv[]) 
+{
+
+    int color = -1;
+
+    char *colorName = NULL;
+
+    printf("输入你喜欢的颜色的代码：");
+    scanf("%d", &color);
+
+    switch (color)
+    {
+    	case red: colorName ="red"; break;
+    	case yellow: colorName ="yellow"; break;
+    	case green: colorName ="green"; break;
+    	default: colorName= "unknown"; break;
+    }
+
+        printf("你喜欢的颜色是%s\n",colorName); 
+    
+    return 0;
+} 
+```
+
+用枚举而不是定义独立的`const int`变量
+
+```c
+enum color{red, yellow, green};
+```
+
+枚举是一种用户定义的数据类型，它用关键字 `enum`以如下语法来声明： 
+
+```c
+enum 枚举类型名字 {名字0, …, 名字n} ;
+```
+
+枚举类型名字通常并不真的使用，要用的是在大括号里的名字， 因为它们就是就是常量符号，它们的类型是int，值则依次从0 到n。如： 
+
+```c
+enum colors { red, yellow, green } ; 
+```
+
+就创建了三个常量，red的值是0，yellow是1，而green是2。 
+
+当需要一些可以排列起来的常量值时，定义枚举的意义就是给了这些常量值名字
+
+**枚举的性质**
+
+枚举量可以作为值
+
+枚举类型可以跟上`enum`作为类型
+
+但是实际上是以整数来做内部和外部输入输出的
+
+```c
+#include<stdio.h>
+enum color {red, yellow, green};
+
+void f(enum color c);
+
+int main(void)
+{
+	enum color t = red;
+	
+	scanf("%d", &t);
+	f(t);
+	
+	return 0;
+}
+
+void f(enum color c)
+{
+	printf("%d\n", c);
+}
+```
+
+套路：**自动计数枚举**
+
+这样需要遍历所有的枚举量或者需要建立一个用枚举量做下标的数组的时候就很方便了
+
+```c
+#include <stdio.h>
+
+enum COLOR {RED, YELLOW, GREEN, NumCOLORS};
+
+int main() {
+    
+   int color = -1;
+   char *ColorNames[NumCOLORS] = {
+       "red","yellow","green",
+   };
+   char *colorNames = NULL;
+   
+   printf("请输入你喜欢的颜色代码:");
+   scanf("%d",&color);
+   if(color>=0 && color<NumCOLORS){
+       colorNames = ColorNames[color];
+   }else{
+       colorNames="unknown";
+   }
+   printf("你喜欢的颜色是%s\n",colorNames);
+   
+    return 0;
+}
+```
+
+声明枚举量的时候可以指定值 
+
+```c
+enum COLOR { RED = 1, YELLOW, GREEN = 5};
+```
+
+即使给枚举类型的变量赋不存在的整数值也没有任何warning或error
+
+虽然枚举类型可以当作类型使用，但是实际上很(bu)少(hao)用 
+
+如果有意义上排比的名字，用枚举比`const int`方便 
+
+枚举比宏（macro）好，因为枚举有`int`类型
+
+相对于其他高级语言，C语言的枚举类型是比较失败的，一般仅仅是作为符号量而不是枚举类型来使用。
