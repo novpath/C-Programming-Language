@@ -7938,4 +7938,197 @@ enum COLOR { RED = 1, YELLOW, GREEN = 5};
 
 枚举比宏（macro）好，因为枚举有`int`类型
 
-相对于其他高级语言，C语言的枚举类型是比较失败的，一般仅仅是作为符号量而不是枚举类型来使用。
+相对于其他高级语言，C语言的枚举类型是比较失败的，一般仅仅是作为**符号量**而不是**枚举类型**来使用。
+
+#### 2.结构
+
+**声明结构类型**
+
+```c
+#include<stdio.h>
+
+int main(int argc, char const *argv[])
+{
+    struct date{
+        int month;
+        int day;
+        int year;
+    };
+    struct date today;
+    today.month = 07;
+    today.day = 31;
+    today.year = 2014;
+    
+    printf("Today's date is %i-%i-%i.\n",
+          today.year, today.month, today.day);
+    
+    return 0;
+}
+```
+
+​		注意，初学者不要忘记在定义结构的语句最后的大括号外加上**分号**。
+
+​		**在函数内/外？**
+
+​		和本地变量一样，在函数内部声明的结构类型只能在函数内部使用 
+
+​		所以通常在**函数外部**声明结构类型， 这样就可以被多个函数所使用了
+
+**声明结构的形式**
+
+```c
+struct point{
+    int x;
+    int y;
+}
+struct point p1, p2;
+```
+
+​		p1、p2都是point，里面有x和y的值，即p1和p2的类型是`struct point`。
+
+```c
+struct point{
+    int x;
+    int y;
+} p1, p2;
+```
+
+​		同时做了两件事，一是声明了point结构，二是定义了这种结构的两个变量p1和p2。
+
+​		**结构类型**和**结构变量**是两件事！声明了一种结构类型，可以用这个类型定义出很多结构变量。
+
+```c
+struct {
+    int x;
+    int y;
+} p1, p2;
+```
+
+​		p1和p2都是一种无名结构，里面有x和y。
+
+**结构变量**
+
+```c
+struct date today;
+today.month = 12;
+today.day = 21;
+today.year = 2024;
+```
+
+![11.2 结构变量在内存中](笔记插图/11.2 结构变量在内存中.png)
+
+<center style="color:#C0C0C0">图11.2 结构变量在内存中</center>
+
+**结构的初始化**
+
+​		放在函数内部的变量叫本地变量，本地变量是没有默认初始值的，如果你不去给它初始值，它里面就是未知的值。
+
+​		`int`类型是直接赋初始值，数组是用大括号赋初始值，对于结构，还是用大括号来赋初始值。
+
+```c
+#include<stdio.h>
+
+struct date
+{
+	int month;
+	int day;
+	int year;
+};
+
+int main(int argc, char const *argv[])
+{
+	struct date today = {12, 21, 2024};
+	struct date thismonth = {.month = 12, .year = 2024};
+	
+	printf("Today's date is %i-%i-%i.\n", 
+		today.year, today.month, today.day);
+	printf("This month is is %i-%i-%i.\n", 
+		thismonth.year, thismonth.month, thismonth.day);
+	
+	return 0;
+}
+```
+
+```ouput
+Today's date is 2024-12-21.
+This month is is 2024-12-0.
+```
+
+​		注意，C语言结构体初始化时，没初始化的值和数组类似，**默认是0**。但C++结构体初始化时，必须按照**定义的顺序**进行初始化，不能够**跳过**其中部分内容而初始化其他选项，也不能和定义的先后顺序不一致。
+
+**结构成员**
+
+​		结构和数组有点像
+
+​		数组的单元必须是**相同类型**，而结构的成员可以是**不同类型**的数组单元。
+
+​		数组用`[]`运算符合下标访问其成员
+
+```c
+a[0] = 25;
+```
+
+​		结构用`.`运算符合下标访问其成员
+
+```c
+today.day
+student.firstName
+p1.x
+p1.y
+```
+
+​		结构类型是虚的，只是告诉编译器有这种结构类型的变量看起来是什么样的，所以`结构类型.`是没有意义的
+
+​		出现在`.`左边的一定是一个结构变量
+
+**结构运算**
+
+​		要访问整个结构，直接用结构变量的名字
+
+​		对于整个结构，可以做赋值、取地址，也可以传递给函数参数
+
+```c
+p1 = (struct point){2, 5}; //相当于p1.x = 2, p1.y = 5;
+p1 = p2;                   //相当于p1.x = p2.x; p1.y = p2.y;
+```
+
+​		对数组来说，除了初始化时之外，没法直接让`数组a = 数组b`，但是结构是可以直接赋值的！
+
+```c
+#include<stdio.h>
+
+struct date
+{
+	int month;
+	int day;
+	int year;
+};
+
+int main(int argc, char const *argv[])
+{
+	struct date today = {12, 21, 2024};
+	struct date thismonth;
+	
+	thismonth = today;
+	
+	printf("Today's date is %i-%i-%i.\n", 
+		today.year, today.month, today.day);
+	printf("This month is is %i-%i-%i.\n", 
+		thismonth.year, thismonth.month, thismonth.day);
+	
+	return 0;
+}
+```
+
+​		注意，`thismonth = today;`执行之后，只是`thismonth`得到了`today`里面所有成员的值，但这两个结构变量`today`和`thismonth`仍然是两个不同的东西，后续也可以单独某个结构变量的成员变量赋值。
+
+**结构指针**
+
+​		和数组不同，结构变量的名字并不是结构变量的地址，必须使用`&`运算符。
+
+​		否则编译器会提示类型不匹配的错误。
+
+```c
+struct date *pDate = &today;
+```
+
