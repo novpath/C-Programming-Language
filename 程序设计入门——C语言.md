@@ -7770,7 +7770,7 @@ void paintText(int x, int y, const char *pStr);
 
 ​		用命令行方法编译，好处是不在需要在dev c++中配置很复杂的.a文件，会用系统默认的方式去找到那些对应的库文件，所以不存在找错的问题，一定能让你的程序能够编译出来。
 
-**课后讨论：画个图吧**
+**课后讨论10.3.1：画个图吧**
 
 用ACLLib写个程序来画图，不能直接往窗口里贴图片！把你的程序和画出的图都贴出来晒一晒吧。
 
@@ -7942,7 +7942,9 @@ enum COLOR { RED = 1, YELLOW, GREEN = 5};
 
 #### 2.结构
 
-**声明结构类型**
+**结构类型**
+
+​		**声明结构类型**
 
 ```c
 #include<stdio.h>
@@ -7974,7 +7976,7 @@ int main(int argc, char const *argv[])
 
 ​		所以通常在**函数外部**声明结构类型， 这样就可以被多个函数所使用了
 
-**声明结构的形式**
+​		**声明结构的形式**
 
 ```c
 struct point{
@@ -8006,7 +8008,7 @@ struct {
 
 ​		p1和p2都是一种无名结构，里面有x和y。
 
-**结构变量**
+​		**结构变量**
 
 ```c
 struct date today;
@@ -8019,7 +8021,7 @@ today.year = 2024;
 
 <center style="color:#C0C0C0">图11.2 结构变量在内存中</center>
 
-**结构的初始化**
+​		**结构的初始化**
 
 ​		放在函数内部的变量叫本地变量，本地变量是没有默认初始值的，如果你不去给它初始值，它里面就是未知的值。
 
@@ -8056,7 +8058,7 @@ This month is is 2024-12-0.
 
 ​		注意，C语言结构体初始化时，没初始化的值和数组类似，**默认是0**。但C++结构体初始化时，必须按照**定义的顺序**进行初始化，不能够**跳过**其中部分内容而初始化其他选项，也不能和定义的先后顺序不一致。
 
-**结构成员**
+​		**结构成员**
 
 ​		结构和数组有点像
 
@@ -8081,7 +8083,7 @@ p1.y
 
 ​		出现在`.`左边的一定是一个结构变量
 
-**结构运算**
+​		**结构运算**
 
 ​		要访问整个结构，直接用结构变量的名字
 
@@ -8122,7 +8124,7 @@ int main(int argc, char const *argv[])
 
 ​		注意，`thismonth = today;`执行之后，只是`thismonth`得到了`today`里面所有成员的值，但这两个结构变量`today`和`thismonth`仍然是两个不同的东西，后续也可以单独某个结构变量的成员变量赋值。
 
-**结构指针**
+​		**结构指针**
 
 ​		和数组不同，结构变量的名字并不是结构变量的地址，必须使用`&`运算符。
 
@@ -8131,4 +8133,472 @@ int main(int argc, char const *argv[])
 ```c
 struct date *pDate = &today;
 ```
+
+**结构与函数**
+
+​		**结构类型作为函数参数**
+
+```c
+int numberOfDays(struct date d)
+```
+
+整个结构可以作为参数的值传入函数
+
+这时候是在函数内新建一个结构变量，并复制调用者的结构的值
+
+也可以返回一个结构
+
+这与数组完全不同
+
+​		**结构指针的传递和访问**
+
+```c
+#include<stdio.h>
+#include<stdbool.h>
+
+struct date
+{
+	int month;
+	int day;
+	int year;
+};
+
+bool isLeap(struct date d);
+int numberOfDays(struct date d);
+
+int main(int argc, char const *argv[])
+{
+	struct date today, tomorrow;
+	
+	printf("Enter today's date (mm dd yyyy):");
+	scanf("%i %i %i", &today.month, &today.day, &today.year);
+	
+	if(today.day != numberOfDays(today))
+	{
+		tomorrow.day = today.day + 1;
+		tomorrow.month = today.month;
+		tomorrow.year = today.year;
+	}
+	else if(today.month == 12)
+	{
+		tomorrow.day = 1;
+		tomorrow.month = 1;
+		tomorrow.year = today.year + 1;
+	}
+	else
+	{
+		tomorrow.day = 1;
+		tomorrow.month = today.month + 1;
+		tomorrow.year = today.year;
+	}
+	
+	printf("Tomorrow's date is %i-%i-%i.\n",
+	tomorrow.year, tomorrow.month, tomorrow.day);
+	
+	return 0;
+}
+
+int numberOfDays(struct date d)
+{
+	int days;
+	
+	const int daysPerMonth[13] = {0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+	
+	if(d.month == 2 && isLeap(d))
+		days = 29;
+	else
+		days = daysPerMonth[d.month];
+	
+	return days;
+}
+
+bool isLeap(struct date d)
+{
+	bool leap = false;
+	
+	if((d.year % 4 == 0 && d.year % 100 != 0) || d.year % 400 == 0)
+		leap = true;
+	
+	return leap;	
+}
+```
+
+​		①取成员`.`的优先级比取地址`&`高
+
+​		②结构变量可以直接在函数之间传递
+
+​		**输入结构**
+
+没有直接的方式可以一次`scanf()`一个结构
+
+如果我们打算写一个函数来读入结构
+
+```c
+#include<stdio.h>
+
+struct point
+{
+	int x;
+	int y;
+};
+
+void getStruct(struct point);
+void output(struct point);
+int main()
+{
+	struct point y = {0, 0};
+	getStruct(y);
+	output(y);
+	
+	return 0;
+}
+
+void getStruct(struct point p)
+{
+	scanf("%d", &p.x);
+	scanf("%d", &p.y);
+	printf("%d,%d\n", p.x, p.y);
+}
+
+void output(struct point p)
+{
+	printf("%d,%d\n", p.x, p.y);
+}
+```
+
+```IO
+2 5<回车>
+2,5
+0,0
+```
+
+但是读入的结构如何送回来呢？
+
+记住C在函数调用时是**传值**的
+
+​		①所以函数中的p与main中的y是不同的
+
+​		②在函数读入了p的数值之后，没有任何东西回到main，所以y还是{0,0}
+
+​		**一个解决方案**
+
+之前的方案，把一个结构传入了函数，然后在函数中操作，但是没有返回回去
+
+​		问题在于传入函数的是外面那个结构的克隆体，而不是指针
+
+​		传入结构和传入数组是不同的
+
+在这个输入函数中，完全可以创建一个临时的结构变量，然后把这个结构返回给调用者
+
+```c
+int main()
+{
+    struct point y = {0, 0};
+    y = inputPoint();          //两个结构变量可以直接赋值
+    output(y);
+    
+    return 0;
+}
+
+struct point inputPoint()
+{
+    struct point temp;
+    scanf("%d", &temp.x);
+    scanf("%d", &temp.y);
+    return temp;
+}
+```
+
+​		**结构指针作为参数**
+
+> “If a large structure is to be passed to a function, it is generally more efficient to pass a pointer than to copy the whole structure”
+>
+> ​				——K&R page.131
+
+​		**指向结构的指针**
+
+```c
+struct date
+{
+    int month;
+    int day;
+    int year;
+} myday;
+
+struct date *p = &myday;
+
+(*p).month = 12;
+p->month = 12;
+```
+
+​		用`->`表示指针所指的结构变量中的成员
+
+​		注意一下写法，`p`是`myday`的结构指针，引用成员变量时直接`p->month`即可，而不是`p->mayday.month`。
+
+```c
+int main()
+{
+    struct point y = {0, 0};
+    inputPoint(&y);          
+    output(y);
+    
+    return 0;
+}
+
+struct point* inputPoint(struct point *p)
+{
+    scanf("%d", &(p->x));
+    scanf("%d", &(p->y));
+    printf("%d,%d", p->x, p->y);
+    return p;
+}
+```
+
+​		将指针所指向的东西处理之后返回指针，这样做好处是将来可以更方便的将这些函数串在其他函数调用当中。
+
+```c
+int main()
+{
+    struct point y = {0, 0};
+    getStruct(&y);
+    output(y);         
+    output(*getStruct(&y));
+    printf(getStruct(&y));
+    getStruct(&y)->x = 0;
+    *getStruct(&y) = (struct point){1, 2};  //Line9: 此处左值不是变量
+    
+    return 0;
+}
+
+struct point* inputPoint(struct point *p)
+{
+    scanf("%d", &(p->x));
+    scanf("%d", &(p->y));
+    printf("%d,%d", p->x, p->y);
+    return p;
+}
+
+void output(struct point p)
+{
+    printf("%d, %d", p.x, p.y);
+}
+void print(const struct point *p)
+{
+    printf("%d,%d", p->x, p->y);
+}
+```
+
+​		**左值与右值：**左值之所以叫左值，出现在赋值号左边的不是变量，而是值，是表达式计算出的结果（是一次运算），特殊的值，所以叫左值。上述代码第九行，`*getStruct(&y)`是左值，但它不是一个变量。左值相当于一个位置（‌Location）‌，‌指向内存中的一个具体地址，‌而这个地址里的数据是可以被读取和修改的。
+
+**结构中的结构**
+
+结构中可以是基础类型，也可以是结构。
+
+```c
+struct dateAndTime
+{
+    struct date sdate;
+    struct time stime;
+};
+```
+
+​		**结构数组**
+
+```c
+struct date dates[100];
+struct date dates[] = {{4, 5, 2025}, {2, 4, 2025}};
+```
+
+​		**嵌套的结构**
+
+```c
+struct point
+{
+    int x;
+    int y;
+};
+struct rectangle
+{
+    struct point pt1;
+    struct point pt2;
+};
+
+int main()
+{
+    struct rectangle r;
+    r.pt1.x = 0;
+    r.pt1.y = 0;
+    r.pt2.x = 2;
+    r.pt2.y = 1;
+    return 0;
+}
+```
+
+如果有变量定义
+
+```c
+struct rectangle r, *rp;
+rp = &r;
+```
+
+那么下面的四种形式是等价的：
+
+```c
+r.pt1.x
+rp->pt1.x
+(r.pt1).x
+(rp->pt1).x
+```
+
+但是下面这种形式是非法的，因为pt1不是指针，而是一个结构。
+
+```c
+rp->pt1->x
+```
+
+​		**结构中的结构的数组**
+
+```c
+#include<stdio.h>
+
+struct point
+{
+	int x;
+	int y;
+};
+
+struct rectangle
+{
+	struct point p1;
+	struct point p2;
+};
+
+void printRect(struct rectangle r)
+{
+	printf("<%d, %d> to <%d, %d>\n", r.p1.x, r.p1.y, r.p2.x, r.p2.y);
+}
+
+int main(int argc, char const *argv[])
+{
+	int i;
+	struct rectangle rects[] = 
+	{
+		{{1, 2}, {3, 4}},
+		{{5, 6}, {7, 8}}
+	};
+	for(i = 0; i < 2; i ++)
+	{
+		printRect(rects[i]);
+	}
+}
+```
+
+**课后讨论11.2.1 结构和数组的联系与区别**
+
+> ​		原本结构和数组没什么联系。FORTRAN就出现了数组的概念，结构是在Algol中出现的，C++开始结构成为定义新的数据类型的主要方式。结构在编程语言中的地位是为了让用户可以定义集成在一起的一些量，给这个整体一个名字；而数组是为了表达能表达一连串相同类型的数据的。现在，如果离开C语言，站在更高的高度，我们如何看到结构和数组？它们有相通之处吗？
+
+​		答：结构是把一堆需要一起用的东西（不管数据类型相不相同）放在一起，方便用的时候不用重复写代码。
+
+数组是把一堆需要一起用的东西（数据类型必须相同）放在一起，方便用的时候不用重复写代码。
+
+他们的相同点：1.存储数据。2.可自定义。3.支持迭代
+
+**课后讨论11.2.2 对结构的探究**
+
+> 对结构，我们没有像对数组那样使用sizeof和&这两个工具来探究一下。我们把这个任务留给你。建议可以做这么几个方向的探究：
+>
+> 1. 不同的成员变量组合，结构的sizeof如何，是否正好等于全部成员的sizeof之和？
+> 2. 结构内的成员之间是否连续，相邻的成员的地址的差是否等于对应的成员的sizeof？
+
+---
+
+答：
+
+第一问：
+
+```c
+#include <stdio.h>
+struct book {
+    char name[10];
+    int price;
+};
+int main() {
+    struct book p;
+    int byte_struct = sizeof(p);
+    int byte_sum = sizeof(p.name) + sizeof(p.price);
+    printf("struct = %d\n", byte_struct);
+    printf("sum = %d", byte_sum);
+    return 0;
+}
+```
+
+上述代码的运行结果为
+
+```IO
+struct = 16
+sum = 14
+```
+
+即struct book所占的字节为16，而里面成员的字节之和为14，结构的sizeof与里面各个成员的sizeof之和**不相等**。
+
+C语言编译器在处理结构体时，如果没有特别的指定，一般都会填充一些字节，以确保不违背**对齐机制**。
+
+第二问：
+
+①结构成员之间是否连续？
+
+运行以下代码：
+
+```c
+#include <stdio.h>
+struct book {
+    char name[10];
+    int price;
+};
+int main() {
+    struct book p;
+    char *s1 = &(p.name[0]);
+    char *s2 = &(p.name[9]);
+    char *s3 = &(p.price);
+    printf("成员name数组的第一个元素地址为:%p\n", s1);
+    printf("成员name数组的最后一个元素地址为：%p\n", s2);
+    printf("成员price的地址为：%p\n", s3);
+    return 0;
+}
+```
+
+结果为：
+
+成员name数组的第一个元素地址为：0060FEE4
+
+成员name数组的最后一个元素地址为：0060FEED
+
+成员price的地址为：0060FEF0
+
+整型price的开始地址为16（也就是上面的0060FEF0的最后一个0(16)），中间刚好差了e(14)和f(15)，而这两个字节就是第一问多出来的两个字节！对齐机制体现在了这里。
+
+进一步猜想，可能在结构体申请的这块空间里
+
+4 - 5 - 6 - 7 //字符型是一个字节一个字节的，所以它很容易拆分
+
+8 - 9 - a - b
+
+c - d - **e - f** //这里加粗的e和f其实就是多出来的两个为了对齐的，里面没有写东西进去，发挥的作用是便于访问
+
+0 - 1 - 2 - 3 //这里是用来放int型的，他不能跟字符型一样可以将10个拆成4个4个2个。所以其实可以说就是以`int`型单元为标准，然后凑成对齐。
+
+所以结论，不考虑因**对齐机制**而多出来的两个字节，我们可以说，结构里的成员变量其实就是连续的。当然这是在我写的代码下多了两个字节，如果里面还有`double`等其他类型的变量，那么可能因对齐机制产生的额外的字节就不一样，所以，到了这里，我想我可以重新回答第一问了：
+
+答：**不一定相等**。并且是**不确定**的。如果我将我第一问的结构改一下，
+
+```c
+struct book {
+   char name[8];
+    int price;
+};
+```
+
+那么得到的结构的`sizeof`与里面成员变量的`sizeof`之和应该就是相等的。运行完了之后，确实是这样的，这里我就不贴出来了，结果确实是相等的。
+
+> ​		思考到了这里我不免对计算机的运作感到惊讶，当然更多的是对制作出如此牛X的计算机系统的人的钦佩！在我们看不到的地方原来计算机在处理...的时候是这么精细。
 
