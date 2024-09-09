@@ -9637,3 +9637,541 @@ typedef struct _list
 ​		不过很多新的编译器已经不在默认隐含包含这些常用的头文件了(Dev C++ 5.11版本报错，编译未通过)，如果使用其中的函数必须自己手动包含，否则会报错。所以为了养成好的编程习惯，用到里面的东西就手动包含一下吧。
 
 ​		能通过编译但是不能运行的情况就是函数的形参类型和编译器猜测的类型不一样时就可能会无法正确运行。
+
+
+
+### 第十三章：指针进阶
+
+​		本章的内容是让你了解C语言的某些较为**复杂的应用**的。本章内容严格来说，不是在教C语言是什么，而是C语言怎么用，也可以算做是和后续的**数据结构**之间的一个链接吧。
+
+#### 1.可变数组
+
+**可变数组（Resizable Array）**
+
+​		C语言的数组是固定大小的，尽管C99可以用变量来定义一个数组的大小，但是一旦我们定义了这个数组，在运行过程中是无法改变它的大小的。如果我们在运行程序前没法确定具体大小，传统做法只能是尽可能让数组大一点，但是仍然有可能面临用完的风险，或者空间浪费的问题。
+
+> Think about a set of functions that provide a mechanism of resizable array of int. 
+>
+> • Growable 
+>
+> • Get the current size 
+>
+> • Access to the elements
+
+​		**The Interface(函数接口)**
+
+```c
+Array array_create(int init_size); 
+void array_free(Array *a); 
+int array_size(const Array *a); 
+int* array_at(Array *a, int index); 
+void array_inflate(Array *a, int more_size);
+```
+
+​		`Array.h`文件
+
+​		有些地方会把结构定义为 *Array，因为后面的函数接口很多地方都要用到结构的指针，而不是结构本身，这样看起来似乎更加简洁美观一点。
+
+​		但是现在越来越多人习惯不在定义新类型时把`*`带进去，因为如果这样定义，Array一定是个从别处制造出来的指针（比如动态申请的内存），如果有个函数，要想在内部定义一个Array类型的本地变量a就做不到了。如果仅仅定义为Array，那可以直接在函数内部用`Array a;`定义一个类型为`Array`的变量。
+
+​		简而言之，不要定义指针类型，除了上面的理由外，还有别的人阅读代码时，很难想到`Array`被定义成指针类型了，不利于程序可读性。
+
+```c
+#ifndef _ARRAY_H_
+#define _ARRAY_H_
+
+typedef struct{
+	int *array;
+	int size;
+} Array;
+
+const int BLOCK_SIZE = 5;
+
+Array array_create(int init_size); 
+void array_free(Array *a); 
+int array_size(const Array *a); 
+int* array_at(Array *a, int index); 
+void array_inflate(Array *a, int more_size);
+
+#endif
+```
+
+​		`Array.c`文件
+
+```c
+#include "array.h"
+
+Array array_create(int init_size)
+{
+	Array a;
+	a.size = init_size;
+	a.array = (int *) malloc(sizeof(int) * a.size);
+	return a; 
+}
+
+void array_free(Array *a)
+{
+	free(a->array);
+	a->array = NULL;
+	a->size = 0;
+}
+
+int array_size(const Array *a)
+{
+    return a->size;
+}
+
+int* array_at(Array *a, int index)
+{
+	if(index >= a->size){
+		array_inflate(a, (index / BLOCK_SIZE + 1) * BLOCK_SIZE - a->size);
+	}
+	return &(a->array[index]);
+}
+
+void array_inflate(Array *a, int more_size)
+{
+	int *p = (int*)malloc(sizeof(int) * (a->size + more_size));
+	int i;
+	for(i = 0; i < a->size; i ++){  //可用库函数memcpy()实现 
+		p[i] = a->array[i];
+	} 
+	free(a->array);
+	a->array = p;
+	a->size += more_size;
+} 
+```
+
+​		`main.c`文件
+
+```c
+#include<stdio.h>
+#include<stdlib.h>
+#include "Array.h"
+#include "Array.c" 
+
+int main(int argc, char const *argv[] )
+{
+    Array a = array_create(10);
+    printf("length(a) = %d\n", array_size(&a));
+    *array_at(&a, 0) = 10;
+    printf("a[0] = %d\n", *array_at(&a, 0));
+    int number = 0;
+    int cnt = 0;
+    while(number != -1){
+    	scanf("%d", &number);
+    	if(number != - 1)
+    		*array_at(&a, cnt ++) = number;
+	}
+    for(int i = 0; i < array_size(&a); i ++)
+    {
+    	printf("%d ", *array_at(&a, i));
+		if((i + 1) % 5 == 0)
+			printf("\n"); 
+	} 
+    array_free(&a);
+    
+    return 0;
+}
+```
+
+​		Ⅰ.`Array array_create(int init_size)`创建数组函数解析
+
+​		在初始化过程中，`array_create()`函数内部的本地变量a，会用我们在该函数内部制作出来的结构初始化。换句话说，`a`存在于`main()`本地，`array_create()`和`main()`的`a`的成员都是一样的，这样`main()`函数可以更灵活的使用`array a`
+
+​		Q1：为什么返回`Array`不返回`Array`的指针？
+
+​		因为a是本地变量，返回本地变量，本地变量就无效了。
+
+​		Q2：为什么不传入一个结构指针，在函数内部`malloc`一个结构，处理后返回`malloc`的东西呢？
+
+​		因为这样使用`Array`更复杂。如果按上面的定义方式，`main()`函数只要`Array a = array_create(100);`即可创建数组，很像正常的c语言代码的写法。
+
+​		如果按下面的方式定义函数，会有两个潜在风险
+
+​		①传入的指针`a == NULL`
+
+​		②传入的指针`a`已经指向一个存在的数组，这时还需要先`free()`
+
+​		所以，与其进行这么复杂的处理，不如直接像上面一样返回`Array`。当然，上面的方法也仅仅是一种可能，不代表最优的方法。
+
+```c
+Array* array_create(Array* a, int init_size)
+{
+    a->size = init_size;
+    a->array = (int *) malloc(sizeof(int) * a.size);
+    return a;
+}
+```
+
+​		Ⅱ.`void array_free(Array *a)`释法数组函数解析
+
+​		主函数`main()`的`a`本身离开`main()`，空间会被自动回收，可是这个`Array a`结构中有指针所指的东西`array*`，指针所指的东西你需要有恰当的方式去释放它。
+
+​		所以`array_free()`做的事情就是对`a->array`来说的，保险起见可以继续让`a->array = NULL;a->size = 0;`因为`free(0)`、`free(NULL)`是无害的，防止使用者调用两次函数。
+
+​		Ⅲ.`int array_size(const Array *a)`数组长度函数解析
+
+​		简单返回数组大小。
+
+​		Q：为什么不直接在函数外部使用`a.size`访问呢？
+
+​		这种做法叫**封装**。将函数内部细节保护起来了，保护`a.size`，而且，如果将来模块变得复杂，不能简单通过`a.size`获取长度时，这时改进`array_size()`函数即可，方便代码维护。
+
+​		Ⅳ.`int* array_at(Array *a, int index)`数组元素访问函数解析
+
+​		访问指定下标的数组元素。
+
+​		Q：为什么要返回指针而不是返回一个`int`
+
+​		这样可以直接获取到目标变量的地址，甚至可以直接拿这个变量做赋值。
+
+​		当然，也可以不这么写，而改成两个子函数实现上述的访问+赋值两个操作，此时访问数组得到值即可，形参也可以设为`const`，修改数组元素可以交给`array_set()`函数处理。
+
+```c
+int array_get(const Array *a, int index)
+{
+    return a->array[index];
+}
+void array_set(Array *a, int index, int value)
+{
+    a->array[index] = value;
+}
+```
+
+​		Ⅴ.`void array_inflate(Array *a, int more_size)`数组扩容函数解析
+
+​		本来`malloc()`出来的内存空间不能自己扩容，我们的解决方案是重新去`malloc()`一块内存，然后再用一个循环将旧空间里面的元素逐一拷贝到新空间里面去。
+
+​		将 `array_inflate()`函数和`array_at()`函数结合，就可以得到一个访问函数越界就自动扩容的函数。
+
+​		考虑到扩容过程是，新申请一块内存，然后把旧数据拷贝的策略。所以每次扩容如果仅仅申请1个空间（正好满足新元素的访问），未免太不经济了，会浪费大量时间在拷贝上。于是引入`BLOCK_SIZE`的概念。每次内存空间不够时，新扩容`sizeof(int) * BLOCK_SIZE`的内存，这样就不用每超出一个内存单元就扩容一次了。
+
+​		这样，通过`array_at()`函数引入`BLOCK_SIZE`概念，我们在不改变`array_inflate()`函数的情况下，实现了数组扩容
+
+过程的优化。
+$$
+\begin{align}
+& ██████████ \\
+& ██████████\underset{BLOCK}{\underbrace{█████}}
+\end{align}
+$$
+
+<center style="color:#C0C0C0">图13.1-扩容BLOCK个内存单元</center>
+
+​		**可变数组的缺陷**
+
+> Allocate new memory each time it inflates is an easy  and clean way. But  
+>
+> ​		• It takes time to copy, and 
+>
+> ​		• may fail in memory restricted situation
+
+​		除了之前提到的，每次扩容时要花很多时间拷贝的问题之外。（特别是在内存受限场合，比如单片机等等）有时候会出现总内存空间足够，但无法再申请内存空间的情况（比如目前申请了一半的内存空间，要再申请一半+BLOCK的内存空间就没法做到了，有一部分内存空间没法充分利用）。
+
+​		这时候，如果有一种方法，每申请一个BLOCK，就将其“链”到前一个BLOCK之后（**Linked Blocks**），而不是重新申请一块内存空间，再拷贝，就能充分利用到内存的每一块，从而解决上述两个问题。
+
+#### 2.链表
+
+本节介绍了链表的概念和实现。链表是由多个节点组成的数据结构，每个节点包含一个数据和一个指向下一个节点的指针。与数组不同，链表的大小可以动态改变。
+
+**链表（Linked List）**
+
+​		**链表的定义与结构**
+
+```c
+typedef struct _node{
+    int value;
+    struct _node *next;
+} Node;
+```
+
+​		链表结点由数据和指向下一个结点的指针组成，利用`typedef`关键字将类型简化为`Node`，第三行编译器还不知道`Node`关键字，所以不能将第三行的`struct _node`写成`Node`。
+
+​		**链表的构建与添加元素**
+
+```c
+#include<stdio.h>
+#include<stdlib.h>
+
+typedef struct _node{
+    int value;
+    struct _node *next;
+} Node;
+
+int main(int argc, char const *argv[])
+{
+	Node * head = NULL;
+	int number;
+	do{
+		scanf("%d", &number);
+			if(number != -1)
+			{
+			//add to linked-list
+			Node *p = (Node*)malloc(sizeof(Node));
+			p->value = number;
+			p->next = NULL;
+			//find the last
+			Node *last = head;
+				if(last)
+				{
+                    while(last->next){
+                        last = last->next;
+                    }
+                    //attach
+                    last->next = p;
+                }else{
+				head = p;
+				}
+			}
+		}while(number != -1);
+}
+```
+
+​		找到最后一个元素的方法就是令`last`指向头指针，然后遍历到所指元素的`next`为空。
+
+​		注意，对于链表为空时，要特殊考虑，因为链表为空，`last == head`，而`head == NULL`，此时`last->next`，即空指针的`next`是无效的，所以链表为空时要特殊处理，上面用了一个`if-else`分别处理。
+
+（**小技巧**：快速找到你程序中**链表的边界情况**，就是看你的**指针出现在指向运算符左边时**，会不会有`NULL`的特殊情况，因为`NULL`的指向运算是错误的，此时要有代码（比如if语句）保证这些语句是安全的。）
+
+![13.2 链表](笔记插图/13.2 链表.png)
+
+<center style="color:#C0C0C0">图13.2 链表示意图</center>
+
+**链表的函数**
+
+​		如何设计一个函数，实现上一小节插入节点的操作？
+
+​		如果仅仅是简单的把核心代码作为新函数的代码，会有什么问题？
+
+```c
+void add(Node *head, int number)
+{
+    //add to linked-list
+    Node *p = (Node*)malloc(sizeof(Node));
+    p->value = number;
+    p->next = NULL;
+    //find the last
+    Node *last = head;
+    if(last)
+    {
+        while(last->next){
+            last = last->next;
+        }
+        //attach
+        last->next = p;
+    }else{
+        head = p;
+    }
+}
+
+int main(int argc, char const *argv[])
+{
+    Node * head = NULL;
+    int number;
+    do{
+        scanf("%d", &number);
+        if(number != -1){
+            add(head, number);
+        }
+    }while(number != -1);
+    
+    return 0;
+}
+```
+
+​		但是有个问题，在`add`函数内部修改指针`head`，不会影响到`main()`里面的指针`head`。
+
+​		这是因为你在函数内部修改的是**指针的副本**，而不是原始的指针。即使你在函数内部改变了指针的值（例如让它指向一个新的节点），这个改变也不会反映到函数外部，因为函数外部的指针并没有被修改。
+
+方案一：Node* head是一个全局变量
+
+​		如果只是学习算法来说，可能没什么大问题。但是，编写程序要注意全局变量是有害的。这样写，你这个`add`函数其实就是一次性的，只对这个全局变量`head`适用，如果有带有其他头结点的其他链表，还要重新编写过。
+
+​		所以我们的想法是，这个`head`尽量使用传入的参数，而不是一个全局变量。
+
+方案二：`add`函数返回类型改为`Node*`
+
+​		然后在主函数调用时返回Node *的变量到主函数
+
+```c
+head = add(head, number);
+```
+
+​		这个方案有进步，没有使用全局变量，而且`add`函数是线程安全的，而且`add`函数可以针对很多不同的链表。
+
+​		但是有个唯一的小缺点，就是使用你这个函数的程序员要非常小心的做这个赋值操作；因为C语言没办法强迫程序员一定这么做，如果他忘了在主函数给`head`指针赋值，此时对空链表的`add`就是错误的操作。
+
+方案三：`add`函数传入二级指针`Node ** pHead`
+
+​		此时返不返回指针已经无所谓了，主函数也不用再像方案二一样赋值。不过后面要用到`head`的地方要改成`*phead`
+
+```c
+void add(Node** phead, int number)
+{
+    ···
+        Node *last = *phead;
+    ···
+        else{
+            *phead = p;
+        }
+}
+```
+
+​		这个也是个不错的方案，我们传入了一个指针的指针（二级指针），这样在函数内部，能让我们对指针的值做修改。这就与`swap()`函数类似，传两个变量进去是没有意义的，所以我们传两个变量的指针进去。
+
+方案四：（最佳方案）自定义一个新的类型`List`来代表整个链表
+
+```c
+typedef struct _list{
+    Node *head;
+} List;
+
+void add(List *pList, int number)
+{
+    //add to linked-list
+    Node *p = (Node*)malloc(sizeof(Node));
+    p->value = number;
+    p->next = NULL;
+    //find the last
+    Node *last = pList->head;
+    if(last)
+    {
+        while(last->next){
+            last = last->next;
+        }
+        //attach
+        last->next = p;
+    }else{
+        pList->head = p;
+    }
+}
+
+int main(int argc, char const *argv[])
+{
+    List list;
+    int number;
+    list.head = NULL;
+    do{
+        scanf("%d", &number);
+        if(number != -1){
+            add(&list, number);
+        }
+    }while(number != -1);
+    
+    return 0;
+}
+```
+
+这么做有很多好处，比如方便之后**扩充、改进我们的链表函数**，比如找为尾指针，可以定义一个`tail`指针永远指向尾部节点。
+
+注意一下，这么做以后，初始化以及函数`add`中的`find last`操作都**会发生变化**，此处不展开。
+
+```c
+typedef struct _list{
+    Node *head;
+    Node *tail;
+} List;
+int main(···)
+{
+    ···
+    list.head = list.tail = NULL;
+    ···
+}
+```
+
+**链表的搜索**
+
+​		**链表的遍历**
+
+​		下面是链表遍历的经典写法。
+
+```c
+Node *p;
+for(p = list.head; p; p = p->next){
+    printf("%d\t", p->value);
+}
+```
+
+​		可以借此改写成**链表输出函数**。
+
+```c
+void print(List *pList)
+{
+    Node *p;
+    for(p = pList->head; p; p = p->next){
+        printf("%d\t", p->value);
+    }
+    printf("\n");
+}
+```
+
+​		**链表搜索函数**
+
+```c
+int search(List *pList, int number)
+{
+    int ret = 0;
+    Node *p;
+    for ( p = pList->head; p; p = p->next ) {
+        if ( p->value == number ) {
+        	ret = 1;
+            break;
+        }
+    }
+    
+    return ret;
+}
+```
+
+**链表的删除**
+
+​		链表的删除其实要做两件不同的事，一是将目标删除节点前面那个节点指向目标删除节点后面的节点，二是将目标删除节点内存空间释放。
+
+​		使用两个指针`p`和`q`，`q`指针指向`p`的**前一个节点**。
+
+```c
+void del(List *pList, int number)
+{
+    Node *p, *q;
+    for(q = NULL, p = pList->head; p ; q = p, p = p->next)
+    {
+        if(p->value == number)
+        {
+            if(q){
+                q->next = p->next;
+            }else{
+                pList->head = p->next;
+            }
+            free(p);
+            break;
+        }
+    }
+}
+```
+
+​		删除节点有边界问题，可以通过之前提到的最机械的一个“小技巧”，由于`p`和`q`都曾出现在指向运算符`->`的左边，而`for`循环的条件是`p`不为`NULL`，所以`p`不会有边界问题，而`q`存在边界问题，此时链表的第一个头结点就是待删除节点，需要特殊处理。
+
+![13.2 链表删除](笔记插图/13.2 链表删除.png)
+
+<center style="color:#C0C0C0">图13.2 链表删除（删除值为1的节点）</center>
+
+**链表清除**
+
+​		因为我们的链表所有节点都是`malloc`出来的，所以在最后需要将它们的内存空间释放掉，即把整个链表清除干净。
+
+和之前删除节点的思路是类似的，只是从删除一个节点，变成删除一整串节点。
+
+​		（注：在释放内存后，指针的值仍然可以打印出来，原因在于释放操作只是**将内存标记为可用**，而**不是将内存内容清空或改变**。）
+
+```c
+void clear(List *pList)
+{
+	Node *p, *q;
+    for(p = pList->head; p; p = q){
+    	q = p->next;
+    	free(p);
+	}
+}
+```
+
