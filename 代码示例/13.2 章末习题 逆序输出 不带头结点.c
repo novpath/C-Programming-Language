@@ -14,7 +14,7 @@ int main(void)
 	Node *p = NULL;
 	List_HeadInsert(&L);
 	
-	for(p = L->next; p; p = p->next)
+	for(p = L; p; p = p->next)
 	{
 		printf("%d ", p->data);
 	}
@@ -26,14 +26,12 @@ void List_HeadInsert(LinkList *L)
 {
 	Node *s;
 	int x;
-	*L = (LinkList)malloc(sizeof(Node));
-	(*L)->next = NULL;
 	scanf("%d", &x);
 	while(x != -1){
 		s = (Node *)malloc(sizeof(Node));
 		s->data = x;
-		s->next = (*L)->next;
-		(*L)->next = s;
+        s->next = *L;
+        *L = s;
 		scanf("%d", &x);
 	}
 }

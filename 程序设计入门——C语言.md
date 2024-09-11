@@ -945,21 +945,21 @@ a = b += c++ - d + --e / -f
 
 > 程序每次读入一个正3位数，然后输出按位逆序的数字。注意：当输入的数字含有结尾的0时，输出不应带有前导的0。比如输入700，输出应该是7。
 >
-> ### 输入格式：
+> **输入格式：**
 >
 > 每个测试是一个3位的正整数。
 >
-> ### 输出格式：
+> **输出格式：**
 >
 > 输出按位逆序的数。
 >
-> ### 输入样例：
+> **输入样例：**
 >
 > ```in
 > 123
 > ```
 >
-> ### 输出样例：
+> **输出样例：**
 >
 > ```out
 > 321
@@ -7239,13 +7239,15 @@ void free(void * ptr);
 
 ​		功能：释放由动态存储分配函数申请到的整块内存空间，ptr为指向要释放空间的首地址。如果ptr的值是空指针，则free什么都不做。该函数无返回值。
 
+​		‌**‌malloc分配内存的位置是堆。**在堆中申请的内存空间不会像在栈中存储的局部变量一样，函数调用完会**自动释放**内存，需要我们**手动释放**，就需要`free()`函数来完成。
+
 ​		为了保证动态存储区的有效利用，在知道某个动态分配的存储块不再用时，就应及时将它释放。
 
 ​		只能还申请来的空间的首地址（比如p指针申请了一部分内存空间，然后p++，此时不能释放p）
 
 ​		`free()`函数可以“释放”NULL，实际上`free(NULL)`意味着不做任何事，只是一种free接指针的良好习惯。
 
-​		申请了内存空间没free→长时间运行内存下降（内存泄露），新手往往是忘了，而老手是找不到合适的free时机。
+​		申请了内存空间没`free()`→长时间运行内存下降（内存泄露），新手往往是忘了，而“老手”是找不到合适的free时机。
 
 ​		TIPS： 释放后不允许再通过该指针去访问已释放的块，否则也可能引起灾难性错误。
 
@@ -7612,7 +7614,7 @@ int main()
 
 ​		第四个注意：帮我们排除了一些特殊情况，注意一下即可。
 
-​		算法思想是基于**双指针回溯的字符串朴素模式匹配**（只需要一层循环即可，循环次数不明显，循环终止条件很明显，所以用`while`循环）。两串匹配，则指针同时后移，不匹配，则子串归零，母串变成本次查找初始位置的下一位，当子串全部匹配时，输出当前位置，然后子串归零，母串变成匹配成功位置的**下一位**（如果是同一位就会无限循环）。
+​		算法思想是基于**双指针回溯的字符串朴素模式匹配**（只需要一层循环即可，循环次数不明显，循环终止条件很明显，所以用`while`循环）。两串匹配，则指针同时后移，不匹配，则子串归零，母串变成本次查找初始位置的下一位，当子串全部匹配时，输出当前往前偏移子串长度的位置，然后子串归零，母串变成匹配成功位置的**下一位**（如果是同一位就会无限循环）。
 
 ​		本题要求每个可能位置后面都要加空格，不要求最后一位不加空格，所以处理起来也是比较简单的。
 
@@ -10559,18 +10561,19 @@ void clear(List *pList)
 
 ​		本题采用**头插法建立单链表**，再顺序遍历输出即得逆序输出。对于头指针的修改问题采用方案四，将方案四所定义的新类型`*LinkList`和节点类型`Node`统一用一次`typedef`定义了，这样比较简便。
 
-​		注意，-1不要输出，也就是头结点不要输出，从头结点的next开始输出，即`p = L->next`。插入函数本质上是传入插入函数一个二级指针，所以内部进行头插法时要注意各变量的类型。
+​		注意，-1不要输出，头结点也不要输出，从头结点的next开始输出，即`p = L->next`。插入函数本质上是传入插入函数一个二级指针，所以内部进行头插法时要注意各变量的类型。
 
-​		先建立一个头结点再进行插入操作可以简化头插法的书写。
+​		一般先建立一个头结点有利于链表的各种操作。
 
 ```c
 #include<stdio.h>
 #include<stdlib.h>
 
 typedef struct LNode{
-	int date;
+	int data;
 	struct LNode *next;
 } Node, *LinkList;
+
 void List_HeadInsert(LinkList *L);
 
 int main(void)
@@ -10580,7 +10583,9 @@ int main(void)
 	List_HeadInsert(&L);
 	
 	for(p = L->next; p; p = p->next)
-		printf("%d ", p->date);
+	{
+		printf("%d ", p->data);
+	}
 	
 	return 0;
 }
@@ -10589,16 +10594,57 @@ void List_HeadInsert(LinkList *L)
 {
 	Node *s;
 	int x;
-	*L = (LinkList)malloc(sizeof(Node));    //创建头结点
+	*L = (LinkList)malloc(sizeof(Node));
 	(*L)->next = NULL;
-	s = *L;
 	scanf("%d", &x);
 	while(x != -1){
 		s = (Node *)malloc(sizeof(Node));
-		s->date = x;
+		s->data = x;
 		s->next = (*L)->next;
 		(*L)->next = s;
 		scanf("%d", &x);
+	}
+}
+```
+
+​		不带头结点的头插法如下，此时可以从头指针开始遍历，顺序输出。
+
+```c
+#include<stdio.h>
+#include<stdlib.h>
+
+typedef struct LNode{
+	int data;
+	struct LNode *next;
+} Node, *LinkList;
+
+void List_HeadInsert(LinkList *L);
+
+int main(void)
+{
+	LinkList L;
+	Node *p = NULL;
+	List_HeadInsert(&L);
+	
+	for(p = L; p; p = p->next)
+	{
+		printf("%d ", p->data);
+	}
+	
+	return 0;
+}
+
+void List_HeadInsert(LinkList *L)
+{
+	Node *s;
+	int x;
+	scanf("%d", &x);
+	while(x != -1){
+        s = (Node *)malloc(sizeof(Node));
+        s->data = x;
+        s->next = *L;
+        *L = s;
+        scanf("%d", &x);
 	}
 }
 ```
