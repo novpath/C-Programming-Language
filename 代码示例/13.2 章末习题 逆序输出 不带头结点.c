@@ -27,6 +27,7 @@ void List_HeadInsert(LinkList *L)
 	Node *s;
 	int x;
 	scanf("%d", &x);
+	*L = NULL;
 	while(x != -1){
 		s = (Node *)malloc(sizeof(Node));
 		s->data = x;
