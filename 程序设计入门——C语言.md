@@ -721,13 +721,13 @@ int c = 1 + (b = a);
 
 <center style="color:#C0C0C0">表-复合算术赋值运算符</center>
 
-| 运算符 | 名称     | 等价关系          |
-| ------ | -------- | ----------------- |
-| +=     | 加赋值   | x+=a等价于x=x+a   |
-| -=     | 减赋值   | x-=a等价于x=x-a   |
-| *=     | 乘赋值   | x\*=a等价于x=x\*a |
-| /=     | 除赋值   | x/=a等价于x=x/a   |
-| %=     | 取余赋值 | x%=a等价于x=x%a   |
+| 运算符 |   名称   |     等价关系      |
+| :----: | :------: | :---------------: |
+|   +=   |  加赋值  |  x+=a等价于x=x+a  |
+|   -=   |  减赋值  |  x-=a等价于x=x-a  |
+|   *=   |  乘赋值  | x\*=a等价于x=x\*a |
+|   /=   |  除赋值  |  x/=a等价于x=x/a  |
+|   %=   | 取余赋值 |  x%=a等价于x=x%a  |
 
 ​	注：a可以常量、变量、表达式，若a为表达式，则外侧自带括号。比如x /= y + 5 等价于x =x / (y + 5 )
 
@@ -2000,12 +2000,12 @@ printf("请分别输入身高的英尺和英寸，"
 
 <center style="color:#C0C0C0">表-逃逸字符</center>
 
-| 字符 | 意义           | 字符 | 意义       |
-| ---- | -------------- | ---- | ---------- |
-| `\b` | 回退一格       | `\"` | 双引号     |
-| `\t` | 到下一个表格位 | `\'` | 单引号     |
-| `\n` | 换行           | `\\` | 反斜杠本身 |
-| `\r` | 回车           |      |            |
+| 字符 |      意义      | 字符 |    意义    |
+| :--: | :------------: | :--: | :--------: |
+| `\b` |    回退一格    | `\"` |   双引号   |
+| `\t` | 到下一个表格位 | `\'` |   单引号   |
+| `\n` |      换行      | `\\` | 反斜杠本身 |
+| `\r` |      回车      |      |            |
 
 注意：
 
@@ -4899,12 +4899,12 @@ int main()
 ​	如果我们仅仅使用C语言的知识来解决这个问题，可以利用两个数组，a数组记录面额，查找a数组返回对应下标的位置，再输出b数组对应位置存放对应的单词即可。
 
 | 面额 |    名词     |
-| ---- | :---------: |
-| 1    |    penny    |
-| 5    |   nickel    |
-| 10   |    dime     |
-| 25   |   quarter   |
-| 50   | half-dollar |
+| :--: | :---------: |
+|  1   |    penny    |
+|  5   |   nickel    |
+|  10  |    dime     |
+|  25  |   quarter   |
+|  50  | half-dollar |
 
 ```c
 #include<stdio.h>
@@ -6325,7 +6325,7 @@ int main()
 }
 ```
 
-​		![9.1普通变量or指针作为函数参数的示意图](笔记插图/9.1普通变量or指针作为函数参数的示意图.png)
+![9.1普通变量or指针作为函数参数的示意图](笔记插图/9.1普通变量or指针作为函数参数的示意图.png)
 
 <center style="color:#C0C0C0">图9.1-普通变量与指针作为函数参数的示意图</center>
 
@@ -6543,14 +6543,14 @@ char word[] = {'H', 'e', 'l', 'l', 'o', '!', '\0'};
 <center style="color:#C0C0C0">表9.2-字符数组与字符串</center>
 
 | 字符数组存储单元 | 内容 | 字符串存储单元 | 内容 |
-| ---------------- | ---- | -------------- | ---- |
-| word[0]          | H    | word[0]        | H    |
-| word[1]          | e    | word[1]        | e    |
-| word[2]          | l    | word[2]        | l    |
-| word[3]          | l    | word[3]        | l    |
-| word[4]          | o    | word[4]        | o    |
-| word[5]          | !    | word[5]        | !    |
-|                  |      | word[6]        | \0   |
+| :--------------: | :--: | :------------: | :--: |
+|     word[0]      |  H   |    word[0]     |  H   |
+|     word[1]      |  e   |    word[1]     |  e   |
+|     word[2]      |  l   |    word[2]     |  l   |
+|     word[3]      |  l   |    word[3]     |  l   |
+|     word[4]      |  o   |    word[4]     |  o   |
+|     word[5]      |  !   |    word[5]     |  !   |
+|                  |      |    word[6]     |  \0  |
 
 ​	**字符串定义及性质**
 
@@ -7953,7 +7953,7 @@ int Setup(){
 }	
 ```
 
-![10.3 ACLLib绘图](笔记插图/10.3 ACLLib绘图.png)
+​									  ![10.3 ACLLib绘图](笔记插图/10.3 ACLLib绘图.png)
 
 <center style="color:#C0C0C0">图10.3 ACLLib绘图</center>
 
@@ -9562,15 +9562,15 @@ extern int gAll;
 
 <center style="color:#C0C0C0">表10.3-常用标准头文件</center>
 
-| 头文件名 | 作用                               |
-| -------- | ---------------------------------- |
-| ctype.h  | 字符处理                           |
-| math.h   | 与数学处理函数有关的说明与定义     |
+| 头文件名 |                作用                |
+| :------: | :--------------------------------: |
+| ctype.h  |              字符处理              |
+|  math.h  |   与数学处理函数有关的说明与定义   |
 | stdio.h  | 输入输出函数中使用的有关说明和定义 |
-| string.h | 字符串函数的有关说明和定义         |
-| stddef.h | 定义某些常用内容                   |
-| stdlib.h | 杂项说明                           |
-| time.h   | 支持系统时间函数                   |
+| string.h |     字符串函数的有关说明和定义     |
+| stddef.h |          定义某些常用内容          |
+| stdlib.h |              杂项说明              |
+|  time.h  |          支持系统时间函数          |
 
 ​	**不对外公开的函数**
 
@@ -9881,7 +9881,7 @@ Command_Name parameter1 parameter2 ··· parametern
 
 ​	命令名后是否有参数并不影响程序的运行结果。这是因为参数并没有被程序接收。
 
-​	**程序参数** **`int main(int argc, char const * argv[])`**
+​	**程序参数** `int main(int argc, char const * argv[])`
 
 ​	在C语言程序中，主函数`main()`可以有两个参数，用于接受命令行参数（Command Line Parameter），`argc`和`argv`就是`main()`的形参（分别是argument count 和argument vector的缩写）
 
@@ -9983,6 +9983,59 @@ fun(3, 5);
 //通过函数指针调用函数的一般格式为：
 (*funptr_name)(parameter_list)
 ```
+
+函数指针有三个经典应用场景
+
+a.通过输入不同的`i`值让核心代码段调用不同的函数
+
+函数指针很适合做那些用户输入命令，然后控制函数执行对应函数的操作。下列函数通过调用函数指针，以后扩充相似函数时，不用重新改写核心代码（如果用`switch-case`就要重写）。
+
+```c
+#include<stdio.h>
+void f(int i){
+	printf("in f(), %d", i);
+}
+void g(int i){
+	printf("in g(), %d", i);
+}
+void h(int i){
+	printf("in h(), %d", i);
+}
+int main()
+{
+	int i = 0;
+	void (*fa[])(int) = {f, g, h};
+	scanf("%d", &i);
+	if(i >= 0 && i < sizeof(fa) / sizeof(fa[0]))
+		(*fa[i]) (0);
+	return 0;
+}
+```
+
+b.某个环节，对于同一个控制函数，由于传入函数不同而实现不同的功能
+
+如果之后有扩充新的运算函数，控制函数`cal()`函数也不用重新写过。
+
+```c
+#include<stdio.h>
+int plus(int a, int b){
+	return a + b;
+}
+int minus(int a, int b){
+	return a * b;
+}
+void cal(int (*f)(int x, int y)){
+	printf("%d\n", (*f)(2, 3));
+}
+int main()
+{
+	cal(plus);
+	cal(minus);
+	return 0;
+}
+```
+
+c.回调函数（见十四章·2）
 
 ​	**③函数指针作为函数的参数**
 
@@ -10675,6 +10728,22 @@ void List_HeadInsert(LinkList *L)
 
 ​	所以，无论你是否有Windows来实验这里的交互图形程序，函数指针和MVC设计模式都是值得你深入理解的。
 
+```mermaid
+mindmap
+	root((交互图形设计))
+		1.图形程序的终端IO
+			图形基本操作
+			静态IO无法实现交互
+		2.交互图形程序设计
+			回调函数
+			四种可处理的消息
+		3.游戏设计思路
+			MVC设计模式
+			游戏设计思路
+```
+
+
+
 #### 1.图形程序的终端输入输出
 
 ​	第十章介绍过了图形函数的一些操作，但是都是静态的，不涉及用户的输入和输出。
@@ -10682,14 +10751,14 @@ void List_HeadInsert(LinkList *L)
 ​	如果仅仅是像下面这样调用图形窗口和控制台，虽然用户可以在控制台输入数据，但是此时图形窗口是未响应状态，不能实现真正的交互。
 
 ```c
-#include<stdio.h?
+#include<stdio.h>
 #include "acllib.h"
 
 int Setup()
 {
 	initWindow("Test", DEFAULT, DEFAULT, 800, 600);
 	initConsole();
-	printf("Hellow\n");
+	printf("Hello\n");
 	int x;
 	beginPaint();
 	
@@ -10701,4 +10770,199 @@ int Setup()
 }
 ```
 
-​		
+#### 2.交互图形程序设计
+
+**回调函数**
+
+​	**register()函数**
+
+​	将**函数指针**（比如功能是点击鼠标后执行某个函数`m()`）交付给某个地方保存，那边的程序一直在运行，直到某一刻发现的鼠标点击动作，就会回来调用函数`m()`，这就是回调函数。
+
+```c
+#include<stdio.h>
+#include "acllib.h" 
+
+void mouseListener(int x, int y, int button, int event)
+{
+	printf("x=%d,y=%d,button=%d,event=%d\n", x, y, button, event);
+}
+
+int Setup()
+{
+	initWindow("Test", DEFAULT, DEFAULT, 800, 600);
+	initConsole();
+	printf("Hello\n");
+	int x;
+	registerMouseEvent(mouseListener);
+	
+	beginPaint();
+	
+	line(10, 10, 100, 100);
+	
+	endPaint();
+    return 0;
+}
+```
+
+​	运行上述程序时，我们发现，`Setup()`函数和普通的C语言函数不一样，它即使执行了`return 0`，程序也不会立即结束，而是不断返回屏幕上鼠标的移动产生的信息。
+
+​	因此，（除了主函数之外）回调函数本身也不能是死循环，否则你可能连程序都关不掉。点程序界面右上角的“X”关闭，也是属于一种**消息**，如果你的回调函数死循环了，程序结束不了，也就读取不了你的关闭消息了。
+
+![14.2 传统程序vs交互程序 ](笔记插图/14.2 传统程序vs交互程序 .png)
+
+<center style="color:#C0C0C0">图14.2 传统程序vs交互程序</center>
+
+**图形交互信息**
+
+​	四种可以处理的消息，这四种消息在程序里面是可以回调的。
+
+```c
+typedef void(&KeyboardEventCallback)(const char key);
+typedef void(*CharEventCallback)(int key);
+typedef void(*MouseEventCallback)(int x, int y, int button, int status);
+typedef void(*TimerEventCallback)(int timerID);
+```
+
+`void(*MouseEventCallback)(int x, int y, int button, int status)`
+
+​	该函数除了移动鼠标时返回x和y的位置信息，还会根据你鼠标操作的不同，返回不同的`button`。
+
+```c
+typedef enum
+{
+	BUTTON_DOWN,
+	BUTTON_DOUBLECLICK,
+	BUTTON_UP,
+	ROLL_UP,
+	ROLL_DOWN,
+	MOUSEMOVE
+} ACL_Mouse_Event;
+```
+
+​	下面是一个简单的绘制鼠标移动轨迹的响应程序（不过没有抬笔功能）
+
+```c
+void mouseListener(int x, int y, int button, int event)
+{
+	static ox = 0;
+	static oy = 0;
+	printf("x=%d,y=%d,button=%d,event=%d\n", x, y, button, event);
+	beginPaint();
+	line(ox, oy, x, y);
+	endPaint();
+	ox = x;
+	oy = y;
+}
+```
+
+`typedef void(&KeyboardEventCallback)(const char key)`
+
+​	下面的函数会根据你在键盘中按下的键，以及按键状态返回对应数值。
+
+​	`Setup()`函数也要记得`registerKeyboardEvent(keyListener);`
+
+```c
+void keyListener(int key, int event)
+{
+	printf("key=%d, event=%d\n", key, event);
+}
+```
+
+`void(*TimerEventCallback)(int timerID)`
+
+​	这个是计时器函数，除了像上面两函数一样设置`registerTimerEvent(timerListener);`以及`timerListener()`之外，还要搭配一个计时开始的程序才可以正常使用。
+
+​	上面三个函数的合并代码如下：
+
+```c
+#include<stdio.h>
+#include "acllib.h" 
+
+void mouseListener(int x, int y, int button, int event)
+{
+	static ox = 0;
+	static oy = 0;
+	printf("x=%d,y=%d,button=%d,event=%d\n", x, y, button, event);
+	beginPaint();
+	line(ox, oy, x, y);
+	endPaint();
+	ox = x;
+	oy = y;
+}
+void keyListener(int key, int event)
+{
+	printf("key=%d, event=%d\n", key, event);
+}
+void timerListener(int id)
+{
+	static cnt = 0;
+	printf("id=%d\n");	
+	if(id == 0)
+	{
+		cnt ++;
+		if(cnt == 5)
+			cancelTimer(0);
+	}
+} 
+
+int Setup()
+{
+	initWindow("Test", DEFAULT, DEFAULT, 800, 600);
+	initConsole();
+	printf("Hello\n");
+	int x;
+	registerMouseEvent(mouseListener);
+	registerKeyboardEvent(keyListener);
+	registerTimerEvent(timerListener);
+	startTimer(0, 500);
+	startTimer(1, 1000);
+	
+	beginPaint();
+	
+	line(10, 10, 100, 100);
+	
+	endPaint();
+}
+```
+
+#### 3.游戏设计思路
+
+**MVC设计模式**
+
+MVC是一种设计模式，体现了你怎么去安排你的程序各部分之间的关系。
+
+Model-View-Controller（*MVC*）这种软件架构模式指出你要有三个部分的代码负责三个部分的模块。
+
+​	①用户看到的部分称为View
+
+​	负责此部分的代码需要完成的任务是：（读入数据放在Model里）需要显示的时候，从model里面取数据，然后根据数据把画面画出来，它不负责读取鼠标、键盘等信息。
+
+​	②Control部分是控制模块
+
+​	它的功能是告诉Model什么数据要怎么改，比如用户键入了一个键，Control就会将这个信息发送给Model，Model处理完会通知Control数据改过了。
+
+可以看到，在MVC模式下，鼠标的移动并不会直接引起图像的改变，它引起的是数据的改变。它的好处是保证你的View和Control，即图像和控制模块不会直接发生关系。让你各部分的代码写得比较单纯，这样如果是多人分工合作写各部分模块时，就不容易纠结某个功能到底要在哪个模块中实现。
+
+**游戏设计思路**
+
+​	本节介绍了一个简单的游戏设计思路，通过MVC模式实现一个自动移动的游戏。游戏中有炮塔和飞机，玩家通过控制炮塔发射炮弹来击落飞机。游戏中还有炸弹和降落伞，炸弹可以被炮弹击飞，降落伞上的人会爬上炮塔并炸毁它。游戏的实现需要使用定时器来控制自动移动，使用数据结构来存储游戏对象的状态，使用键盘回调函数来控制炮塔的移动和发射炮弹，使用画面刷新函数来更新游戏画面。爆炸效果可以通过另外开一个定时器来实现。整个游戏的设计思路简单，代码量和图形绘制量都不大，适合练手。
+
+这个程序需要：
+
+​	①数据结构存放各类物体（objects）
+
+​	②使用计时器timer，记录屏幕上飞机、炸弹、炮弹等等物体的运动
+
+​	③扫描屏幕上的物体，离开屏幕的东西要拿走
+
+​	④碰撞、爆炸等等效果怎么实现
+
+​	⑤刷新屏幕refresh、经过上面的步骤之后draw新的画面
+
+​	⑥移动炮管、装弹之类的读取键盘操作利用回调函数实现
+
+注意：
+
+①.爆炸可以自己单独设个计时器，单独绘制爆炸效果，也可以将爆炸也看成一个object，在原本的框架下实现。
+
+②.和写传统程序的思路不同，你的画面上object的移动要在很短的timer回调内完成一轮，比如10ms。而不是把操作放到一个函数里做完，这样才不至于在执行爆炸的时候，其他物体的移动都停止，这样是不合理的。
