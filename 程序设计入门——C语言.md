@@ -5665,15 +5665,6 @@ printf("%d\n", 25 / 0);
 
 <center style="color:#C0C0C0">表-浮点数格式控制说明</center>
 
-<style>
-  table td,table th {
-    text-align:center;/*表格文字水平居中*/
-    vertical-align:middle;/*表格文字垂直居中*/
-  }
- table tr:odd{
-    background:#faa;/*表格偶数行颜色灰色*/
- }
-</style>
 <table>
 <thead>
   <tr>
@@ -5715,6 +5706,7 @@ printf("%d\n", 25 / 0);
   </tr>
 </tbody>
 </table>
+
 
 ​	%e、%E是按科学计数法的格式输出。
 
@@ -11130,6 +11122,400 @@ int main(int argc, char const *argv[])
 
 
 
+**文件输入输出**
 
+​	`<`和`>`可以用作**程序运行时的重定向**，`<`指定用一个文件来作为它的输入，`>`来指定把它的输出写到另外一个文件里面去，这样很容易就能实现文件的输入输出。但是，这不是一般的文件输入输出的操作，一般的文件输入输出要借助**FILE**。
+
+**FILE**
+
+```c
+FILE* fopen(const char *restrict path, cont char *restrict mode);
+int fclose(FILE *stream);
+fscanf(FILE *, ...)
+fprintf(FILE*, ...)
+```
+
+**打开文件的标准代码**
+
+```c
+FILE *fp = fopen("filename", "r");
+if(fp){
+    fscanf(fp, ...);
+    fclose(fp);
+}else{
+    ...
+}
+```
+
+​	`file`是一个结构，`fp`是指向文件结构的一个指针。`fopen()`函数用于打开文件，而`r`表示去读，如果它没有打开这个文件，该函数会返回`NULL`。
+
+```c
+#include<stdio.h>
+
+int main(int argc, char const *argv[])
+{
+	FILE *fp = fopen("新建文本文档.txt", "r");
+	if(fp){
+		int num;
+		fscanf(fp, "%d", &num);
+		printf("%d\n", num);
+		fclose(fp);
+	}else{
+		printf("无法打开文件\n");
+	}
+	
+	return 0;
+}
+```
+
+**fopen()**
+
+`fopen()`有两个参数，第一个参数是文件名，是一个字符串，第二个参数代表对文件的访问模式，也是字符串。
+
+<center style="color:#C0C0C0">表-fopen对文件的访问模式</center>
+
+| 字符串 | 访问模式                                                     |
+| ------ | ------------------------------------------------------------ |
+| r      | 打开只读                                                     |
+| r+     | 打开读写，从文件头开始（一般用来做修改）                     |
+| w      | 打开只写。如果不存在则创建，如果存在则清空                   |
+| w+     | 打开读写。如果不存在则新建，如果存在则清空（空白文档一开始只能写，可以读自己写入的内容） |
+| a      | 打开追加。如果不存在则新建，如果存在则从文件尾开始           |
+| ..X    | 只新建，如果文件已存在则不能打开（主要针对w和a，避免对已有文件的破坏） |
+
+**二进制文件**
+
+​	**文本文件与二进制文件**
+
+​	其实所有的文件最终都是二进制的，文本文件无非是用最简单的方式可以读写的文件
+
+> 对于Unix来说，对文本文件可以：
+>
+> more、tail 打开文件
+>
+> cat 重定向到一个文件再写入
+>
+> vi 完整的编辑
+
+​	而二进制文件是需要专门的程序来读写的文件（.mp3、.jpg等等）
+
+​	文本文件的输入输出是格式化，可能经过转码。
+
+​	**文本 vs 二进制**
+
+​	Unix喜欢⽤⽂本⽂件来做数据存储和程序配置
+
+​	• 交互式终端的出现使得⼈们喜欢⽤⽂本和计算机 “talk”  
+
+​	• Unix的shell提供了⼀些读写⽂本的⼩程序 
+
+​	Windows喜欢⽤⼆进制⽂件 
+
+​	• DOS是草根⽂化，并不继承和熟悉Unix⽂化 
+
+​	• PC刚开始的时候能⼒有限，DOS的能⼒更有限，⼆ 进制更接近底层
+
+​	**优缺点对比**
+
+​	⽂本的优势是⽅便⼈类读写，⽽且跨平台
+
+​	⽂本的缺点是程序输⼊输出要经过格式化，开销⼤（如printf、scanf处理数据需要开销）
+
+​	⼆进制的优点是程序读写快
+
+​	⼆进制的缺点是⼈类读写困难，⽽且不跨平台 （int、long在不同平台上不一样）
+
+​	int的⼤⼩不⼀致，⼤⼩端的问题...  
+
+​	**程序为什么要⽂件** 
+
+​	配置 ：Unix⽤⽂本，Windows⽤注册表 
+
+​	数据 ：稍微有点量的数据都放数据库了 
+
+​	媒体 ： 这个只能是⼆进制的
+
+​	现实是，程序通过第三⽅库来读写⽂件，很少直接读 写⼆进制⽂件了
+
+​	**⼆进制读写**
+
+```c 
+size_t fread(void *restrict ptr, size_t size, size_t  nitems, FILE *restrict stream);
+size_t fwrite(const void *restrict ptr, size_t size,  size_t nitems, FILE *restrict stream);
+```
+
+​	第一个参数是读/写的那个指针（那块内存），第二个参数是那块内存有多大，第三个参数是有几个这样的内存
+
+​	注意FILE指针是最后⼀个参数 
+
+​	返回的是成功读写的字节数
+
+​	为什么有`size`还要有`nitems`？因为⼆进制⽂件的读写⼀般都是通过对⼀个结构变量 的操作来进⾏的，于是`nitems`就是⽤来说明这次读写⼏个结构变量。
+
+​	**在文件中定位**
+
+```c
+long ftell(FILE *stream); 
+int fseek(FILE *stream, long offset, int whence); 
+SEEK_SET：从头开始
+SEEK_CUR：从当前位置开始
+SEEK_END：从尾开始（倒过来）
+```
+
+​	**可移植性** 
+
+​	这样的⼆进制⽂件不具有可移植性
+
+​	在int为32位的机器上写成的数据⽂件⽆法直接在int为64位的机器上正确读出
+
+​	解决⽅案之⼀是放弃使⽤`int`，⽽是`typedef`具有明确⼤⼩的类型
+
+​	更好的⽅案是⽤**⽂本**
+
+**课后讨论15.1.1：文本文件 vs 二进制文件？**
+
+> 文本文件和二进制文件有什么区别？在`fopen`的第二个参数中，过去可以加"b"来表示要打开一个二进制文件，现在可能有些编译器带的库还得这么操作。你的编译器不带“b”打开二进制文件会如何？打开二进制文件后还可以用printf和scanf吗？会写入读出怎样的数据？
+
+---
+
+答：
+
+​	文本文件和二进制文件的主要区别在于它们的数据类型、长度、可编辑性以及所需的软件工具，文本文件适合存储和处理纯文本数据，而二进制文件则适合存储和处理各种非文本数据，如图像、音频、视频等‌。
+
+​	‌**在C语言中，如果错误地以文本模式（不带“b”标志）打开二进制文件，可能会导致数据混乱。**‌这是因为二进制文件包含二进制数据，这些数据可能包含不可打印的字符，如果以文本模式打开，可能会导致数据解析错误，因为文本模式通常期望文件中的数据是文本格式，会尝试将二进制数据转换为字符，这可能会导致数据的损坏或丢失。此外，不同的操作系统和编译器对二进制文件的处理方式可能有所不同。
+
+​	虽然`printf`和`scanf`是C语言中非常重要的输入输出函数，但它们主要用于处理文本数据，而不是二进制数据。对于二进制数据的处理，需要使用专门的函数和方法，如`fread()`和`fwrite()`，以及文件流（FILE *）相关的操作。如果使用`printf`和`scanf`函数读写二进制文件，会保持数据的**原始形式**，包括整数、浮点数、字符等的内部表示，而不进行任何格式化转换。
 
 #### 2.位运算
+
+C有提供几种不同的按位运算的运算符，此事在第四章第一节中亦有记载。
+
+**按位与 `&`**
+
+如果 `x == 1 `并且`y == 1`，那么` (x & y) == 1` 
+
+否则的话 `(x & y) == 0 `
+
+按位与常⽤于两种应⽤： 
+
+•让某⼀位或某些位为0：`x & 0xFE` 
+
+•取⼀个数中的⼀段：`x & 0xFF`
+
+**按位或 `｜`** 
+
+如果 `x == 1`或 `y == 1`，那么 `(x | y) = 1 `
+
+否则的话， `(x | y) == 0 `
+
+按位或常⽤于两种应⽤： 
+
+•使得⼀位或⼏个位为1：`x | 0x01 `
+
+•把两个数拼起来：`0x00FF | 0xFF00`
+
+**按位取反` ~`** 
+
+`~x == 0B111...1 - x`
+
+把1位变0，0位变1 
+
+想得到全部位为1的数：`~0`
+
+7的⼆进制是`0111`，`x | 7`使得低3位为1
+
+⽽` x & ~7`，就使得低3位为0
+
+```c
+unsigned char c = 0xAA;
+printf(" c = %hhx\n", c);
+printf("~c = %hhx\n", (char)~c);
+printf("-c = %hhx", (char)-c);
+//output:
+ c = aa
+~c = 55
+-c = 56
+```
+
+**逻辑运算vs按位运算**
+
+对于逻辑运算，它只看到两个值：0和1 
+
+可以认为逻辑运算相当于把所有⾮0值都变成1，然后做按位运算 
+
+```c
+5 & 4 —>4 but 5 && 4 —> 1 & 1 —> 1  
+
+5 | 4 —> 5 but 5 || 4 —> 1 | 1 —> 1  
+
+~4 —> 3 but !4 —> !1 —> 0
+```
+
+**按位异或`^`** 
+
+如果`x == y` ，那么`(x ^ y) == 0` 
+
+否则的话，`(x ^ y) == 1` 
+
+如果两个位相等，那么结果为0，不相等，结果为1 
+
+如果x和y相等，那么`x ^ y`的结果为0  
+
+对⼀个变量⽤同⼀个值异或两次，等于什么也没做：
+
+`x ^ y ^ y == x`
+
+**左移 `<<`** 
+
+`i << j `:`i`中所有的位向左移动`j`个位置，⽽右边填⼊0 
+
+所有⼩于`int`的类型，移位以`int`的⽅式来做，结果是`int` 
+
+`x <<= 1`等价于` x *= 2 `
+
+`x <<= n` 等价于`x *= pow(2, n)`(最多可以移的位数取决于你的`int`有多大)
+
+```c
+unsigned char c = 0xA5;
+printf("   c = %d\n", c);
+printf("c<<2 = %d", c<<2);
+//output:
+   c = 165
+c<<2 = 660
+```
+
+**右移`>>`**
+
+ `i >> j`:`i`中所有的位向右移`j`位 
+
+所有⼩于int的类型，移位以int的⽅式来做，结果是int  
+
+对于unsigned的类型，左边填⼊0  
+
+对于signed的类型，左边填⼊原来的最⾼位（简而言之就是保持符号不变） 
+
+`x >>= 1` 等价于 `x /= 2 `
+
+`x >>= n `等价于 `x /= pow(2, n)`
+
+```c
+int a = 0x80000000;
+unsigned int b = 0x80000000;
+printf("a   = %d, b    = %u\n", a, b);
+printf("a<<1= %11d, b<<1 = %11u\n", a<<1, b<<1);
+printf("a>>1= %d, b>>1 = %u", a>>1, b>>1);
+//output:
+a   = -2147483648, b    = 2147483648
+a<<1=           0, b<<1 =           0
+a>>1= -1073741824, b>>1 = 1073741824
+```
+
+no zuo no die: 移位运算不要用负数，这是没有定义的行为
+
+```c
+x << -2;   /*  No!!!  */
+```
+
+**位运算的例子**
+
+​	**典例一：输出一个数的二进制**
+
+```c
+#include<stdio.h>
+int main(int argc, char const *argv[])
+{
+	int number;
+	scanf("%x", &number);
+	unsigned mask = 1u<<31;
+	while(mask){
+		printf("%d", number & mask ? 1 : 0);
+		mask >>= 1;
+	}
+	return 0;
+}
+/*Input*/
+aaaaaaaa
+/*Output*/
+10101010101010101010101010101010
+```
+
+​	**典例二：MCU(单片机)的SFR(特殊寄存器)**
+
+<center style="color:#C0C0C0">Table 70: UART0 Line Control Register (U0LCR - 0xE000C00C)</center>
+
+| U0LCR | Function                  | Description                                                  | Reset Value |
+| ----- | ------------------------- | :----------------------------------------------------------- | ----------- |
+| 1:0   | Word Length  Select       | 00: 5 bit character length <br/>01: 6 bit character length <br/>10: 7 bit character length <br/>11: 8 bit character length | 0           |
+| 2     | Stop Bit Select           | 0: 1 stop bit 1: <br />2 stop bits (1.5 if U0LCR[1:0]=00)    | 0           |
+| 3     | Parity Enable             | 0: Disable parity generation and checking<br />1: Enable parity generation and checking | 0           |
+| 5:4   | Parity Select             | 00: Odd parity <br />01: Even parity<br />10: Forced “1” stick parity <br />11: Forced “0” stick parity | 0           |
+| 6     | Break Control             | 0: Disable break transmission<br />1: Enable break transmission. Output pin UART0 TxD is forced to logic 0 when U0LCR6 is active high. | 0           |
+| 7     | Divisor Latch  Access Bit | 0: Disable access to Divisor Latches <br />1: Enable access to Divisor Latches | 0           |
+
+​	如何操作可以对2位（停止位选择）、3位（奇偶校验）进行控制呢？
+
+​	下面这几个操作就可以达到对单片机某些位操作的目的了。
+
+```c
+• const unsigned int SBS = 1u << 2; 
+• const unsigned int PE = 1u << 3;   //上述两步定义了两个二进制常量100和1000
+• U0LCR |= SBS | PE; 
+• U0LCR &= ~SBS; 
+• U0LCR &= ~(SBS | PE);
+```
+
+​	上述技巧常用于控制1个bit的位，但是如果是2个bit，就需要用其它手段。
+
+**位段**
+
+把⼀个int的若干位组合成⼀个结构，冒号后面的数字指的是该成员占几个bit。
+
+```c
+struct 
+{ 
+     unsigned int leading : 3; 
+     unsigned int FLAG1: 1; 
+     unsigned int FLAG2: 1; 
+     int trailing: 11; 
+};
+```
+
+定义了位段之后，可以直接⽤位段的成员名称来访问某些位，⽐移位、与、或还⽅便 
+
+编译器会安排其中的位的排列，不具有可移植性（缺点）
+
+当所需的位超过⼀个`int`时会采⽤多个`int`
+
+```c
+#include<stdio.h>
+void prtBin(unsigned int number);
+struct U0{
+	unsigned int leading : 3;
+	unsigned int FLAG1 : 1;
+	unsigned int FLAG2 : 1;
+	int trailing : 27;
+};
+int main(int argc, char const *argv[])
+{
+	struct U0 uu;
+	uu.leading = 2;
+	uu.FLAG1 = 0;
+	uu.FLAG2 = 1;
+	uu.trailing = 0;
+	printf("sizeof(uu) = %lu\n", sizeof(uu));
+	prtBin(*(int*)&uu);
+	return 0;
+}
+void prtBin(unsigned int number)
+{
+	unsigned mask = 1u<<31;
+	while(mask){
+		printf("%d", number & mask ? 1 : 0);
+		mask >>= 1;
+	}
+}
+/*Output*/
+sizeof(uu) = 4
+00000000000000000000000000010010
+```
+
