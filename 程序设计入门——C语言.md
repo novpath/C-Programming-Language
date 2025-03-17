@@ -588,17 +588,13 @@ int main()
 int i, sum;
 sum = 0;
 for (i = 1; i <= 2; i++)
-{
     sum = sum + 1.0/i;
-}
 //执行以下程序段，sum 的值是 0。
 int i;
 double sum;
 sum = 0;
 for (i = 2; i <= 4; i = i + 2)
-{
     sum = sum + 1/i;
-}
 ```
 
 **double**
@@ -788,7 +784,7 @@ int main()
 * “++”、“--”是两个很特殊的运算符，它们是单目运算符，这个操作数还必须是**变量**。这两个运算符分别叫作递增和递减运算符，它们的作用就是给这个变量+1、-1。
 
 ```c
-count ++;
+count++;
 count = count + 1;
 count += 1;      //三者等价
 ```
@@ -829,7 +825,7 @@ a = 12
 ```c
 ++i++;
 i++++;
-a = b += c ++ -d + --e/-f;   //组合进表达式就太复杂了
+a = b += c++ -d + --e/-f;   //组合进表达式就太复杂了
 ```
 
 - [x] **课后讨论 2.3.2：上课提到的那个复杂表达式该怎么理解？**
@@ -986,7 +982,7 @@ int im = minute2 - minute1;
 if (im < 0)
 {
     im = 60 + im;
-    ih --;
+    ih--;
 }
 
 printf("时间差是 %d 时 %d 分。", ih, im);  
@@ -1057,13 +1053,9 @@ int main()
     scanf("%d", &bill);
     //    判断票面够不够并计算找零
     if (bill >= price) 
-    {
         printf("应该找您：%d\n", bill - price);
-    }
     else 
-    {
         printf("你的钱不够\n");
-    }
 
     return 0;
 }
@@ -1091,9 +1083,7 @@ int main()
     printf("你的年龄是 %d 岁。\n", age);  //人机交互常用方案：先输出刚才读取的内容，方便用户验证和阅览
 
     if (age < MINOR) 
-    {
         printf("年轻是美好的，");
-    }
 
     printf("年龄决定了你的精神世界，好好珍惜吧。\n");
 
@@ -1159,8 +1149,7 @@ int main()
     scanf("%d", &hours);
     printf("\n");
     if (hours > STANDARD)
-        pay = STANDARD * RATE + 
-        (hours-STANDARD) * (RATE * 1.5);
+        pay = STANDARD * RATE + (hours-STANDARD) * (RATE * 1.5);
     else
         pay = hours * RATE;
     printf("应付工资: %f\n", pay);
@@ -1203,44 +1192,33 @@ while (score >= 0)
 {
     scanf ("%d", &score);
     if (score > 85)
-    {
         count++;
-    }
 }
 printf("%d\n", count);
 //B
 int count = 0, score;
 scanf ("%d", &score);
-while (score >= 0)
-{
+while (score >= 0) {
     scanf ("%d", &score);
     if (score > 85)
-    {
         count++;
-    }
 }
 printf("%d\n", count);
 //C
 int count = 0, score;
-while (1)
-{
+while (1) {
     scanf ("%d", &score);
     if (score < 0) break;
     if (score > 85)
-    {
         count++;
-    }
 }
 printf("%d\n", count);
 //D
 int count = 0, score;
 scanf ("%d", &score);
-while (score >= 0)
-{
+while (score >= 0) {
     if (score > 85)
-    {
         count++;
-    }
     scanf ("%d", &score);
 }
 printf("%d\n", count);
@@ -1320,7 +1298,7 @@ else
 
 * 也可以得到推论，判断 x 大于某数，应该从高处往低处判断，x 小于某数，应该从低处往高处判断。
 
-* 但是，本节开篇的代码也有一定局限性，如果位数有很多位的时候，就需要非常多层 if-else 嵌套才能实现数位的判断，如何写一个通用的整数数位判断程序呢？受到人数数（数一个划掉一个）的启发，我们也可以让计算机“数数”，通过 x = x/10，“数”一个数把最右边的一个数划掉，并且让计数器 n ++，最终统计划掉所有数后 n 的值即可。
+* 但是，本节开篇的代码也有一定局限性，如果位数有很多位的时候，就需要非常多层 if-else 嵌套才能实现数位的判断，如何写一个通用的整数数位判断程序呢？受到人数数（数一个划掉一个）的启发，我们也可以让计算机“数数”，通过 x = x/10，“数”一个数把最右边的一个数划掉，并且让计数器 n++，最终统计划掉所有数后 n 的值即可。
 
 ```c
 #include <stdio.h>
@@ -1332,9 +1310,8 @@ int main()
 
     scanf("%d", &x);
 
-    while (x > 0)
-    {
-        n ++;
+    while (x > 0) {
+        n++;
         x /= 10;
     }
 
@@ -1359,10 +1336,9 @@ int main()
 * 如果我们把 while 翻译作“当”，while 循环就是条件满足时，不断重复循环体内的语句。while 的条件判断表达式可以是任意合法的表达式，循环体语句只能是一条语句（一般为 { } 构成的复合语句）。
 
 ```c
-while (x > 0)
-{
+while (x > 0) {
     x /= 10;
-    n ++;
+    n++;
 }
 ```
 
@@ -1428,8 +1404,7 @@ cond(no,left)->e
 * for 循环像一个计数循环：设定一个计数器，初始化它，然后在计数器达到某值之前重复执行循环体，而每执行一次循环体，计数器就进行一次值的调整。for 中的三个表达式，每个表达式都是可以省略的`for (;条件;)`等价于`while (条件)`
 
 ```c
-for (初始动作, 条件, 每轮的动作)
-{
+for (初始动作, 条件, 每轮的动作) {
     ... ...
 }
 ```
@@ -1437,16 +1412,14 @@ for (初始动作, 条件, 每轮的动作)
 * 事实上，for 循环一定可以和 while 循环相互转化。
 
 ```c
-for (int i = 1; i <= n; i++)
-{
+for (int i = 1; i <= n; i++) {
     fact *= i;
 }
 //等价于
 int i = 1;
-while (i <= n)
-{
+while (i <= n) {
     fact *= i;
-    i ++;
+    i++;
 }
 ```
 
@@ -1459,7 +1432,7 @@ cond=>condition: 条件满足？
  
 for=>operation: 循环体
 
-iadd=>operation: i ++
+iadd=>operation: i++
 
 initialization=>operation: i = 1
  
@@ -1474,11 +1447,10 @@ cond(no)->e
 
 <center style="color:#C0C0C0">图 for 循环流程图</center>
 
-* for 可以读作“对于”，于是下面的 for 循环可以读成：“对于一开始`i = 10`，当`i > 0`时，重复执行循环体，每一轮执行完循环体内语句后，令`i --`。”
+* for 可以读作“对于”，于是下面的 for 循环可以读成：“对于一开始`i = 10`，当`i > 0`时，重复执行循环体，每一轮执行完循环体内语句后，令`i--`。”
 
 ```c
-for (int i = 10; i > 0; i--)
-{
+for (int i = 10; i > 0; i--) {
     .../*Code*/...
 }
 ```
@@ -1486,12 +1458,10 @@ for (int i = 10; i > 0; i--)
 下面两种 for 循环的循环次数都是一样的，都为 n，区别在于第一次循环 i 的值以及循环结束后 i 的值。注意，循环结束后，第一段代码的 i 为 n，第二段代码的 i 为 n+1，即对于 for 循环，i 最终的值是**不满足**循环条件的值。
 
 ```c
-for (i = 0; i < n; i ++)
-{
+for (i = 0; i < n; i++) {
     .../*Code*/...
 }
-for (i = 1; i <= n; i ++)
-{
+for (i = 1; i <= n; i++) {
     .../*Code*/...
 }
 ```
@@ -1499,8 +1469,7 @@ for (i = 1; i <= n; i ++)
 试编写程序，让用户输入 n，计算阶乘 $n! = 1 × 2×3 ... ×n$
 
 ```c
-double factorial_a(int n)
-{
+double factorial_a(int n) {
     double product = 1;          //小套路：求积初值设为 1，求和初值设为 0。
     for (int i = 1; i <= n; i++)  //仅有 C99 支持 for 语句内定义初值 i，这里 i 从 2 开始也没问题，可以自行验证
         product *= i;
@@ -1508,8 +1477,7 @@ double factorial_a(int n)
     return product;
 }
 //也可以逆向递减计数，实现的功能相同
-double factorial_b(int n)
-{
+double factorial_b(int n) {
     double product = 1;          
     for (int i = n; i > 1; i--)   
         product *= i;
@@ -1523,11 +1491,9 @@ double factorial_b(int n)
 ```c
 //二重循环写法
 sum = 0;
-for (i = 1; i <= n; i++)
-{
+for (i = 1; i <= n; i++) {
     item = 1;
-    for (j = 1; j <= i; j++)
-    {
+    for (j = 1; j <= i; j++) {
         item = item * j;
     }
     sum = sum + item;
@@ -1539,8 +1505,7 @@ printf("%.0f\n", sum)
 //单重循环写法
 sum = 0;
 item = 1;
-for (i = 1; i <= n; i++)
-{
+for (i = 1; i <= n; i++) {
     item = item * i;
     sum = sum + item;
 }
@@ -1618,13 +1583,10 @@ int main()
     t1 = 60 * hour1 + minute1;
     t2 = t1 - 60 * 8;
 
-    if (t2 >= 0)
-    {
+    if (t2 >= 0) {
         hour2 = t2 / 60;
         minute2 = t2 % 60;
-    }
-    else
-    {
+    } else {
         t2 = 24 * 60 + t2;
         hour2 = t2 / 60;
         minute2 = t2 % 60;
@@ -1676,16 +1638,12 @@ int main()
     if (n % 2 == 0)
         odd = 0;
 
-    for (int i = 1; i <= n; i = i + 2)
-    {
+    for (int i = 1; i <= n; i = i + 2) {
         printf("%d", i);
-        if (odd == 1)
-        {
+        if (odd == 1) {
             if (i != n)
                 printf(" ");
-        } 
-        else
-        {
+        } else {
             if (i != n - 1)
                 printf(" ");
         }       
@@ -1883,13 +1841,9 @@ int main()
     c = 1;
     d = '1';
     if (c == d)
-    {
         printf("Equal\n");
-    }
     else
-    {
         printf("Not Equal\n");
-    }
     printf("c = %d\n", c);
     printf("d = %d\n", d);
     
@@ -2074,7 +2028,7 @@ int a, b = 0;
 * 目前，逗号表达式主要用于 for 语句，如果在 for 内三块区域需要进行多个计算，就可以在区域内使用逗号表达式实现
 
 ```c
-for (i = 0, j = 10; i < j; i ++, j--)
+for (i = 0, j = 10; i < j; i++, j--)
 ```
 
 **位运算**
@@ -2265,7 +2219,7 @@ printf("Tha max number is %d", max);
 * else 总是和之前与其最近的且不带 else 的那个 if 匹配，通过加大括号，可以改变 if-else 对应的匹配，比如将上面的程序修改为下面这段程序，此时第二个 if 就没有对应的 else 和它匹配了。
 
 ```c
-if (a > b)
+if (a > b) 
 {
     if (a > c)
     max = a;
@@ -2287,7 +2241,7 @@ if (a > b)
 switch 语句可以处理多分支选择问题，根据其中 break 语句的不同用法，可以实现不同的功能。
 
 ```c
-switch(控制表达式)
+switch (控制表达式)
 {
     case 常量表达式 1:
         语句段 1
@@ -2354,8 +2308,7 @@ for 结构中 break 和 continue 的区别如下图，左一是宏观描绘，�
 ```c
 char ch = getchar();
 int blank = 0;
-switch(ch)
-{
+switch (ch) {
     case ' ':
     case '\n':
         blank++;
@@ -2374,8 +2327,7 @@ int main()
     scanf("%d", &grade);
     grade /= 10;
 
-    switch(grade)
-    {
+    switch (grade) {
         case 10:
         case 9:
             printf("A\n");
@@ -2422,8 +2374,7 @@ int main()
     else
         n = 3;
     
-    switch(n)
-    {
+    switch (n) {
         case 1: printf("f = -1\n"); break;
         case 2: printf("f = 0\n"); break;
         case 3: printf("f = %d\n", 2 * x); break;
@@ -2445,10 +2396,9 @@ int ret = 0;
 
 scanf("%d", &x);
 int t = x;
-while (x > 1)
-{
+while (x > 1) {
     x /= 2;
-    ret ++;
+    ret++;
 }
 
 printf("log2 of %d is %d", t, ret);
@@ -2458,7 +2408,7 @@ printf("log2 of %d is %d", t, ret);
 
 * 现在问题是，上述程序代码中，ret 的初值以及 while 满足的条件是如何确定的呢？这两个值其实是息息相关的，而且也不一定只有唯一答案。
 
-* 一个思路是，直接考虑边界条件，1 以 2 为底的对数是 0，所以希望`x = 1`时，不进入 while 循环，于是可以知道 ret = 0，while 里面的条件是`x > 1`或者`x >=  2`，反过来考虑，假如我就想让 while 里面的条件是`X > 0`呢？此时 1 会进入循环，然后`ret ++`，所以，此时的 ret 初值应该设置为`ret = 0`；
+* 一个思路是，直接考虑边界条件，1 以 2 为底的对数是 0，所以希望`x = 1`时，不进入 while 循环，于是可以知道 ret = 0，while 里面的条件是`x > 1`或者`x >=  2`，反过来考虑，假如我就想让 while 里面的条件是`X > 0`呢？此时 1 会进入循环，然后`ret++`，所以，此时的 ret 初值应该设置为`ret = 0`；
 
 * 当然，此类问题初值的确定，主要还是依靠个人经验，熟能生巧。
 
@@ -2466,9 +2416,8 @@ printf("log2 of %d is %d", t, ret);
 
 ```c
 int count = 100;
-while (count >= 0)
-{
-    count --;
+while (count >= 0) {
+    count--;
     printf("%d\n", count);
 }
 printf("发射！\n");
@@ -2516,10 +2465,9 @@ int main()
     int count;
     
     scanf("%d", number);
-    while (number != -1)
-    {
+    while (number != -1) {
         sum += number;
-        count ++;
+        count++;
         scanf("%d", &number);
     }
     
@@ -2563,13 +2511,11 @@ int main()
     do{
         printf("请猜这个 1 到 100 之间数：");
         scanf("%d", &a);
-        count ++;
+        count++;
         if (a > number)
-        {
             printf("你猜的数大了。");
-        } else if (a < number){ 
+        else if (a < number)
             printf("你猜的数小了。");
-        }
     }while (a != number);
 
     printf("太好了，你用了 %d 次就猜到了答案。\n", count);
@@ -2611,8 +2557,7 @@ int main()
     int digit;
     int ret = 0;
     
-    while (x > 0)
-    {
+    while (x > 0) {
         digit = x % 10;
         ret = 10 * ret + digit;
         //printf("x = %d, digit = %d, ret = %d\n", x, digit, ret); //调试信息
@@ -2649,25 +2594,26 @@ while (x > 0)
 
 ```c
 //风格一：可以看的代码行数多、紧凑
-if (x < 0){
+if (x < 0) {
     f = -1;
-}else if (x == 0){
+} else if (x == 0) {
     f = 0;
-}else{
+} else {
     f = 2 * x;
 }
 //风格二：中庸、括号匹配更清晰
-if (x < 0){
+if (x < 0) {
     f = -1;
-}else if (x == 0)
+} else if (x == 0)
 {
     f = 0;
-}else
+} else
 {
     f = 2 * x;
 }
 //风格三：括号匹配最清晰、松散、方便用快捷键注释多行
-if (x < 0){
+if (x < 0)
+{
     f = -1;
 }
 else if (x == 0)
@@ -2685,11 +2631,12 @@ else
     *   ①缩进：使用空格进行缩进，通常每次缩进为 4 个空格。不要使用 Tab 键进行缩进，除非你的项目或团队明确要求使用 Tab 键。
     *   ②运算符空格规则： 双目运算符如“`+ - * / = +=`”等两侧加空格，**一元运算符**及**其他运算符**如“`! ~ . -> ++ -- & * a[i]`”等，两侧不加空格，分隔逗号或分号“`, ;`”后应加一个空格，分隔两部分，如`for (i = 1; i < 0; i++)`
     *   ③函数名、变量名后不加空格：函数名和变量名后不应加空格。如：`add(a, b)`
-    *   ④括号的使用： 控制语句（如`if for while`等）的左括号前要加空格，函数调用的括号前后不加空格。
+    *   ④括号的使用： 控制语句（如`if for while switch`等）的左括号前要加空格，函数调用的括号前后不加空格。
     *   ⑤大括号风格：控制语句的大括号风格可以是左大括号在行的末尾的 K&R 风格，也可以是左大括号在新的一行的 Allman 风格，选择一种风格并在项目中保持一致。
     *   ⑥空行：在不同的逻辑块之间使用空行来分隔，以提高可读性。在函数之间也使用空行。
     *   ⑦注释：单行注释以`//`开始，后面跟一个空格，然后是注释内容。多行注释使用`/* 注释内容 */`。
     *   ⑧预编译指令和库函数之间要加空格：`#include <stdio.h>`
+    *   ⑨分支一致：for、while、if-else 只有单行代码时，语句不加大括号，但是如果其中一个分支用了大括号，另外的分支也要使用以保持一致。
 
 **经典考点**
 
@@ -2704,34 +2651,29 @@ int main()
     int value1, value2;
     value1 = value2 = 2; 
     //语句 A：
-    switch(op)
-    {
+    switch (op) {
        default: printf("Error\n"); break;
     }
     //语句 B：
-    switch('/')
-    {
+    switch ('/') {
        case '*': printf("%d\n", value1 * value2); break;
        case '-': printf("%d\n", value1 - value2); break;
        case '+': printf("%d\n", value1 + value2); break;
        default: printf("Error\n"); break;
     }
     //语句 C：case 后面不能跟关系表达式
-    switch(op)
-    {
+    switch (op) {
        case op == '+': printf("%d\n", value1 + value2); break;
        default: printf("Error\n"); break;
     }
     //语句 D：
-    switch(op+1)
-    {
+    switch (op+1) {
        default: printf("Error\n"); break;
        case '*': printf("%d\n", value1 * value2); break;
        case '+': printf("%d\n", value1 + value2); break;
     }
     //语句 E：有两处 case 值为'*'
-    switch(op)
-    {
+    switch (op) {
        case '*': printf("%d\n", value1 * value2); break;
        case '+': printf("%d\n", value1 + value2); break;
        case '-': printf("%d\n", value1 - value2); break;
@@ -2753,12 +2695,10 @@ int main()
 {
     char grade;
     int i, score;
-    for (i = 1; i < 6; i++)
-    {
+    for (i = 1; i < 6; i++) {
         scanf("%d", &score);
         score = score/10;
-        switch(score) 
-        {
+        switch (score) {
             case 10: 
             case 9: 
             default: grade = 'F'; break;
@@ -2780,15 +2720,14 @@ int main()
 【典例三】写出与以下 switch 语句等价的 else-if 语句。
 
 ```c
-switch (ch)
-{
+switch (ch) {
     case '0' : case '1' : case '2' : case '3' : case '4' :
     case '-': 
         minus++; break; 
     case '5' : case '6' : case '7' : case '8' : case '9' : 
-        digit ++;break;
+        digit++; break;
     default: 
-       other ++; break; 
+        other++; break; 
 }   
 ```
 
@@ -2796,17 +2735,11 @@ switch (ch)
 
 ```c
 if (ch == '-' || (ch >= '0' && ch <= '4'))
- {
     minus++; 
- }
 else if (ch >= '5' && ch <= '9')
-{
-    digit ++;
-}
+    digit++;
 else 
-{ 
-    other ++;
-}
+    other++;
 ```
 
 【典例四】结尾不要输出空格！
@@ -2823,18 +2756,13 @@ int main()
 
     scanf("%d", &n);
     /*             */
-    for (k = 1; k <= n; k++)
-    {
+    for (k = 1; k <= n; k++) {
         scanf("%d", &x); 
-        /*             */
-        {
-            if (first == 1)
-            { 
+        /*             */ {
+            if (first == 1) { 
                 printf("%d", x); 
                 /*         */
-            }
-            else
-            { 
+            } else { 
                 /*         */ 
             }
         }
@@ -2896,13 +2824,12 @@ int main()
     int even = 0;
     
     scanf("%d", &n);
-    while (n != -1)
-    {
+    while (n != -1) {
         scanf("%d", &n);
         if (n % 2 == 0)
-            even ++;
+            even++;
         else
-            odd ++;
+            odd++;
     }
     
     printf("%d %d", odd, even);
@@ -2960,14 +2887,11 @@ int main()
     int i = 1;
     
     scanf("%d", &n);
-    while (n != 0)
-    {
+    while (n != 0) {
         if (n % 2 == digit % 2)
-        {
             val += i;
-        }
         i *= 2;
-        digit ++;
+        digit++;
         n /= 10;
     }
     
@@ -2998,22 +2922,16 @@ int main()
     
     int i;
     int isPrime = 1;
-    for (i = 2; i < x; i ++)
-    {
-        if (x % i == 0)
-        {
+    for (i = 2; i < x; i++) {
+        if (x % i == 0) {
             isPrime = 0;
             break;
         }
     }
     if (isPrime == 1)
-    {
         printf("是素数\n");
-    }
     else
-    {
-         printf("不是素数\n");
-    }
+        printf("不是素数\n");
     
     return 0;
 }
@@ -3032,8 +2950,7 @@ int main()
 > 课程中提到有种“聪明”的做法，可以不设 isPrime，直接利用循环出口处循环变量和终点值的关系来判断循环是否 break 了。你觉得这种做法好吗？
 >
 > ```c
->   for (i = 2; i < x; i ++)
->    {
+>   for (i = 2; i < x; i++) {
 >        if (x % i == 0)
 >            break;
 >    }
@@ -3041,7 +2958,7 @@ int main()
 >        printf("是素数\n");
 >    else
 >        printf("不是素数\n");
-> ```
+>    ```
 
 讨论：
 
@@ -3075,21 +2992,16 @@ int main()
     int x; 
     int i;
     
-    for (x = 2; x < 100; x ++)
-    {
+    for (x = 2; x < 100; x++) {
         int isPrime = 1;
-        for (i = 2; i < x; i ++)
-        {
-            if (x % i == 0)
-            {
+        for (i = 2; i < x; i++) {
+            if (x % i == 0) {
                 isPrime = 0;
                 break;
             }
         }
         if (isPrime == 1)
-        {
             printf("%d ", x);
-        } 
     }
     
     return 0;
@@ -3110,14 +3022,10 @@ int one, two, five;
 int exit = 0;
 
 scanf("%d", &x);
-for (one = 1; one < x * 10; one ++)
-{
-    for (two = 1; one < x * 10 / 2; two ++)
-    {
-        for (five = 1; five < x * 10 / 5; five ++)
-        {
-            if (one + two * 2 + five * 5 == x * 10)
-            {
+for (one = 1; one < x * 10; one++) {
+    for (two = 1; one < x * 10 / 2; two++) {
+        for (five = 1; five < x * 10 / 5; five++) {
+            if (one + two * 2 + five * 5 == x * 10) {
                 printf("可以用 %d 个 1 角加 %d 个 2 角加 %d 个 5 角得到 %d 元\n", one, two, five, x);
                 exit = 1;
                 break;
@@ -3210,11 +3118,10 @@ int main()
     scanf("%d", &n);
     double flag = 1;
 
-    for (int i = 1; i <= n; i++)
-    {
+    for (int i = 1; i <= n; i++) {
         sum += flag * numerator / denominator;
         flag = -flag;
-        numerator ++;
+        numerator++;
         denominator += 2;
     }
 
@@ -3241,10 +3148,8 @@ scanf("%d %d", &a, &b);
 
 int ret = 0;
 int i;
-for (i = 1; i < ((a < b)? a : b); i ++)
-{
-    if (a % i == 0 && b % i == 0)
-    {
+for (i = 1; i < ((a < b)? a : b); i++) {
+    if (a % i == 0 && b % i == 0) {
         ret = i;  
     }
 }
@@ -3273,8 +3178,7 @@ int main()
     int a, b;
     int t;
     scanf("%d %d", &a, &b);
-    while (b != 0)
-    {
+    while (b != 0) {
         t = a % b;
         a = b;
         b = t;
@@ -3308,20 +3212,16 @@ int main()
     x = 0;
     int mask = 1;
     int t = x;
-    while (t > 9)
-    {
+    while (t > 9) {
         t /= 10;
         mask *= 10;
     }
     
-    while (mask > 0)
-    {
+    while (mask > 0) {
         int d = x / mask;
         printf("%d", d);
         if (mask > 9)
-        {
             printf(" ");
-        }
         x %= mask;
         mask /= 10;
     }
@@ -3342,8 +3242,7 @@ flag = 1;
 denominator = 1;
 item = 1.0;
 pi = 0;
-while (fabs(item) >= 0.0001)
-{
+while (fabs(item) >= 0.0001) {
     pi = pi + item;
     flag = -flag;
     denominator = denominator + 2;
@@ -3397,26 +3296,20 @@ int main()
     
     int i, j;
     j = 2;
-    while (count < m) 
-    {
+    while (count < m) {
         isPrime = 1;
-        for (i = 2; i < j; i ++)
-        {
-            if (j % i == 0)
-            {
+        for (i = 2; i < j; i++) {
+            if (j % i == 0) {
                 isPrime = 0;
                 break;
             }
         }
-        if (isPrime == 1)
-        {
-            count ++;
+        if (isPrime == 1) {
+            count++;
             if (count >= n && count <= m)
-            {
                 sum += j; 
-            } 
         }
-        j ++;
+        j++;
     }
     
     printf("%d", sum);
@@ -3466,23 +3359,19 @@ int main()
     int mask = 1;
     scanf("%d", &x);
     
-    if (x < 0)
-    {
+    if (x < 0) {
         printf("fu ");
         x = -x;
     }
     
     int t = x;
-    while (t > 9)
-    {
+    while (t > 9) {
         t /= 10;
         mask *= 10;
     }
-    while (mask > 0)
-    {
+    while (mask > 0) {
         int d = x / mask;
-        switch(d)
-        {
+        switch (d) {
             case 0: printf("ling"); break;
             case 1: printf("yi"); break;
             case 2: printf("er"); break;
@@ -3495,9 +3384,7 @@ int main()
             case 9: printf("jiu"); break;
         }
         if (mask > 9)
-        {
             printf(" ");
-        }
         x %= mask;
         mask /= 10;
     }
@@ -3530,23 +3417,18 @@ int main()
     int cnt = 0;
     int number[100];                           //定义数组
     scanf("%d", &x);
-    while (x != 0)
-    {
+    while (x != 0) {
         number[cnt] = x;                       //对数组元素赋值
         sum += x;
-        cnt ++;
+        cnt++;
         scanf("%d", &x);
     }
-    if (cnt > 0)
-    {
+    if (cnt > 0) {
         int i;
         double average = sum / cnt;
-        for (int i = 0; i < cnt ; i ++)         //18 行
-        {
-            if (number[i]  > average)
-            {
+        for (int i = 0; i < cnt ; i++) {       //18 行
+            if (number[i] > average)
                 printf("%d", number[i]);        //使用数组元素
-            }
         }                                       //24 行，18-24 行是遍历数组
     }
     
@@ -3643,23 +3525,16 @@ int main()
     int x, i;
     int count[number];              //定义数组 
     
-    for (i = 0; i < number; i ++)  //for loop 初始化数组 →
-    { 
-        count[i] = 0;          
-    }                               //←
+    for (i = 0; i < number; i++)  //for loop 初始化数组
+        count[i] = 0;
     scanf("%d", &x);
-    while (x != -1) 
-    {
-        if (x >= 0 && x <= 9) 
-        {
-            count[x] ++;               //数组参与运算 
-        }
+    while (x != -1) {
+        if (x >= 0 && x <= 9)
+            count[x]++;               //数组参与运算 
         scanf("%d", &x);
     }
-    for (i = 0; i < number; i++)      //遍历数组输出 →
-    {
+    for (i = 0; i < number; i++)       //遍历数组输出 →
         printf("%d:%d\n", i, count[i]);
-    }                                  //←
     return 0;
  } 
 ```
@@ -3736,11 +3611,10 @@ int main()
     int i;
     int fib[10] = {1, 1};
     
-    for (i = 2; i < 10; i ++)
+    for (i = 2; i < 10; i++)
         fib[i] = fib[i - 1] + fib[i - 2];
         
-    for (i = 0; i < 10; i ++)
-    {
+    for (i = 0; i < 10; i++) {
         printf("%6d", fib[i]);
         if ((i + 1) % 5 == 0)
             printf("\n");
@@ -3763,10 +3637,8 @@ int main()
 int isprime(int x)
 {
     int ret = 1;
-    for (int i = 2; i <= sqrt(x); i ++)
-    {
-        if (x % i == 0)
-        {
+    for (int i = 2; i <= sqrt(x); i++) {
+        if (x % i == 0) {
             ret = 0;
             break;
         }
@@ -3787,10 +3659,8 @@ void sum(int begin, int end)
 {
     int i;
     int sum = 0;
-    for (i = begin; i <= end; i ++)
-    {
+    for (i = begin; i <= end; i++)
         sum += i;
-    }
     printf("%d + ... + %d = %d\n", begin, end, sum);
 }
 
@@ -4217,9 +4087,9 @@ static 类型名 变量表
 * 和一维数组类似，注意**行下标**和**列下标**不要越界，行、列下标最大值都只能到**行、列长度-1**。
 
 ```c
-for (i = 0; i < 2; i ++)
+for (i = 0; i < 2; i++)
 {
-    for (j = 0; j < 5; j ++)
+    for (j = 0; j < 5; j++)
     {
         a[i][j] = i * j;
     }
@@ -4238,7 +4108,7 @@ for (i = 0; i < 2; i ++)
 | 下三角   | 主对角线以下的部分           | i >= j         |
 | 副对角线 | 从矩阵的右上角至左下角的连线 | i + j == N - 1 |
 
-注：行下标`i`和列下标`j`的取值范围都为[0, N - 1]，此时矩阵为**方阵**。
+注：行下标 i 和列下标 j 的取值范围都为[0, N - 1]，此时矩阵为**方阵**。
 
 **二维数组的初始化**
 
@@ -4246,14 +4116,12 @@ for (i = 0; i < 2; i ++)
 
 ```c
 //分行赋初值（不省略）
-int a[2][5] = 
-{
+int a[2][5] = {
     {0, 1, 2, 3, 4},
     {2, 3, 4, 5, 6},
 }
 //分行赋初值（省略行）
-int a[][5] = 
-{
+int a[][5] = {
     {0, 1, 2, 3, 4},
     {2, 3, 4, 5, 6},
 }
@@ -4301,111 +4169,66 @@ int main()
     int numOfO;
     int result = -1;       //-1 没人赢，1：X 赢，0：O 赢 
     //读入矩阵
-    for (i = 0; i < size; i ++)
-    {
-        for (j = 0; j < size; j ++)
-        {
+    for (i = 0; i < size; i++)
+        for (j = 0; j < size; j++)
             scanf("%d", &board[i][j]);
-        }
-    }
     //检查行
-    for (i = 0; i < size && result == -1; i ++)
-    {
+    for (i = 0; i < size && result == -1; i++) {
         numOfO = numOfX = 0;
-        for (j = 0; j < size; j ++)
-        {
+        for (j = 0; j < size; j++) {
             if (board[i][j] == 1)
-            {
-                numOfX ++;
-            }
+                numOfx++;
             else
-            {
-                numOfO ++;
-            }
+                numOfO++;
         }
         if (numOfO == size)
-        {
             result = 0;
-        }
         else if (numOfX == size)
-        {
             result = 1;
-        }
     }
     //检查列
-    if (result == -1)
-    {
-        for (j = 0; j < size && result == -1; j ++)
-        {
+    if (result == -1) {
+        for (j = 0; j < size && result == -1; j++) {
             numOfO = numOfX = 0;
-            for (i = 0; i < size; i ++)
-            {
+            for (i = 0; i < size; i++) {
                 if (board[i][j] == 1)
-                {
-                    numOfX ++;
-                }
+                    numOfx++;
                 else
-                {
-                    numOfO ++;
-                }
+                    numOfO++;
             }
             if (numOfO == size)
-            {
                 result = 0;
-            }
             else if (numOfX == size)
-            {
                 result = 1;
-            }
         }
     }
     //检查主对角线
-    if (result == -1)
-    {
+    if (result == -1) {
         numOfO = numOfX = 0;
-        for (i = 0; i < size; i ++)
-        {
+        for (i = 0; i < size; i++) {
             if (board[i][i] == 1)
-            {
-                numOfX ++;
-            }
+                numOfx++;
             else
-            {
-                numOfO ++;
-            }
+                numOfO++;
         }
         if (numOfO == size)
-        {
             result = 0;
-        }
         else if (numOfX == size)
-        {
             result = 1;
-        }
     }
     //检查副对角线
-    if (result == -1)
-    {
+    if (result == -1) {
         numOfO = numOfX = 0;
-        for (i = 0; i < size; i ++)
-        {
+        for (i = 0; i < size; i++) {
             if (board[i][size - i - 1] == 1)
-            {
-                numOfX ++;
-            }
+                numOfx++;
             else
-            {
-                numOfO ++;
-            }
+                numOfO++;
         }
         if (numOfO == size)
-        {
             result = 0;
-        }
         else if (numOfX == size)
-        {
             result = 1;
-        }
     }
     
     printf("返回值为：%d\n", result); 
@@ -4420,7 +4243,7 @@ int main()
 
 讨论：
 
-* 将循环中判断行列的`i`和`j`调换位置，即`board[i][j]`判断行，`board[j][i]`判断列，在遍历的同时一起进行判断即可；
+* 将循环中判断行列的 i 和 j 调换位置，即`board[i][j]`判断行，`board[j][i]`判断列，在遍历的同时一起进行判断即可；
 
 ```c
 #include <stdio.h>
@@ -4433,45 +4256,28 @@ int main()
     int numOfO,numOfOO;
     int result =-1;          //  -1:没人赢，1：X 赢，0:0 赢；
     
-    for (i = 0; i < size; i ++)
-    {
-        for (j = 0; j < size; j ++)
-        {
+    for (i = 0; i < size; i++) {
+        for (j = 0; j < size; j++)
             scanf("%d", &board[i][j]);
-        }
     } 
-    for (i = 0; i < size && result == -1; i ++)
-    {
+    for (i = 0; i < size && result == -1; i++) {
         numOfO = numOfX = 0;
         numOfXX = numOfOO = 0;
-        for (j = 0; j < size; j ++)
-        {
+        for (j = 0; j < size; j++) {
             if (board[i][j] == 1)
-            {
-                numOfX ++; 
-            }
+                numOfX++; 
             else if (board[i][j] == 0)
-            { 
-                numOfO ++;
-            }
+                numOfO++;
             if (board[j][i] == 1)
-            {
-                numOfXX ++;
-            }
+                numOfXX++;
             else if (board[j][i] == 0)
-            {
-                numOfOO ++;
-            }
+                numOfOO++;
         } 
     }
     if (numOfO == size || numOfOO == size)
-    {
         result = 0;
-    }
     else if (numOfX == size || numOfXX == size)
-    {
         result = 1;
-    }
     
     return 0;
 }
@@ -4546,11 +4352,10 @@ int main()
     
     n = 0; 
     printf("0.");
-    while (n < 200 && a != 0)
-    {
+    while (n < 200 && a != 0) {
         printf("%d", a * 10 / b);
         a = a * 10 % b;
-        n ++;
+        n++;
     }
     printf("\n"); 
 
@@ -4591,13 +4396,9 @@ int main(void)
     scanf("%d", &x);
     loc = search(x, a, sizeof(a) / sizeof(a[0]));
     if (loc != -1)
-    {
         printf("%d in the %d position\n", x, loc);
-    }
     else
-    {
         printf("%d absent\n", x);
-    }
     
     return 0;
 }
@@ -4606,10 +4407,8 @@ int search(int key, int a[], int length)
 {
     int ret = -1;
     int i;
-    for (i = 0; i < length; i ++)
-    {
-        if (a[i] == key)
-        {
+    for (i = 0; i < length; i++) {
+        if (a[i] == key) {
             ret = i;
             break;
         }
@@ -4654,35 +4453,23 @@ int b[] = a[];
 **遍历数组**
 
 ```c
-for (i = 0; i < length; i ++)
-{
+for (i = 0; i < length; i++)
     b[i] = a[i];
-}
-for (i = 0; i < number; i ++)
-{
+for (i = 0; i < number; i++)
     count[i] = 0;
-}
 //
-for (i = 0; i < length; i ++)
-{
-    if (a[i] == key)
-    {
+for (i = 0; i < length; i++) {
+    if (a[i] == key) {
         ret = i;
         break;
     }
 }
 //
-for (i = 0; i < cnt; i ++)
-{
+for (i = 0; i < cnt; i++)
     if (number[i] > average)
-    {
         printf("%d", number[i]);
-    }
-}
-for (i = 0; i < number; i ++)
-{
+for (i = 0; i < number; i++)
     printf("%d:%d\n", i, count[i]);
-}
 ```
 
 * 通常都是使用 for 循环，让循环变量`i`从`0`到`数组长度 - 1`，这样循环体内最大的 i 正好是数组最大的有效下标。
@@ -4704,10 +4491,8 @@ int isPrime(int x, int knownPrimes[], int numberOfKnownPrimes)
 {
     int ret = 1;
     int i;
-    for (i = 0; i < numberOfKnownPrimes; i ++)
-    {
-        if (x % knownPrimes[i] == 0)
-        {
+    for (i = 0; i < numberOfKnownPrimes; i++) {
+        if (x % knownPrimes[i] == 0) {
             ret = 0;
             break;
         }
@@ -4723,31 +4508,27 @@ int main(void)
 //    {
 //        int i;
 //        printf("\t\t\t\t");
-//        for (i = 0; i < number; i ++)
+//        for (i = 0; i < number; i++)
 //        {
 //            printf("%d\t", i);
 //        }
 //        printf("\n");
 //    }
-    while (count < number)
-    {
+    while (count < number) {
         if (isPrime(i, prime, count))
-        {
             prime[count++] = i;
-        }
 //        {
 //            printf("i=%d \tcnt=%d", i, count);
 //            int i;
-//            for (i = 0; i < number; i ++)
+//            for (i = 0; i < number; i++)
 //            {
 //                printf("%d\t", prime[i]);
 //            }
 //            printf("\n");
 //        }
-        i ++;
+        i++;
     }
-    for (i = 0; i < number; i ++)
-    {
+    for (i = 0; i < number; i++) {
         printf("%d", prime[i]);
         if ((i + 1) % 5) printf("\t");
         else printf("\n");
@@ -4788,26 +4569,17 @@ int main()
     int isPrime[maxNumber];
     int i;
     int x;
-    for (i = 0; i < maxNumber; i ++)
-    {
+    for (i = 0; i < maxNumber; i++)
         isPrime[i] = 1;
-    }
-    for (x = 2; x < maxNumber; x ++)
-    {
-        if (isPrime[x])
-        {
-            for (i = 2; i * x < maxNumber; i ++)
-            {
+    for (x = 2; x < maxNumber; x++) {
+        if (isPrime[x]) {
+            for (i = 2; i * x < maxNumber; i++)
                 isPrime[i * x] = 0;
-            }
         }
     }
-    for (i = 2; i < maxNumber; i ++)
-    {
+    for (i = 2; i < maxNumber; i++) {
         if (isPrime[i])
-        {
             printf("%d\t", i);
-        }
     }
     printf("\n");
     
@@ -4832,10 +4604,8 @@ int main()
 int search(int key, int a[], int len)
 {
     int ret = -1;
-    for (int i = 0; i < len; i ++)
-    {
-        if (key == a[i])
-        {
+    for (int i = 0; i < len; i++) {
+        if (key == a[i]) {
             ret = i;
             break;
         }
@@ -4877,10 +4647,8 @@ char *name[] = {"penny", "nickel", "dime", "quarter", "half-dollar"};
 int search(int key, int a[], int len)
 {
     int ret = -1;
-    for (int i = 0; i < len; i ++)
-    {
-        if (key == a[i])
-        {
+    for (int i = 0; i < len; i++) {
+        if (key == a[i]) {
             ret = i;
             break;
         }
@@ -4894,9 +4662,7 @@ int main()
     int k = 25;
     int r = search(k, amount, sizeof(amount) / sizeof(amount[0]));
     if (r > -1)
-    {
         printf("%s\n", name[r]);
-    }
     
     return 0;
 }
@@ -4912,8 +4678,7 @@ int main()
 int amount[] = {1, 5, 10, 25, 50};
 const char *name[] = {"penny", "nickel", "dime", "quarter", "half-dollar"};
 
-struct
-{
+struct {
     int amount;
     const char *name;
 }
@@ -4929,10 +4694,9 @@ coins[] =
 int search(int key, int a[], int len)
 {
     int ret = -1;
-    for (int i = 0; i < len; i ++)
+    for (int i = 0; i < len; i++)
     {
-        if (key == a[i])
-        {
+        if (key == a[i]) {
             ret = i;
             break;
         }
@@ -4944,10 +4708,8 @@ int search(int key, int a[], int len)
 int main()
 {
     int k = 25;
-    for (int i = 0; i < sizeof(coins) / sizeof(coins[0]); i ++)
-    {
-        if (k == coins[i].amount)
-        {
+    for (int i = 0; i < sizeof(coins) / sizeof(coins[0]); i++) {
+        if (k == coins[i].amount) {
             printf("%s\n", coins[i].name);
             break;
         }
@@ -4973,20 +4735,14 @@ int search(int key, int a[], int len)
     int ret = -1;
     int left = 0;
     int right = len - 1;
-    while (left <= right)
-    {
+    while (left <= right) {
         int mid = (left + right) / 2;
-        if (a[mid] == key)
-        {
+        if (a[mid] == key) {
             ret = mid;
             break;
-        }
-        else if (a[mid] > key)
-        {
+        } else if (a[mid] > key) {
             right = mid - 1;
-        }
-        else
-        {
+        } else {
             left = mid + 1;
         }
     }
@@ -5029,12 +4785,9 @@ void swap_sort(int a[], int len)
 {
     int i, j, temp;
     
-    for (i = 0; i < len; i++)
-    {
-        for (j = i + 1; j < len; j ++)
-        {
-            if (a[j] < a[i])  /*注意和冒泡排序的区别*/
-            { 
+    for (i = 0; i < len; i++) {
+        for (j = i + 1; j < len; j++) {
+            if (a[j] < a[i]) {  /*注意和冒泡排序的区别*/
                 temp = a[i];
                 a[i] = a[j];
                 a[j] = temp;
@@ -5059,12 +4812,9 @@ void swap_sort(int a[], int len)
 void bubble_sort(int a[], int len)
 {
     int i, j, temp;
-    for (i = 1; i < n; i++)
-    {
-        for (j = 0; j < n - i; j ++)
-        {
-            if (a[j] > a[j + 1])
-            { 
+    for (i = 1; i < n; i++) {
+        for (j = 0; j < n - i; j++) {
+            if (a[j] > a[j + 1]) { 
                 temp = a[j];
                 a[j] = a[j + 1];
                 a[j + 1] = temp;
@@ -5090,15 +4840,11 @@ void bubble_sort(int a[], int len)
 void select_sort(int a[], int len)
 {
     int temp;
-    for (int i = 0; i < len - 1; i ++)
-    {
+    for (int i = 0; i < len - 1; i++) {
         int minid = i;
-        for (int j = i + 1; j < len; j ++)
-        {
+        for (int j = i + 1; j < len; j++) {
             if (a[j] < a[minid])
-            {
                 minid = j;
-            }
         }
         temp = a[minid];
         a[minid] = a[i];
@@ -5111,7 +4857,7 @@ int main()
     int a[] = {6, 45, 2, 12, 87, 34, 90, 24, 23, 11, 65};
     select_sort(a, sizeof(a) / sizeof(a[0]));
     
-    for (int i = 0; i < sizeof(a) / sizeof(a[0]); i ++)
+    for (int i = 0; i < sizeof(a) / sizeof(a[0]); i++)
         printf("%d ", a[i]);
     printf("\n");
     
@@ -5184,43 +4930,36 @@ int main()
     int a[101], b[101], c[101];
     int i;
     
-    for (i = 0; i < 101; i ++)
-    {
+    for (i = 0; i < 101; i++) {
         a[i] = 0;
         b[i] = 0;
     }
     
     i = 1;
-    while (i != 0)
-    {
+    while (i != 0) {
         scanf("%d ", &i);
         scanf("%d", &a[i]);
     }
     i = 1;
-    while (i != 0)
-    {
+    while (i != 0) {
         scanf("%d ", &i);
         scanf("%d", &b[i]);
     }
     
     i = 100;
-    while (i != -1)
-    {
+    while (i != -1) {
         c[i] = a[i] + b[i];
-        if (c[i] != 0)
-        {
+        if (c[i] != 0) {
             if (i != 1 && i != 0)
                 printf("%dx%d+", c[i], i);
             else if (i == 1)
                 printf("%dx+", c[i]);
             else
                 printf("%d", c[i]);
-        }
-        else if (i == 0)
-        {
+        } else if (i == 0) {
             printf("%d", c[i]);
         }
-        i --;
+        i--;
     }
     printf("\n");
     
@@ -5280,31 +5019,21 @@ int main()
     int n, a[100][100], x, y, flag;
 
     scanf("%d", &n);
-    for (int i = 0; i < n; i ++)
-    {
-        for (int j = 0; j < n; j ++)
-        {
+    for (int i = 0; i < n; i++)
+        for (int j = 0; j < n; j++)
             scanf("%d", &a[i][j]);
-        }
-    }
 
-    for (int i = 0; i < n; i ++)
-    {
+    for (int i = 0; i < n; i++) {
         flag = 1;
         x = i;
         y = 0;
-        for (int j = 0; j < n; j ++)
-        {
+        for (int j = 0; j < n; j++) {
             if (a[i][j] >= a[x][y])
-            {
                 y = j;
-            }
         }
         
-        for (int k = 0; k < n; k ++)
-        {
-            if (a[k][y] < a[x][y])
-            {
+        for (int k = 0; k < n; k++) {
+            if (a[k][y] < a[x][y]) {
                 flag = 0;
                 break;
             }
@@ -5314,13 +5043,9 @@ int main()
     }
 
     if (flag == 0)
-    {
         printf("NO\n");
-    }
     else
-    {
         printf("%d %d", x, y);
-    }
 
     return 0;
 }
@@ -6044,7 +5769,7 @@ void g(int k)
 (* p) ++;
 //下面两条语句的作用等价，都是——先取*p 的值作为表达式的值，再将指针 p 的值+1
 //运算后，p 不再指向变量 a，而是指向 a 的下一个位置
-* p ++;
+* p++;
 * (p++);
 ```
 
@@ -6294,8 +6019,7 @@ void minmax(int a[], int len, int *min, int *max)
     printf("minmax a=%p\n", a);
     a[0] = 1000;
     *min = *max = a[0];
-    for (i = 1; i < len; i ++)
-    {
+    for (i = 1; i < len; i++) {
         if (a[i] < *min)
             *min = a[i];
         if (a[i] > *max)
@@ -6368,7 +6092,7 @@ int a[] <==> int * const a=....
 ```c
 int * const q = &i;  //q 是 const
 *q = 25;             //OK
-q ++;                //ERROR
+q++;                //ERROR
 ```
 
 **所指是 const**
@@ -6627,8 +6351,7 @@ void fun1()
     printf("Please input month:");
     int month;
     scanf("%d", &month);
-    switch(month)
-    {
+    switch (month) {
         case 1:printf("January\n"); break;
         case 2:printf("February\n"); break;
         case 3:printf("March\n"); break;
@@ -6724,14 +6447,12 @@ int main(void)
     scanf("%s", word2);
     printf("%s##%s##\n", word, word2);
     
-    for (int i = 0; i < 16; i ++)
-    {
+    for (int i = 0; i < 16; i++) {
         printf("%c %p ", word[i], &word[i]);
         if (i % 2 == 1)
         printf("\n");
     }
-    for (int i = 0; i < 16; i ++)
-    {
+    for (int i = 0; i < 16; i++) {
         printf("%c %p ", word2[i], &word2[i]);    
         if (i % 2 == 1)
         printf("\n");
@@ -6883,7 +6604,7 @@ size_t mylen(const char *s)
 {
     int idx = 0;
     while (s[idx] != '\0')
-        idx ++;
+        idx++;
     
     return idx;
 }
@@ -6913,8 +6634,7 @@ int strcmp(const char *s1, const char *s2);
 //strcmp 模拟实现-指针版
 int mycmp(const char *s1, const char *s2)
 {
-    while (*s1 == *s2 && s1 != '\0')
-    {
+    while (*s1 == *s2 && s1 != '\0') {
         s1 ++;
         s2 ++;
     }
@@ -6952,10 +6672,9 @@ strcpy(dst, src);
 char *mycpy(char* dst, const char* src)
 {
     int idx = 0;
-    while (src[idx])
-    {
+    while (src[idx]) {
         dst[idx] = src[idx];
-        idx ++;
+        idx++;
     }
     dst[idx] = '\0';
     
@@ -6997,8 +6716,7 @@ char strcat(char *restrict s1, const char *restrict s2);
 char* mycat(char* s1, const char* s2)
 {
     while (*++s1);
-    while (*s2 != '\0') 
-    {
+    while (*s2 != '\0') {
         *s1 = *s2;
         *s1++;
         *s2++;
@@ -7105,8 +6823,7 @@ void * malloc(unsigned size);
 
 ```c
 /*动态分配 n 个整数类型大小的空间*/
-if ((p = (int *)malloc(n * sizeof(int))) == NULL)
-{
+if ((p = (int *)malloc(n * sizeof(int))) == NULL) {
     printf("Not able to allocate memory.\n");
     exit(1);
 }
@@ -7131,9 +6848,7 @@ int main(void)
     void *p;
     int cnt = 0;
     while ((p = malloc(100 * 1024 * 1024)))
-    {
-        cnt ++;
-    }
+        cnt++;
     printf("分配了 %d00MB 的空间\n", cnt);
     
     return 0;
@@ -7234,21 +6949,19 @@ int main()
     int count = 0;
     
     while ((str[i] = getchar()) != '\n')
-        i ++;
+        i++;
     str[i] = '\0';
     
     i = 0;
-    while (str[i] != '.')
-    {
-        if (str[i] != ' ')
-            count ++;
-        else
-        {
+    while (str[i] != '.') {
+        if (str[i] != ' ') {
+            count++;
+        } else {
             if (count != 0)
                 printf("%d ", count);
             count = 0;
         }
-        i ++;
+        i++;
     }
     printf("%d", count);
     
@@ -7435,46 +7148,37 @@ int main()
         field = number = 0;
         begin = check_str = check_value = 0; 
         positioning = 0;
-        if (!strncmp(str, s1, 6))
-        {
-            while (str[j] != '\0')
-            {
+        if (!strncmp(str, s1, 6)) {
+            while (str[j] != '\0') {
                 if (str[j] == ',')
-                    number ++;
-                j ++;
+                    number++;
+                j++;
             }
             if (number != 12)
                 break;
-            while (str[i] != '\0')
-            {
+            while (str[i] != '\0') {
                 if (str[i] == ',')
-                    field ++;
-                if (begin == 1 && str[i] != '*' && check_str != 1)
-                {
+                    field++;
+                if (begin == 1 && str[i] != '*' && check_str != 1) {
                     if (i == 1)
                         check = str[i];
                     else if (i > 1)
                         check = check ^ str[i];
                 }
-                if (field == 1 && flag == 0)
-                {
-                    for (k = i + 1, j = 0; j < 10 && str[k] != ','; k ++, j ++)
-                    {
+                if (field == 1 && flag == 0) {
+                    for (k = i + 1, j = 0; j < 10 && str[k] != ','; k++, j++)
                         utc[j] = str[k];
-                    }
                     utc[10] = '\0';
                     th = (utc[0] - '0') * 10 + (utc[1] - '0');
                     tm = (utc[2] - '0') * 10 + (utc[3] - '0');
                     ts = (utc[4] - '0') * 10 + (utc[5] - '0');
                     flag = 1;
                 }
-                if (field == 2 && str[i] != ',')
-                {
+                if (field == 2 && str[i] != ',') {
                     if (str[i] == 'A')
                         positioning = 1;
                 }
-                if (check_str == 1)
-                {
+                if (check_str == 1) {
                     if (str[i] >= '0' && str[i] <= '9')
                         check_value = check_value * 16 + (str[i] - '0');
                     else if (str[i] >= 'a' && str[i] <= 'f')
@@ -7487,10 +7191,9 @@ int main()
                     check_str = 1;
                 if (begin == 0 && str[i] == '$')
                     begin = 1;
-                i ++;
+                i++;
             }
-            if ((check % 65536) == check_value && positioning == 1)
-            {
+            if ((check % 65536) == check_value && positioning == 1) {
                 minutes = tm;
                 seconds = ts;
                 bjt_hours = (th + 8) % 24;
@@ -7568,25 +7271,19 @@ int main()
     scanf("%[^\n]", str1);
     getchar();
     while ((str2[i] = getchar()) != '\n')
-        i ++;
+        i++;
     str2[i] = '\0';
     
     pos = -1;
     i = j = 0;
-    while (i < strlen(str2) && j < strlen(str1))
-    {
-        if (str1[j] == str2[i])
-        {
-            i ++;
-            j ++;
-        }
-        else
-        {
+    while (i < strlen(str2) && j < strlen(str1)) {
+        if (str1[j] == str2[i]) {
+            i++;
+            j++;
+        } else {
             i = i - j + 1;
             j = 0;
-        }
-        if (j == strlen(str1))
-        {
+        } if (j == strlen(str1)) {
             pos = i - strlen(str1);
             printf("%d ", pos);
             i = pos + 1;
@@ -7688,9 +7385,8 @@ while (GetMessage(&Msg, NULL, 0, 0))
 ```
 
 ```c
-LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM IParam){
-switch(msg)
-{
+LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM IParam) {
+switch (msg) {
     case WM LBUTTONDOWN: char szFileName[MAX PATH];
     HINSTANCE hInstance GetModuleHandle(NULL); GetModuleFileName(hInstance, szFileName, MAX_PATH);
     MessageBox(hwnd, szFileName, "This program is:", MB OK MB_ICONINFORMATION);
@@ -7872,8 +7568,8 @@ int Setup()
     int width = 255, i, j;
     initWindow("RainBow", DEFAULT, DEFAULT, width, width);
     beginPaint();
-    for (j = 0; j <= width; j ++)
-        for (i = 0; i <= width; ++i)
+    for (j = 0; j <= width; j++)
+        for (i = 0; i <= width; i++)
         {
             putPixel(i, j, RGB(i % 255, j % 255, (j + i) * (j - i) % 255));
         }
@@ -7914,8 +7610,7 @@ int main(int argc, char const *argv[])
     printf("输入你喜欢的颜色的代码：");
     scanf("%d", &color);
 
-    switch (color)
-    {
+    switch (color) {
         case red: colorName ="red"; break;
         case yellow: colorName ="yellow"; break;
         case green: colorName ="green"; break;
@@ -8000,13 +7695,9 @@ int main()
    printf("请输入你喜欢的颜色代码:");
    scanf("%d",&color);
    if (color>=0 && color<NumCOLORS)
-   {
        colorNames = ColorNames[color];
-   }
    else
-   {
        colorNames="unknown";
-   }
    printf("你喜欢的颜色是 %s\n",colorNames);
    
     return 0;
@@ -8042,8 +7733,7 @@ enum COLOR { RED = 1, YELLOW, GREEN = 5};
 
 int main(int argc, char const *argv[])
 {
-    struct date
-    {
+    struct date {
         int month;
         int day;
         int year;
@@ -8054,7 +7744,7 @@ int main(int argc, char const *argv[])
     today.year = 2014;
     
     printf("Today's date is %i-%i-%i.\n",
-          today.year, today.month, today.day);
+        today.year, today.month, today.day);
     
     return 0;
 }
@@ -8077,8 +7767,7 @@ int main(int argc, char const *argv[])
 ①下面是结构定义的第一种方式——**单独定义**：先定义一个结构类型，再定义这种结构类型的变量。
 
 ```c
-struct point
-{
+struct point{
     int x;
     int y;
 };
@@ -8094,8 +7783,7 @@ struct point p1, p2;
 ②下面是结构定义的第二种方式——**混合定义**：在定义结构类型的同时定义结构变量。
 
 ```c
-struct point
-{
+struct point {
     int x;
     int y;
 } p1, p2;
@@ -8142,8 +7830,7 @@ today.year = 2024;
 ```c
 #include <stdio.h>
 
-struct date
-{
+struct date {
     int month;
     int day;
     int year;
@@ -8204,7 +7891,7 @@ p1.y
 * 对于整个结构，可以做**整体赋值**（只有结构类型相同的变量才可以）、取地址，也可以传递给函数参数
 
 ```c
-p1 = (struct point){2, 5}; //相当于 p1.x = 2, p1.y = 5;
+p1 = (struct point) {2, 5}; //相当于 p1.x = 2, p1.y = 5;
 p1 = p2;                   //相当于 p1.x = p2.x; p1.y = p2.y;
 ```
 
@@ -8213,8 +7900,7 @@ p1 = p2;                   //相当于 p1.x = p2.x; p1.y = p2.y;
 ```c
 #include <stdio.h>
 
-struct date
-{
+struct date {
     int month;
     int day;
     int year;
@@ -8298,8 +7984,7 @@ int numberOfDays(struct date d)
 #include <stdio.h>
 #include <stdbool.h>
 
-struct date
-{
+struct date {
     int month;
     int day;
     int year;
@@ -8314,20 +7999,15 @@ int main(int argc, char const *argv[])
     
     printf("Enter today's date (mm dd yyyy):");
     scanf("%i %i %i", &today.month, &today.day, &today.year);
-    if (today.day != numberOfDays(today))
-    {
+    if (today.day != numberOfDays(today)) {
         tomorrow.day = today.day + 1;
         tomorrow.month = today.month;
         tomorrow.year = today.year;
-    }
-    else if (today.month == 12)
-    {
+    } else if (today.month == 12) {
         tomorrow.day = 1;
         tomorrow.month = 1;
         tomorrow.year = today.year + 1;
-    }
-    else
-    {
+    } else {
         tomorrow.day = 1;
         tomorrow.month = today.month + 1;
         tomorrow.year = today.year;
@@ -8370,8 +8050,7 @@ bool isLeap(struct date d)
 ```c
 #include <stdio.h>
 
-struct point
-{
+struct point {
     int x;
     int y;
 };
@@ -8453,8 +8132,7 @@ struct point inputPoint()
 **指向结构的指针**
 
 ```c
-struct date
-{
+struct date {
     int month;
     int day;
     int year;
@@ -8530,8 +8208,7 @@ void print(const struct point *p)
 * 结构成员可以是基础类型，也可以是结构。
 
 ```c
-struct dateAndTime
-{
+struct dateAndTime {
     struct date sdate;
     struct time stime;
 };
@@ -8559,13 +8236,11 @@ struct date dates[] = {{4, 5, 2025}, {2, 4, 2025}};
 * 定义嵌套结构类型时，必须**先定义成员的结构类型**，**再定义主结构类型**。
 
 ```c
-struct point
-{
+struct point {
     int x;
     int y;
 };
-struct rectangle
-{
+struct rectangle {
     struct point pt1;
     struct point pt2;
 };
@@ -8608,14 +8283,12 @@ rp->pt1->x
 ```c
 #include <stdio.h>
 
-struct point
-{
+struct point {
     int x;
     int y;
 };
 
-struct rectangle
-{
+struct rectangle {
     struct point p1;
     struct point p2;
 };
@@ -8628,15 +8301,12 @@ void printRect(struct rectangle r)
 int main(int argc, char const *argv[])
 {
     int i;
-    struct rectangle rects[] = 
-    {
+    struct rectangle rects[] = {
         {{1, 2}, {3, 4}},
         {{5, 6}, {7, 8}}
     };
-    for (i = 0; i < 2; i ++)
-    {
+    for (i = 0; i < 2; i++)
         printRect(rects[i]);
-    }
 }
 ```
 
@@ -8748,8 +8418,7 @@ Length numbers[10];
 
 ```c
 typedef long int64_t;  //重载已有的类型名字，新名字的含义更清晰，具有可移植性
-typedef struct ADate
-{
+typedef struct ADate {
     int month;
     int day;
     int year;
@@ -8774,8 +8443,7 @@ typedef struct {
 ```c
 typedef int Length; //Length 就等价于 int 类型
 typedef char* String[10]; //Strings 是 10 个字符指针(串)的数组的类型
-typedef struct node
-{
+typedef struct node {
     int date;
     struct node *next;
 } aNode;
@@ -8799,8 +8467,7 @@ typedef char*[10] String;
 * union 是和 struct 非常相似的另一种 C 语言的数据结构
 
 ```c
-union AnElt
-{
+union AnElt {
     int i;
     char c;
 } elt1, elt2;
@@ -8835,8 +8502,7 @@ sizeof(union ...) = sizeof(每个成员)的最大值
 ```c
 #include <stdio.h>
 
-typedef union
-{
+typedef union {
     int i;
     char ch[sizeof(int)];
 } CHI;
@@ -8846,10 +8512,8 @@ int main(int argc, char const *argv[])
     CHI chi;
     int i;
     chi.i = 1234;
-    for (i = 0; i < sizeof(int); i ++)
-    {
+    for (i = 0; i < sizeof(int); i++)
         printf("%02hhX", chi.ch[i]);
-    }
     printf("\n");
     
     return 0;
@@ -8911,15 +8575,13 @@ FFD2040000
 ```c
 #include <stdio.h>
 
-typedef struct num
-{
+typedef struct num {
     int numerator;
     int denominator;
     double ret;
 } num;
 
-int main()
-{
+int main() {
     num a, b;
     char flag;
     scanf("%d/%d %d/%d", &a.numerator, &a.denominator, &b.numerator, &b.denominator);
@@ -9538,8 +9200,7 @@ extern int i;
 
 #include "node.h"
 
-typedef struct _list
-{
+typedef struct _list {
     Node* head;
     Node* tail;
 } List;
@@ -9628,8 +9289,7 @@ int main(void)
     scanf("%d", &n);
     minx = miny = MAXINT;
     maxx = maxy = MINXY;
-    for (i = 0; i < n; i ++)
-    {
+    for (i = 0; i < n; i++) {
         scanf("%d %d", &x, &y);
         if (x > maxx)
             maxx = x;
@@ -9728,7 +9388,7 @@ while (str[0] != '#')
 {
     color[n] = (char *)malloc(sizeof(char) * (strlen(str) + 1));
     strcpy(color[n], str);
-    n ++;
+    n++;
     scanf("%s", str);
 }
 ···
@@ -9787,7 +9447,7 @@ Command_Name parameter1 parameter2 ··· parametern
 int main(int argc, char * argv[])
 {
     int k;
-    for (k = 1; k < argc; k ++)
+    for (k = 1; k < argc; k++)
         printf("%s", argv[k]);
     printf("\n");
     
@@ -9819,10 +9479,8 @@ How are you?
 int main(int argc, char const *argv[])
 {
     int i;
-    for (i = 0; i < argc; i ++)
-    {
+    for (i = 0; i < argc; i++)
         printf("%d:%s\n", i, argv[i]);
-    }
     
     return 0;
 }
@@ -9971,8 +9629,7 @@ Array.h 文件：
 #ifndef _ARRAY_H_
 #define _ARRAY_H_
 
-typedef struct
-{
+typedef struct {
     int *array;
     int size;
 } Array;
@@ -10016,9 +9673,7 @@ int array_size(const Array *a)
 int* array_at(Array *a, int index)
 {
     if (index >= a->size)
-    {
         array_inflate(a, (index / BLOCK_SIZE + 1) * BLOCK_SIZE - a->size);
-    }
     return &(a->array[index]);
 }
 
@@ -10026,10 +9681,8 @@ void array_inflate(Array *a, int more_size)
 {
     int *p = (int*)malloc(sizeof(int) * (a->size + more_size));
     int i;
-    for (i = 0; i < a->size; i ++)
-    {  //可用库函数 memcpy()实现 
+    for (i = 0; i < a->size; i++)  //可用库函数 memcpy()实现 
         p[i] = a->array[i];
-    } 
     free(a->array);
     a->array = p;
     a->size += more_size;
@@ -10052,14 +9705,12 @@ int main(int argc, char const *argv[])
     printf("a[0] = %d\n", *array_at(&a, 0));
     int number = 0;
     int cnt = 0;
-    while (number != -1)
-    {
+    while (number != -1) {
         scanf("%d", &number);
         if (number != - 1)
-            *array_at(&a, cnt ++) = number;
+            *array_at(&a, cnt++) = number;
     }
-    for (int i = 0; i < array_size(&a); i ++)
-    {
+    for (int i = 0; i < array_size(&a); i++) {
         printf("%d ", *array_at(&a, i));
         if ((i + 1) % 5 == 0)
             printf("\n"); 
@@ -10178,8 +9829,7 @@ $$
 **链表的定义与结构**
 
 ```c
-typedef struct _node
-{
+typedef struct _node {
     int value;
     struct _node *next;
 } Node;
@@ -10197,15 +9847,14 @@ typedef struct _node
 #include <stdio.h>
 #include <stdlib.h>
 
-typedef struct _node
-{
+typedef struct _node {
     int value;
     struct _node *next;
 } Node;
 
 int main(int argc, char const *argv[])
 {
-    Node * head = NULL;
+    Node *head = NULL;
     int number;
     do{
         scanf("%d", &number);
@@ -10270,17 +9919,15 @@ void add(Node *head, int number)
     p->next = NULL;
     //find the last
     Node *last = head;
-    if (last)
-    {
-        while (last->next)
-        {
+    if (last) {
+        while (last->next) {
             last = last->next;
         }
         //attach
         last->next = p;
-    }
-    else
+    } else {
         head = p;
+    }
 }
 
 int main(int argc, char const *argv[])
@@ -10289,10 +9936,10 @@ int main(int argc, char const *argv[])
     int number;
     do{
         scanf("%d", &number);
-        if (number != -1){
+        if (number != -1) {
             add(head, number);
         }
-    }while (number != -1);
+    } while (number != -1);
     
     return 0;
 }
@@ -10331,8 +9978,7 @@ void add(Node** phead, int number)
     ···
         Node *last = *phead;
     ···
-        else
-        {
+        else {
             *phead = p;
         }
 }
@@ -10343,8 +9989,7 @@ void add(Node** phead, int number)
 方案四：（**最佳方案**）自定义一个新的类型 List 来代表整个链表
 
 ```c
-typedef struct _list
-{
+typedef struct _list {
     Node *head;
 } List;
 
@@ -10356,17 +10001,12 @@ void add(List *pList, int number)
     p->next = NULL;
     //find the last
     Node *last = pList->head;
-    if (last)
-    {
+    if (last) {
         while (last->next)
-        {
             last = last->next;
-        }
         //attach
         last->next = p;
-    }
-    else
-    {
+    } else {
         pList->head = p;
     }
 }
@@ -10379,10 +10019,8 @@ int main(int argc, char const *argv[])
     do{
         scanf("%d", &number);
         if (number != -1)
-        {
             add(&list, number);
-        }
-    }while (number != -1);
+    } while (number != -1);
     
     return 0;
 }
@@ -10393,8 +10031,7 @@ int main(int argc, char const *argv[])
 * 注意一下，这么做以后，初始化以及函数 add 中的 find last 操作都**会发生变化**，此处不展开。
 
 ```c
-typedef struct _list
-{
+typedef struct _list {
     Node *head;
     Node *tail;
 } List;
@@ -10417,21 +10054,16 @@ int main(···)
 ```c
 Node *p;
 for (p = list.head; p; p = p->next)
-{
     printf("%d\t", p->value);
-}
 ```
 
 * 可以借此改写成**链表输出函数**。
 
 ```c
-void print(List *pList)
-{
+void print(List *pList) {
     Node *p;
     for (p = pList->head; p; p = p->next)
-    {
         printf("%d\t", p->value);
-    }
     printf("\n");
 }
 ```
@@ -10443,10 +10075,8 @@ int search(List *pList, int number)
 {
     int ret = 0;
     Node *p;
-    for (p = pList->head; p; p = p->next)
-    {
-        if (p->value == number)
-        {
+    for (p = pList->head; p; p = p->next) {
+        if (p->value == number) {
             ret = 1;
             break;
         }
@@ -10466,18 +10096,12 @@ int search(List *pList, int number)
 void del(List *pList, int number)
 {
     Node *p, *q;
-    for (q = NULL, p = pList->head; p ; q = p, p = p->next)
-    {
-        if (p->value == number)
-        {
+    for (q = NULL, p = pList->head; p ; q = p, p = p->next) {
+        if (p->value == number) {
             if (q)
-            {
                 q->next = p->next;
-            }
             else
-            {
                 pList->head = p->next;
-            }
             free(p);
             break;
         }
@@ -10503,8 +10127,7 @@ void del(List *pList, int number)
 void clear(List *pList)
 {
     Node *p, *q;
-    for (p = pList->head; p; p = q)
-    {
+    for (p = pList->head; p; p = q) {
         q = p->next;
         free(p);
     }
@@ -10553,8 +10176,7 @@ void clear(List *pList)
 #include <stdio.h>
 #include <stdlib.h>
 
-typedef struct LNode
-{
+typedef struct LNode {
     int data;
     struct LNode *next;
 } Node, *LinkList;
@@ -10568,9 +10190,7 @@ int main(void)
     List_HeadInsert(&L);
     
     for (p = L->next; p; p = p->next)
-    {
         printf("%d ", p->data);
-    }
     
     return 0;
 }
@@ -10582,9 +10202,8 @@ void List_HeadInsert(LinkList *L)
     *L = (LinkList)malloc(sizeof(Node));
     (*L)->next = NULL;
     scanf("%d", &x);
-    while (x != -1)
-    {
-        s = (Node *)malloc(sizeof(Node));
+    while (x != -1) {
+        s = (Node*)malloc(sizeof(Node));
         s->data = x;
         s->next = (*L)->next;
         (*L)->next = s;
@@ -10601,8 +10220,7 @@ void List_HeadInsert(LinkList *L)
 #include <stdio.h>
 #include <stdlib.h>
 
-typedef struct LNode
-{
+typedef struct LNode {
     int data;
     struct LNode *next;
 } Node, *LinkList;
@@ -10616,9 +10234,7 @@ int main(void)
     List_HeadInsert(&L);
     
     for (p = L; p; p = p->next)
-    {
         printf("%d ", p->data);
-    }
     
     return 0;
 }
@@ -10629,8 +10245,7 @@ void List_HeadInsert(LinkList *L)
     int x;
     scanf("%d", &x);
     *L = NULL;
-    while (x != -1)
-    {
+    while (x != -1) {
         s = (Node *)malloc(sizeof(Node));
         s->data = x;
         s->next = *L;
@@ -10821,9 +10436,8 @@ void timerListener(int id)
 {
     static cnt = 0;
     printf("id=%d\n");
-    if (id == 0)
-    {
-        cnt ++;
+    if (id == 0) {
+        cnt++;
         if (cnt == 5)
             cancelTimer(0);
     }
@@ -11084,8 +10698,7 @@ fprintf(FILE*, ...)
 * `FILE`的`struct`内部定义的成员包含了文件缓冲区的信息，这里不做具体介绍。对于一般程序员来说，不必关心`FILE`结构内部的具体内容，这些内容由系统在文件打开时填入和使用，C 程序只使用文件指针`fp`，用`fp`代表文件整体。
 
 ```c
-typedef struct
-{
+typedef struct {
     short level;           //缓冲区使用量
     unsigned flags;        //文件状态标志
     char fd;               //文件描述符
@@ -11102,13 +10715,10 @@ typedef struct
 
 ```c
 FILE *fp = fopen("filename", "r");
-if (fp)
-{
+if (fp) {
     fscanf(fp, ...);
     fclose(fp);
-}
-else
-{
+} else {
     ...
 }
 ```
@@ -11127,15 +10737,12 @@ else
 int main(int argc, char const *argv[])
 {
     FILE *fp = fopen("新建文本文档.txt", "r");
-    if (fp)
-    {
+    if (fp) {
         int num;
         fscanf(fp, "%d", &num);
         printf("%d\n", num);
         fclose(fp);
-    }
-    else
-    {
+    } else {
         printf("无法打开文件\n");
     }
     
@@ -11188,8 +10795,7 @@ fopen("file-name", "modes-to-open-a-file");
 * 为了保证文件操作的可靠性，调用 fopen() 函数时，最好做一个判断，以确保文件正常打开后再进行读写。其形式为：
 
 ```c
-    if ((fp = fopen("abc.txt", "r")) == NULL)
-    {
+    if ((fp = fopen("abc.txt", "r")) == NULL) {
         printf("File open error!\n");
         exit(0);
     }
@@ -11212,8 +10818,7 @@ fclose(filepointer);
 * 该函数将返回一个整数，若该数为 0 表示正常关闭文件，否则表示无法正常关闭文件，所以关闭文件也应该使用条件判断：
 
 ```c
-if (fclose(fp))
-{
+if (fclose(fp)) {
     printf("Can not close the file!\n");
     exit(0);
 }
@@ -11260,7 +10865,7 @@ fputs(ch, fp);
 fputs(ch, fp);
 //等价于
 *(fp->curp) = ch;
-fp -> curp++;
+fp->curp++;
 ```
 
 * 注意：切记不要在程序中使用`fp++`来改变文件缓冲区的位置，`fp`指向的是文件结构。
@@ -11665,8 +11270,7 @@ int main(int argc, char const *argv[])
     int number;
     scanf("%x", &number);
     unsigned mask = 1u<<31;
-    while (mask)
-    {
+    while (mask) {
         printf("%d", number & mask ? 1 : 0);
         mask >>= 1;
     }
@@ -11710,8 +11314,7 @@ aaaaaaaa
 * 把⼀个 int 的若干位组合成⼀个结构，冒号后面的数字指的是该成员占几个 bit。
 
 ```c
-struct 
-{ 
+struct { 
      unsigned int leading : 3; 
      unsigned int FLAG1: 1; 
      unsigned int FLAG2: 1; 
@@ -11728,8 +11331,7 @@ struct
 ```c
 #include <stdio.h>
 void prtBin(unsigned int number);
-struct U0
-{
+struct U0 {
     unsigned int leading : 3;
     unsigned int FLAG1 : 1;
     unsigned int FLAG2 : 1;
@@ -11749,8 +11351,7 @@ int main(int argc, char const *argv[])
 void prtBin(unsigned int number)
 {
     unsigned mask = 1u<<31;
-    while (mask)
-    {
+    while (mask) {
         printf("%d", number & mask ? 1 : 0);
         mask >>= 1;
     }
