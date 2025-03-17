@@ -46,6 +46,4 @@
 
 ## 预览图
 
-![0.0 封面预览](https://raw.githubusercontent.com/novpath/C-Programming-Language/refs/heads/master/%E7%AC%94%E8%AE%B0%E6%8F%92%E5%9B%BE/0.0%20%E5%B0%81%E9%9D%A2%E9%A2%84%E8%A7%88.png)
-
-<center style="color:#C0C0C0">图 封面预览</center>
+![封面预览](封面预览.png)
