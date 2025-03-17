@@ -156,7 +156,7 @@
 **程序框架**
 
 ```c
-#include<stdio.h>
+#include <stdio.h>
 
 int main()
 {
@@ -175,8 +175,8 @@ int main()
 
 ```c
 //头文件区 start
-#include<stdio.h>
-#include<math.h>
+#include <stdio.h>
+#include <math.h>
 //end
 int main()
 {
@@ -336,7 +336,7 @@ printf("%02f", x);   //保留两位宽度，不足前面补零
 
 **1.void main（）**
 
-* 有一些书上的 main( )，都使用了 void main( ) ，其实这是错误的。C/C++ 中从来没有定义过`void main( ) `。C++ 之父 Bjarne Stroustrup 在他的主页上的 FAQ 中明确地写着 “The definition void main( ) { /* … */ } is not and never has been C++, nor has it even been C.”
+* 有一些书上的 main()，都使用了 void main() ，其实这是错误的。C/C++ 中从来没有定义过`void main() `。C++ 之父 Bjarne Stroustrup 在他的主页上的 FAQ 中明确地写着 “The definition void main() { /* … */ } is not and never has been C++, nor has it even been C.”
 
 * 这可能是因为在 C 和 C++ 中，不接收任何参数也不返回任何信息的函数原型为“void foo(void);”。可能正是因为这个，所以很多人都误认为如果不需要程序返回值时可以把 main 函数定义成 void main(void) 。然而这是错误的！main 函数的返回值应该定义为 int 类型，C 和 C++ 标准中都是这样规定的。虽然在一些编译器中，void main（） 可以通过编译，但并非所有编译器都支持 `void main ()` ，因为标准中从来没有定义过 void main 。g++3.2 中如果 main 函数的返回值不是 int 类型，就根本通不过编译。而 gcc3.2 则会发出警告。所以，为了程序拥有很好的可移植性，一定要用` int main ()`。
 
@@ -378,7 +378,7 @@ printf("%02f", x);   //保留两位宽度，不足前面补零
 解答：
 
 ```c
-#include<stdio.h>
+#include <stdio.h>
 
 int main()
 {
@@ -587,14 +587,16 @@ int main()
 //执行以下程序段，sum 的值是 1。
 int i, sum;
 sum = 0;
-for (i = 1; i <= 2; i++){
+for (i = 1; i <= 2; i++)
+{
     sum = sum + 1.0/i;
 }
 //执行以下程序段，sum 的值是 0。
 int i;
 double sum;
 sum = 0;
-for (i = 2; i <= 4; i = i + 2){
+for (i = 2; i <= 4; i = i + 2)
+{
     sum = sum + 1/i;
 }
 ```
@@ -726,7 +728,7 @@ int c = 1 + (b = a);
 |   /=   |  除赋值  |  x/=a 等价于 x=x/a  |
 |   %=   | 取余赋值 |  x%=a 等价于 x=x%a  |
 
-注：a 可以常量、变量、表达式，若 a 为表达式，则外侧自带括号。比如 x /= y + 5 等价于 x =x / (y + 5 )
+注：a 可以常量、变量、表达式，若 a 为表达式，则外侧自带括号。比如 x /= y + 5 等价于 x =x / (y + 5)
 
 * 注意符合赋值运算符的**两个运算符中间**不要有空格，否则编译器会提示语法错误，“**[Error] expected expression before '=' token**”
 
@@ -754,7 +756,7 @@ total = total + 2;   //二者等价
 * 为了交换两个容器的值，我们想到可以借用第三个容器。
 
 ```c
-#include<stdio.h>
+#include <stdio.h>
 
 int main()
 {
@@ -948,7 +950,7 @@ a = b += c++ - d + --e / -f
 解答：
 
 ```c
-#include<stdio.h>
+#include <stdio.h>
 
 int main()
 {
@@ -1054,7 +1056,7 @@ int main()
     printf("请输入票面：");
     scanf("%d", &bill);
     //    判断票面够不够并计算找零
-    if ( bill >= price ) 
+    if (bill >= price) 
     {
         printf("应该找您：%d\n", bill - price);
     }
@@ -1088,7 +1090,7 @@ int main()
 
     printf("你的年龄是 %d 岁。\n", age);  //人机交互常用方案：先输出刚才读取的内容，方便用户验证和阅览
 
-    if ( age < MINOR ) 
+    if (age < MINOR) 
     {
         printf("年轻是美好的，");
     }
@@ -1121,7 +1123,7 @@ int main()
 int max1(int a, int b)
 {
     int max = b;
-    if ( a > b )
+    if (a > b)
         max = a;
     
     return max;
@@ -1181,7 +1183,7 @@ int main()
     scanf("%d", &score);
 
     printf("你输入的成绩是 %d.\n", score);
-    if ( score < PASS )
+    if (score < PASS)
         printf("很遗憾，这个成绩没有及格。");
     else {
         printf("祝贺你，这个成绩及格了。");
@@ -1197,9 +1199,11 @@ int main()
 ```c
 //A
 int count = 0, score;
-while (score >= 0){
+while (score >= 0)
+{
     scanf ("%d", &score);
-    if (score > 85){
+    if (score > 85)
+    {
         count++;
     }
 }
@@ -1207,19 +1211,23 @@ printf("%d\n", count);
 //B
 int count = 0, score;
 scanf ("%d", &score);
-while (score >= 0){
+while (score >= 0)
+{
     scanf ("%d", &score);
-    if (score > 85){
+    if (score > 85)
+    {
         count++;
     }
 }
 printf("%d\n", count);
 //C
 int count = 0, score;
-while (1){
+while (1)
+{
     scanf ("%d", &score);
     if (score < 0) break;
-    if (score > 85){
+    if (score > 85)
+    {
         count++;
     }
 }
@@ -1227,8 +1235,10 @@ printf("%d\n", count);
 //D
 int count = 0, score;
 scanf ("%d", &score);
-while (score >= 0){
-    if (score > 85){
+while (score >= 0)
+{
+    if (score > 85)
+    {
         count++;
     }
     scanf ("%d", &score);
@@ -1266,7 +1276,7 @@ printf("%d\n", count);
 * 人直接通过眼睛看数位，判断数的位数，而计算机不擅长做这个，计算机擅长通过比较数在什么区间判断数的位数，而人是不擅长的，人对文字的处理能力比对数字的处理能力更强。
 
 ```c
-#include<stdio.h> 
+#include <stdio.h> 
 
 int main()
 {
@@ -1274,11 +1284,11 @@ int main()
     int n = 1;
 
     scanf("%d", &x); 
-    if ( x > 999 )
+    if (x > 999)
         n = 4;
-    else if ( x > 99 )
+    else if (x > 99)
         n = 3;
-    else if ( x > 9 ) 
+    else if (x > 9) 
         n = 2; 
     else
         n = 1; 
@@ -1296,11 +1306,11 @@ int main()
 * 而且注意我们上面的程序是从高处往低处判断，这样每次判断可以排除掉一个确定的数位区间或者直接确定数位。
 
 ```c
-if ( x > 0 )
+if (x > 0)
     n = 1;
-else if ( x > 9 )
+else if (x > 9)
     n = 2;
-else if ( x > 99 )
+else if (x > 99)
     n = 3; 
 else
     n = 4; 
@@ -1313,7 +1323,7 @@ else
 * 但是，本节开篇的代码也有一定局限性，如果位数有很多位的时候，就需要非常多层 if-else 嵌套才能实现数位的判断，如何写一个通用的整数数位判断程序呢？受到人数数（数一个划掉一个）的启发，我们也可以让计算机“数数”，通过 x = x/10，“数”一个数把最右边的一个数划掉，并且让计数器 n ++，最终统计划掉所有数后 n 的值即可。
 
 ```c
-#include<stdio.h>
+#include <stdio.h>
 
 int main()
 {
@@ -1322,7 +1332,7 @@ int main()
 
     scanf("%d", &x);
 
-    while ( x > 0 )
+    while (x > 0)
     {
         n ++;
         x /= 10;
@@ -1349,7 +1359,7 @@ int main()
 * 如果我们把 while 翻译作“当”，while 循环就是条件满足时，不断重复循环体内的语句。while 的条件判断表达式可以是任意合法的表达式，循环体语句只能是一条语句（一般为 { } 构成的复合语句）。
 
 ```c
-while ( x > 0 )
+while (x > 0)
 {
     x /= 10;
     n ++;
@@ -1513,9 +1523,11 @@ double factorial_b(int n)
 ```c
 //二重循环写法
 sum = 0;
-for (i = 1; i <= n; i++){
+for (i = 1; i <= n; i++)
+{
     item = 1;
-    for (j = 1; j <= i; j++){
+    for (j = 1; j <= i; j++)
+    {
         item = item * j;
     }
     sum = sum + item;
@@ -1527,7 +1539,8 @@ printf("%.0f\n", sum)
 //单重循环写法
 sum = 0;
 item = 1;
-for (i = 1; i <= n; i++){
+for (i = 1; i <= n; i++)
+{
     item = item * i;
     sum = sum + item;
 }
@@ -1590,7 +1603,7 @@ printf("%.0f\n", sum);
 解答：
 
 ```c
-#include<stdio.h>
+#include <stdio.h>
 
 int main()
 {
@@ -1609,7 +1622,9 @@ int main()
     {
         hour2 = t2 / 60;
         minute2 = t2 % 60;
-    }else{
+    }
+    else
+    {
         t2 = 24 * 60 + t2;
         hour2 = t2 / 60;
         minute2 = t2 % 60;
@@ -1650,7 +1665,7 @@ int main()
 解答：
 
 ```c
-#include<stdio.h>
+#include <stdio.h>
 
 int main()
 {
@@ -1688,7 +1703,7 @@ int main()
 
 **bool 类型**
 
-* bool 类型（布尔类型）：最早 C 语言是没有 bool 类型的，C89 开始有这类逻辑运算类型的苗头，C99 正式确立了这种新的类型。它不是 C 语言真正的原生类型，包含 #include<stbool.h> 头文件之后，就可以使用 bool、true 和 false。
+* bool 类型（布尔类型）：最早 C 语言是没有 bool 类型的，C89 开始有这类逻辑运算类型的苗头，C99 正式确立了这种新的类型。它不是 C 语言真正的原生类型，包含 #include <stbool.h> 头文件之后，就可以使用 bool、true 和 false。
 
 * 注意，bool 其实不是一个新类型，它也**属于整数类型**。
 
@@ -1722,9 +1737,9 @@ int main()
 
 > 注记：
 >
-> 反之亦然：( p → q ) ↔ ( q → p );
+> 反之亦然：(p → q) ↔ (q → p);
 >
-> 反之则反：( p → q ) ↔ ( ﹁p → ﹁q );
+> 反之则反：(p → q) ↔ (﹁p → ﹁q);
 
 同样的，逻辑运算符内部的优先级也不一样，将已学过的所有运算符整理为下表
 
@@ -1733,7 +1748,7 @@ int main()
 | 优先级 |    运算符     |            结合性            |
 | :----: | :-----------: | :--------------------------: |
 |   1    |      ()       |           从左到右           |
-|   2    |  ! + - ++ --  | ==从右到左(单目的 + 和 - )== |
+|   2    |  ! + - ++ --  | ==从右到左(单目的 + 和 -)== |
 |   3    |     * / %     |           从左到右           |
 |   4    |      + -      |           从左到右           |
 |   5    |   < <= > >=   |           从左到右           |
@@ -1844,7 +1859,7 @@ int putchar(int c);//注意输出参数是 int 类型而不是 char 类型，但
 * 下列程序顺序输入`'Q'`后，输出`'`
 
 ```c
-#include<stdio.h>
+#include <stdio.h>
 
 int main()
 {
@@ -1859,7 +1874,7 @@ int main()
 * 计算机内部，数字`1`和字符`'1'`是不相等的。
 
 ```c
-#include<stdio.h>
+#include <stdio.h>
 
 int main()
 {
@@ -1867,9 +1882,12 @@ int main()
     char d;
     c = 1;
     d = '1';
-    if (c == d){
+    if (c == d)
+    {
         printf("Equal\n");
-    }else{
+    }
+    else
+    {
         printf("Not Equal\n");
     }
     printf("c = %d\n", c);
@@ -1895,7 +1913,7 @@ scanf("%d", &i);c=i;—>49
 * `'1'`的 ASCI 编码是 49，所以当 c==49 时，它代表`'1'`
 
 ```c
-printf("%i %c\n", c, c );
+printf("%i %c\n", c, c);
 ```
 
 * 一个 49 **各自表述**！ 
@@ -1903,7 +1921,7 @@ printf("%i %c\n", c, c );
 * **混合输入**：下面两行代码有何不同？
 
 ```c
-#include<stdio.h>
+#include <stdio.h>
 
 int main()
 {
@@ -2056,7 +2074,7 @@ int a, b = 0;
 * 目前，逗号表达式主要用于 for 语句，如果在 for 内三块区域需要进行多个计算，就可以在区域内使用逗号表达式实现
 
 ```c
-for (i = 0, j = 10; i < j; i ++, j-- )
+for (i = 0, j = 10; i < j; i ++, j--)
 ```
 
 **位运算**
@@ -2148,7 +2166,7 @@ a = a ^ b;//可解释为: a = a ^ b ⇔ (a ^ b) ^ (b ^ a ^ b) ⇔ a ^ a ^ b ^ b 
    * `siezeof()`见第八章数据类型
 
 2. **特殊运算符**
-   * `( )`括号：改变运算顺序
+   * `()`括号：改变运算顺序
    * `[ ]`下标：表示数值元素
    * `*`和`&`：与指针运算有关
    * `->`和`.`：用来表示结构分量
@@ -2348,7 +2366,7 @@ switch(ch)
 下面是一个将一个百分制成绩转换为五分制成绩的程序。类似地，也可以编写一个输入月份转换为对应英文单词的程序。
 
 ```c
-#include<stdio.h>
+#include <stdio.h>
 
 int main()
 {
@@ -2356,7 +2374,7 @@ int main()
     scanf("%d", &grade);
     grade /= 10;
 
-    switch( grade )
+    switch(grade)
     {
         case 10:
         case 9:
@@ -2489,7 +2507,7 @@ printf("发射！\n");
 <center style="color:#C0C0C0">图 4.3 求平均数 流程图</center>
 
 ```c
-#include<stdio.h>
+#include <stdio.h>
 
 int main()
 {
@@ -2530,9 +2548,9 @@ int main()
   7. 否则，程序输出“猜中”和次数，然后结束。
 
 ```c
-#include<stdio.h>
-#include<stdlib.h>
-#include<time.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
 
 int main()
 {
@@ -2546,10 +2564,10 @@ int main()
         printf("请猜这个 1 到 100 之间数：");
         scanf("%d", &a);
         count ++;
-        if ( a > number )
+        if (a > number)
         {
             printf("你猜的数大了。");
-        } else if ( a < number ){ 
+        } else if (a < number){ 
             printf("你猜的数小了。");
         }
     }while (a != number);
@@ -2583,7 +2601,7 @@ int main()
 3. 对一个整数做 /10 的操作，就去掉了它的个位，然后再对结果 %10，就得到原来整数的十位，以此类推。
 
 ```c
-#include<stdio.h>
+#include <stdio.h>
 
 int main()
 {
@@ -2671,13 +2689,14 @@ else
     *   ⑤大括号风格：控制语句的大括号风格可以是左大括号在行的末尾的 K&R 风格，也可以是左大括号在新的一行的 Allman 风格，选择一种风格并在项目中保持一致。
     *   ⑥空行：在不同的逻辑块之间使用空行来分隔，以提高可读性。在函数之间也使用空行。
     *   ⑦注释：单行注释以`//`开始，后面跟一个空格，然后是注释内容。多行注释使用`/* 注释内容 */`。
+    *   ⑧预编译指令和库函数之间要加空格：`#include <stdio.h>`
 
 **经典考点**
 
 【典例一】设变量已正确定义，以下____是合法的 switch 语句。(本题假设，在考虑每一句 switch 语句时，其他的 switch 语句都是被注释的状态)
 
 ```c
-#include<stdio.h>
+#include <stdio.h>
 
 int main()
 {
@@ -2690,25 +2709,29 @@ int main()
        default: printf("Error\n"); break;
     }
     //语句 B：
-    switch('/'){
+    switch('/')
+    {
        case '*': printf("%d\n", value1 * value2); break;
        case '-': printf("%d\n", value1 - value2); break;
        case '+': printf("%d\n", value1 + value2); break;
        default: printf("Error\n"); break;
     }
     //语句 C：case 后面不能跟关系表达式
-    switch(op){
+    switch(op)
+    {
        case op == '+': printf("%d\n", value1 + value2); break;
        default: printf("Error\n"); break;
     }
     //语句 D：
-    switch(op+1){
+    switch(op+1)
+    {
        default: printf("Error\n"); break;
        case '*': printf("%d\n", value1 * value2); break;
        case '+': printf("%d\n", value1 + value2); break;
     }
     //语句 E：有两处 case 值为'*'
-    switch(op){
+    switch(op)
+    {
        case '*': printf("%d\n", value1 * value2); break;
        case '+': printf("%d\n", value1 + value2); break;
        case '-': printf("%d\n", value1 - value2); break;
@@ -2724,7 +2747,7 @@ int main()
 【典例二】default 位置变了，会对结果产生什么影响。下面代码输入`100 90 82 72 69`，请问输出是____。
 
 ```c
-#include<stdio.h>
+#include <stdio.h>
 
 int main()
 {
@@ -2757,7 +2780,8 @@ int main()
 【典例三】写出与以下 switch 语句等价的 else-if 语句。
 
 ```c
-switch (ch){
+switch (ch)
+{
     case '0' : case '1' : case '2' : case '3' : case '4' :
     case '-': 
         minus++; break; 
@@ -2799,11 +2823,12 @@ int main()
 
     scanf("%d", &n);
     /*             */
-    for (k = 1; k <= n; k++){
+    for (k = 1; k <= n; k++)
+    {
         scanf("%d", &x); 
         /*             */
         {
-            if ( first == 1 )
+            if (first == 1)
             { 
                 printf("%d", x); 
                 /*         */
@@ -2862,7 +2887,7 @@ int main()
 解答：
 
 ```c
-#include<stdio.h>
+#include <stdio.h>
 
 int main()
 {
@@ -2925,7 +2950,7 @@ int main()
 解答：
 
 ```c
-#include<stdio.h>
+#include <stdio.h>
 
 int main()
 {
@@ -2963,7 +2988,7 @@ int main()
 判断素数的程序：
 
 ```c
-#include<stdio.h>
+#include <stdio.h>
 
 int main()
 {
@@ -3043,7 +3068,7 @@ int main()
 * 内外层循环变量不能相同。
 
 ```c
-#include<stdio.h>
+#include <stdio.h>
 
 int main()
 {
@@ -3156,7 +3181,7 @@ out:
 典例一、求 $1 + 1/2 + 1/3 + ... $ 的前 N 项之和：
 
 ```c
-#include<stdio.h>
+#include <stdio.h>
 
 int main()
 {
@@ -3176,7 +3201,7 @@ int main()
 典例二、求交错序列 $1-2/3+3/5-4/7+5/9-6/11+... $ 的前 N 项之和。
 
 ```c
-#include<stdio.h>
+#include <stdio.h>
 
 int main()
 {
@@ -3241,7 +3266,7 @@ printf("%d 和 %d 的最大公约数是 %d。\n", a, b, ret);
 * ③回到第一步
 
 ```c
-#include<stdio.h>
+#include <stdio.h>
 
 int main()
 {
@@ -3273,7 +3298,7 @@ $$
 将一个正整数按数位顺序分解，中间每个数位之间有空格间隔，但最后一位数没有空格。
 
 ```c
-#include<stdio.h>
+#include <stdio.h>
 
 int main()
 {
@@ -3317,7 +3342,8 @@ flag = 1;
 denominator = 1;
 item = 1.0;
 pi = 0;
-while (fabs(item) >= 0.0001){
+while (fabs(item) >= 0.0001)
+{
     pi = pi + item;
     flag = -flag;
     denominator = denominator + 2;
@@ -3358,7 +3384,7 @@ while (fabs(item) >= 0.0001){
 * 注意每处理完内层一个素数，都要在外层循环把`isPrime`置为 1，不要把循环初始化语句放错了位置，混淆了外层循环和内层循环的初始化。
 
 ```c
-#include<stdio.h>
+#include <stdio.h>
 
 int main()
 {
@@ -3432,7 +3458,7 @@ int main()
 解答：
 
 ```c
-#include<stdio.h>
+#include <stdio.h>
 
 int main()
 {
@@ -3495,7 +3521,7 @@ int main()
 * 第四章我们已经了解过求成绩平均分和及格人数的程序，那个程序并不需要使用数组来记录，因为每次读入数据都可以直接统计总分并统计及格人数，最后可以用总分/人数获得平均分。但现在如果要输出所有大于平均分的分数，就需要利用数组了，因为首次读入数据时并不知道平均分，也就不知道这个分数是否要输出。
 
 ```c
-#include<stdio.h>
+#include <stdio.h>
 
 int main()
 {
@@ -3617,20 +3643,20 @@ int main()
     int x, i;
     int count[number];              //定义数组 
     
-    for ( i = 0; i < number; i ++)  //for loop 初始化数组 →
+    for (i = 0; i < number; i ++)  //for loop 初始化数组 →
     { 
         count[i] = 0;          
     }                               //←
     scanf("%d", &x);
     while (x != -1) 
     {
-        if ( x >= 0 && x <= 9 ) 
+        if (x >= 0 && x <= 9) 
         {
             count[x] ++;               //数组参与运算 
         }
         scanf("%d", &x);
     }
-    for ( i = 0; i < number; i++)      //遍历数组输出 →
+    for (i = 0; i < number; i++)      //遍历数组输出 →
     {
         printf("%d:%d\n", i, count[i]);
     }                                  //←
@@ -3703,7 +3729,7 @@ int a[10] = {
 **例题**-利用数组计算斐波那契数列的前 10 个数，即 1，1，2，3，5，...，55，并按每行打印五个数的格式输出。
 
 ```c
-#include<stdio.h>
+#include <stdio.h>
 
 int main()
 {
@@ -3731,8 +3757,8 @@ int main()
 第五章第 3 节章末习题求素数和代码，我们可以把判定素数这个功能很单纯的代码部分拿出来，单独写成一个函数，使用时只要函数调用即可，而且其他地方也能方便的使用。
 
 ```c
-#include<stdio.h>
-#include<math.h>
+#include <stdio.h>
+#include <math.h>
 
 int isprime(int x)
 {
@@ -3755,7 +3781,7 @@ int isprime(int x)
 【典例】求 1 到 10，20 到 30，35 到 45 三组数的和，试着编写求和函数计算。
 
 ```c
-#include<stdio.h>
+#include <stdio.h>
 
 void sum(int begin, int end)
 {
@@ -3835,7 +3861,7 @@ int main()
 * 调用函数 f(a, b)时，圆括号里的逗号仅仅是标点符号，不是运算符，但如果是 f((a,b))，里面的逗号就是运算符了，二者的区别是传了两个，还是一个表达式的值进函数。
 
 ```c
-#include<stdio.h>
+#include <stdio.h>
 
 void cheer()
 {
@@ -3858,7 +3884,7 @@ int main()
 1. **从函数中返回值**
 
 ```c
-#include<stdio.h>
+#include <stdio.h>
 
 int max(int a, int b)
 {
@@ -3930,7 +3956,7 @@ int main()
 * ⑤原型里可以不写参数名字，甚至只用类型对，变量名称不和函数定义一致都行，但是一般写上，而且保持和函数定义的函数头一致，方便人类阅读和理解。
 
 ```c
-#include<stdio.h>
+#include <stdio.h>
 
 int max(int a, int b);
 
@@ -4008,7 +4034,7 @@ $$
 即求 $n!$ 可以在 $(n-1)!$ 的基础上再乘上 $n$。如果把求 $n!$ 写成函数`fact(n)`，则`fact(n)`的实现依赖于`fact(n-1)`。
 
 ```c
-#include<stdio.h>
+#include <stdio.h>
 double fact(int n);
 int main(void)
 {
@@ -4264,7 +4290,7 @@ static int b[4][3] = {1, 2, 3, 0, 0, 0, 4, 5};
 程序判断这个矩阵中是否有获胜的一方，输出表示获胜一方的字符 X 或 O，或输出无人获胜
 
 ```c
-#include<stdio.h>
+#include <stdio.h>
 
 int main()
 {
@@ -4510,7 +4536,7 @@ int main()
 * 本题由于结果计算完一位可以直接输出，所以不一定需要利用数组来解决。
 
 ```c
-#include<stdio.h>
+#include <stdio.h>
 
 int main()
 {
@@ -4543,7 +4569,7 @@ int main()
 * 在一组给定的数据中，如何找出某个数据是否存在？
 
 ```c
-#include<stdio.h>
+#include <stdio.h>
 
 /*
 找出 key 在数组 a 中的位置
@@ -4567,7 +4593,9 @@ int main(void)
     if (loc != -1)
     {
         printf("%d in the %d position\n", x, loc);
-    }else{
+    }
+    else
+    {
         printf("%d absent\n", x);
     }
     
@@ -4626,26 +4654,33 @@ int b[] = a[];
 **遍历数组**
 
 ```c
-for (i = 0; i < length; i ++){
+for (i = 0; i < length; i ++)
+{
     b[i] = a[i];
 }
-for (i = 0; i < number; i ++){
+for (i = 0; i < number; i ++)
+{
     count[i] = 0;
 }
 //
-for (i = 0; i < length; i ++){
-    if (a[i] == key){
+for (i = 0; i < length; i ++)
+{
+    if (a[i] == key)
+    {
         ret = i;
         break;
     }
 }
 //
-for (i = 0; i < cnt; i ++){
-    if (number[i] > average){
+for (i = 0; i < cnt; i ++)
+{
+    if (number[i] > average)
+    {
         printf("%d", number[i]);
     }
 }
-for (i = 0; i < number; i ++){
+for (i = 0; i < number; i ++)
+{
     printf("%d:%d\n", i, count[i]);
 }
 ```
@@ -4663,7 +4698,7 @@ for (i = 0; i < number; i ++){
 ​    最初，我们判断一个数是否是素数，就利用循环从 2 开始到这个数减 1 是否能整除这个数。后来，我们发现，只要不是 2 的偶数都不是素数，所以循环次数可以**减为一半**。再后来，利用数学知识可以知道，只需要循环到这个数的**平方根**即可，又提升了程序的运行效率，还有没有其他更有效方法呢？就是这一节的内容——判断素数，即判断该数 **x 能否被已知的且小于 x 的素数整除**。
 
 ```c
-#include<stdio.h>
+#include <stdio.h>
 
 int isPrime(int x, int knownPrimes[], int numberOfKnownPrimes)
 {
@@ -4694,7 +4729,7 @@ int main(void)
 //        }
 //        printf("\n");
 //    }
-    while (count < number )
+    while (count < number)
     {
         if (isPrime(i, prime, count))
         {
@@ -4745,7 +4780,7 @@ int main(void)
 代码实现如下：
 
 ```c
-#include<stdio.h>
+#include <stdio.h>
 
 int main()
 {
@@ -4792,7 +4827,7 @@ int main()
 
 ```c
 /*search 函数符合单一出口，而且 i 和 ret 变量各自作用很清晰，避免一专多能。 */
-#include<stdio.h>
+#include <stdio.h>
 
 int search(int key, int a[], int len)
 {
@@ -4834,7 +4869,7 @@ int main()
 |  50  | half-dollar |
 
 ```c
-#include<stdio.h>
+#include <stdio.h>
 
 int amount[] = {1, 5, 10, 25, 50};
 char *name[] = {"penny", "nickel", "dime", "quarter", "half-dollar"};
@@ -4872,15 +4907,17 @@ int main()
 * (如果用`char *name[]`，编译器会报 warning——`deprecated conversion from string constant to 'char*'`，这里仅需要对字符串指针`char *name[]`进行读取，所以设置成不能修改的常量指针即可。)
 
 ```c
-#include<stdio.h>
+#include <stdio.h>
 
 int amount[] = {1, 5, 10, 25, 50};
 const char *name[] = {"penny", "nickel", "dime", "quarter", "half-dollar"};
 
-struct{
+struct
+{
     int amount;
     const char *name;
-} coins[] = 
+}
+coins[] = 
 {
     {1, "penny"},
     {5, "nickel"},
@@ -4929,7 +4966,7 @@ int main()
 <center style="color:#C0C0C0">图 7.2 二分查找算法的流程图</center>
 
 ```c
-#include<stdio.h>
+#include <stdio.h>
 
 int search(int key, int a[], int len)
 {
@@ -4943,10 +4980,13 @@ int search(int key, int a[], int len)
         {
             ret = mid;
             break;
-        }else if (a[mid] > key)
+        }
+        else if (a[mid] > key)
         {
             right = mid - 1;
-        }else{
+        }
+        else
+        {
             left = mid + 1;
         }
     }
@@ -4989,7 +5029,7 @@ void swap_sort(int a[], int len)
 {
     int i, j, temp;
     
-    for ( i = 0; i < len; i++ )
+    for (i = 0; i < len; i++)
     {
         for (j = i + 1; j < len; j ++)
         {
@@ -5019,7 +5059,7 @@ void swap_sort(int a[], int len)
 void bubble_sort(int a[], int len)
 {
     int i, j, temp;
-    for (i = 1; i < n; i++ )
+    for (i = 1; i < n; i++)
     {
         for (j = 0; j < n - i; j ++)
         {
@@ -5045,7 +5085,7 @@ void bubble_sort(int a[], int len)
 * 算法思想：每一次把待排序的第一个数当做最小（大）的数，每一轮扫描这个数之后的所有数，如果有更小的数就记录下标，然后在这一轮扫描循环结束后交换最小的数和第一个数。第一个数即为排序后的数，然后从下一个数开始重复上述过程。（因为对 n 个数选择排序 n-1 次后，前 n-1 个数都有序，那么最后一个数自然也有序，就不用排序了。）
 
 ```c
-#include<stdio.h>
+#include <stdio.h>
 
 void select_sort(int a[], int len)
 {
@@ -5137,7 +5177,7 @@ int main()
 * 注意点二：“0 次幂的系数为 0 时还是会出现在输入数据中”，其实这个要求反而会简化的输出格式的判断，只要最后一项 0 次幂输出格式特殊处理即可，因为不管系数是否为 0 最后一项都一定会存在。
 
 ```c
-#include<stdio.h>
+#include <stdio.h>
 
 int main()
 {
@@ -5233,7 +5273,7 @@ int main()
 解答：
 
 ```c
-#include<stdio.h>
+#include <stdio.h>
 
 int main()
 {
@@ -5822,7 +5862,7 @@ printf("%d\n", i);
 * 总之，下例可以说明`&`可以为我们取出变量的地址，但是地址的大小，它的数据类型和 int 是否相等，取决于编译器，取决于你的系统是 32 位还是 64 位架构。所以我们需要输出地址，`printf()`的格式控制应该使用`%p`而不是`%d`，不要把地址真的当作整数输出，因为地址和整数有时候并不相同。
 
 ```c
-#include<stdio.h>
+#include <stdio.h>
 
 int main()
 {
@@ -5960,7 +6000,7 @@ int *p, q;
 * 在函数里面可以通过这个指针**访问(读 or 写)外面的**这个 i
 
 ```c
-#include<stdio.h>
+#include <stdio.h>
 
 void f(int *p);
 void g(int k);
@@ -6118,7 +6158,7 @@ void*q = (void*)p;
 ---
 
 ```c
-#include<stdio.h>
+#include <stdio.h>
 
 void f(int *p);
 void g(int k);
@@ -6230,7 +6270,7 @@ int main()
 **传入函数的数组变成了什么？**
 
 ```c
-#include<stdio.h>
+#include <stdio.h>
 
 void minmax(int a[], int lenm, int *max, int *min);
 
@@ -6392,8 +6432,8 @@ int sum(const int a[], int length);
 ​    数组变量不等于 const 指针变量 ， 在使用 sizeof() 进行返回大小时使用数组变量和使用 const 指针变量返回的大小是不同的。可以看到在下述的代码中，我声明了一个数组 arr_1[ARRLEN] 它可以保存 10 个 int 类型的元素 ， 而下面我使用函数 malloc() 开辟了一段内存空间同样可以保存 10 个 int 类型的元素，然后我使用一个 const 指针指向该内存空间 ， 最后我使用 sizeof() 返回空间的大小 ， 此时可以发现只有数组变量可以成功返回空间的大小 ， 而使用 const 指针只是返回了指针的大小，所以数组变量**并不完全等于** const 类型的指针，只是在某些情况下我们可以将数组变量**暂时看做**是一个 const 指针变量方便我们的理解。
 
 ```c
-#include<stdio.h>
-#include<stdlib.h>
+#include <stdio.h>
+#include <stdlib.h>
 #define ARRLEN 10
 
 int main()
@@ -6482,7 +6522,7 @@ char line[10] = "Hello";//(3)定义一个有空位的字符串
 ---
 
 ```c
-#include<stdio.h>
+#include <stdio.h>
 
 int main(void)
 {
@@ -6571,7 +6611,7 @@ printf("请分别输入身高的英尺和英寸，\
 
 ```c
 /*利用指针数组，可以把 switch-case 的月份写法改写得更简单*/
-#include<stdio.h>
+#include <stdio.h>
 void fun1();
 void fun2();
 
@@ -6633,7 +6673,7 @@ printf("%s", string);
 * scanf() 是**不安全**的，因为不知道要读入的内容的长度
 
 ```c
-#include<stdio.h>
+#include <stdio.h>
 
 void f(void)
 {
@@ -6674,7 +6714,7 @@ scanf("%s", word2);
 ​    当你将一段大于数组长度的数据往该数组中写入的时候，实际上是以首地址开始依次写入，由于 c 语言**没有显式的越界检查**，输出字符串是以 \0 结束，不是以内存大小，因为编译器也不知道实际具体大小。除非你**写入到一块不可写的内存**中，c 语言才会报错；
 
 ```c
-#include<stdio.h>
+#include <stdio.h>
 
 int main(void)
 {
@@ -7083,8 +7123,8 @@ if ((p = (int *)malloc(n * sizeof(int))) == NULL)
 讨论：
 
 ```c
-#include<stdio.h>
-#include<stdlib.h>
+#include <stdio.h>
+#include <stdlib.h>
 
 int main(void)
 {
@@ -7185,7 +7225,7 @@ void * realloc(void * ptr, unsigned size);
 解答：
 
 ```c
-#include<stdio.h>
+#include <stdio.h>
 
 int main()
 {
@@ -7373,8 +7413,8 @@ System.out.printf("%02d:%s:%s\n", (Integer.parseInt(ans.substring(0, 2)) + 8) % 
 ​    额外注意点：每次读取一段 GPS 数据数据，相关的变量都要**初始化**，否则会影响读入的下一条数据的处理。
 
 ```c
-#include<stdio.h>
-#include<string.h>
+#include <stdio.h>
+#include <string.h>
 
 int main()
 {
@@ -7389,8 +7429,7 @@ int main()
     int begin, check, check_str, check_value;
     int positioning;
     
-    do
-    {
+    do{
         scanf("%s", str);
         i = j = k = flag = 0;
         field = number = 0;
@@ -7519,8 +7558,8 @@ int main()
 ​    本题要求每个可能位置后面都要加空格，不要求最后一位不加空格，所以处理起来也是比较简单的。
 
 ```c
-#include<stdio.h>
-#include<string.h>
+#include <stdio.h>
+#include <string.h>
 
 int main()
 {
@@ -7641,18 +7680,20 @@ IDI_APPLICATION);
 * 如何获得用户的鼠标和键盘动作？→ 消息循环和消息处理代码 
 
 ```c
-while (GetMessage(&Msg, NULL, 0, 0)) { 
- TranslateMessage(&Msg); 
- DispatchMessage(&Msg);
+while (GetMessage(&Msg, NULL, 0, 0))
+{ 
+    TranslateMessage(&Msg); 
+    DispatchMessage(&Msg);
 }
 ```
 
 ```c
 LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM IParam){
-switch(msg){
-case WM LBUTTONDOWN: char szFileName[MAX PATH];
-HINSTANCE hInstance GetModuleHandle(NULL); GetModuleFileName(hInstance, szFileName, MAX_PATH);
-MessageBox(hwnd, szFileName, "This program is:", MB OK MB_ICONINFORMATION);
+switch(msg)
+{
+    case WM LBUTTONDOWN: char szFileName[MAX PATH];
+    HINSTANCE hInstance GetModuleHandle(NULL); GetModuleFileName(hInstance, szFileName, MAX_PATH);
+    MessageBox(hwnd, szFileName, "This program is:", MB OK MB_ICONINFORMATION);
 }
 break; 
 ```
@@ -7762,7 +7803,7 @@ PEN_STYLE_NULL
 ```c
 void chrod(int nLeftRect, int nTopRect, int nRightRect, int nBottomRect, int 
 nXRadial1, int nYRadial1, int nXRadial2, int nYRadial2);
-void ellipse( int nLeftRect, int nTopRect, int nRightRect, int nBottomRect);
+void ellipse(int nLeftRect, int nTopRect, int nRightRect, int nBottomRect);
 void pie(int nLeftRect, int nTopRect, int nRightRect, int nBottomRect, int 
 nXRadial1, int nYRadial1, int nXRadial2, int nYRadial2);
 void rectangle(int nLeftRect, int nTopRect, int nRightRect, int nBottomRect);
@@ -7826,7 +7867,8 @@ void paintText(int x, int y, const char *pStr);
 #include"acllib.h"
 #include"stdio.h"
 
-int Setup(){
+int Setup()
+{
     int width = 255, i, j;
     initWindow("RainBow", DEFAULT, DEFAULT, width, width);
     beginPaint();
@@ -7917,7 +7959,7 @@ enum colors { red, yellow, green } ;
 * 但是实际上是以整数来做内部和外部输入输出的
 
 ```c
-#include<stdio.h>
+#include <stdio.h>
 enum color {red, yellow, green};
 
 void f(enum color c);
@@ -7947,8 +7989,8 @@ void f(enum color c)
 
 enum COLOR {RED, YELLOW, GREEN, NumCOLORS};
 
-int main() {
-    
+int main()
+{
    int color = -1;
    char *ColorNames[NumCOLORS] = {
        "red","yellow","green",
@@ -7957,9 +7999,12 @@ int main() {
    
    printf("请输入你喜欢的颜色代码:");
    scanf("%d",&color);
-   if (color>=0 && color<NumCOLORS){
+   if (color>=0 && color<NumCOLORS)
+   {
        colorNames = ColorNames[color];
-   }else{
+   }
+   else
+   {
        colorNames="unknown";
    }
    printf("你喜欢的颜色是 %s\n",colorNames);
@@ -7993,11 +8038,12 @@ enum COLOR { RED = 1, YELLOW, GREEN = 5};
 **声明结构类型**
 
 ```c
-#include<stdio.h>
+#include <stdio.h>
 
 int main(int argc, char const *argv[])
 {
-    struct date{
+    struct date
+    {
         int month;
         int day;
         int year;
@@ -8031,7 +8077,8 @@ int main(int argc, char const *argv[])
 ①下面是结构定义的第一种方式——**单独定义**：先定义一个结构类型，再定义这种结构类型的变量。
 
 ```c
-struct point{
+struct point
+{
     int x;
     int y;
 };
@@ -8047,7 +8094,8 @@ struct point p1, p2;
 ②下面是结构定义的第二种方式——**混合定义**：在定义结构类型的同时定义结构变量。
 
 ```c
-struct point{
+struct point
+{
     int x;
     int y;
 } p1, p2;
@@ -8092,7 +8140,7 @@ today.year = 2024;
 * int 类型是直接赋初始值，数组是用大括号赋初始值，对于结构，还是用大括号（初始化表）按顺序来赋初始值。
 
 ```c
-#include<stdio.h>
+#include <stdio.h>
 
 struct date
 {
@@ -8163,7 +8211,7 @@ p1 = p2;                   //相当于 p1.x = p2.x; p1.y = p2.y;
 * 对数组来说，除了初始化时之外，没法直接让`数组 a = 数组 b`，但是结构是可以直接赋值的！
 
 ```c
-#include<stdio.h>
+#include <stdio.h>
 
 struct date
 {
@@ -8247,8 +8295,8 @@ int numberOfDays(struct date d)
 2. **结构指针的传递和访问**
 
 ```c
-#include<stdio.h>
-#include<stdbool.h>
+#include <stdio.h>
+#include <stdbool.h>
 
 struct date
 {
@@ -8320,7 +8368,7 @@ bool isLeap(struct date d)
 * 如果我们打算写一个函数来读入结构
 
 ```c
-#include<stdio.h>
+#include <stdio.h>
 
 struct point
 {
@@ -8558,7 +8606,7 @@ rp->pt1->x
 **结构中的结构的数组**
 
 ```c
-#include<stdio.h>
+#include <stdio.h>
 
 struct point
 {
@@ -8629,7 +8677,8 @@ struct stu {
     char name[12];
     int num;
 };
-int main() {
+int main()
+{
     struct book p;
     struct stu q;
     int byte_struct1 = sizeof(p), byte_struct2 = sizeof(q);
@@ -8699,7 +8748,8 @@ Length numbers[10];
 
 ```c
 typedef long int64_t;  //重载已有的类型名字，新名字的含义更清晰，具有可移植性
-typedef struct ADate{
+typedef struct ADate
+{
     int month;
     int day;
     int year;
@@ -8724,7 +8774,8 @@ typedef struct {
 ```c
 typedef int Length; //Length 就等价于 int 类型
 typedef char* String[10]; //Strings 是 10 个字符指针(串)的数组的类型
-typedef struct node{
+typedef struct node
+{
     int date;
     struct node *next;
 } aNode;
@@ -8782,9 +8833,10 @@ sizeof(union ...) = sizeof(每个成员)的最大值
 * union 的**常见用途**——得到一个整数(或者 float、double、...)内部各个字节
 
 ```c
-#include<stdio.h>
+#include <stdio.h>
 
-typedef union{
+typedef union
+{
     int i;
     char ch[sizeof(int)];
 } CHI;
@@ -8857,7 +8909,7 @@ FFD2040000
 解答：解析部分见习题文档 实验 9-9 有理数比较
 
 ```c
-#include<stdio.h>
+#include <stdio.h>
 
 typedef struct num
 {
@@ -8900,7 +8952,7 @@ int main()
   2. 在任何函数内部都可以使用它们
 
 ```c
-#include<stdio.h>
+#include <stdio.h>
 int f(void);
 int gAll = 20;
 
@@ -8970,7 +9022,7 @@ int g2 = gAll
 * 静态本地变量的初始化只会在第一次进入这个函数时做，以后进入函数时会保持上次离开时的值。
 
 ```c
-#include<stdio.h>
+#include <stdio.h>
 
 void f(void);
 
@@ -9007,7 +9059,7 @@ in f all=20, stall=22
 * `static`在这里的意思是局部作用域（本地可访问）
 
 ```c
-#include<stdio.h>
+#include <stdio.h>
 int f(void);
 int gAll = 25;
 
@@ -9047,7 +9099,7 @@ int f(void)
 
 ```c
 //返回本地变量的地址是危险的
-#include<stdio.h>
+#include <stdio.h>
 
 int* f(void);
 void g(void);
@@ -9138,7 +9190,7 @@ k = 24
 `#define`用来定义一个宏
 
 ```c
-#include<stdio.h>
+#include <stdio.h>
 
 //ANSI C(C89)标准要用 define 定义宏,PI 是宏的符号,3.14159 是宏的值
 #define PI 3.14359
@@ -9306,8 +9358,8 @@ else
 
 int max(int a, int b); 
 
-int main(int argc, char *argv[]) {
-    
+int main(int argc, char *argv[])
+{    
     int a = 2;
     int b = 5;
     printf("%d\n", max(a, b));
@@ -9365,7 +9417,7 @@ extern int gAll;
 **`""`还是`<>`**
 
 ```c
-#include<需包含的文件名>
+#include <需包含的文件名>
 //
 #include"需包含的文件名"
 ```
@@ -9564,7 +9616,7 @@ typedef struct _list
 ​    Online Judge 关闭了，没法验证 www，样例是通过的。
 
 ```c
-#include<stdio.h>
+#include <stdio.h>
 #define MAXINT 2147483647
 #define MINXY 0
 
@@ -9672,7 +9724,8 @@ char *pcolor[] = {"red", "blue", "yellow", "green", "black"};
 ```c
 char * color[20], str[15];
 scanf("%s", str);
-while (str[0] != '#'){
+while (str[0] != '#')
+{
     color[n] = (char *)malloc(sizeof(char) * (strlen(str) + 1));
     strcpy(color[n], str);
     n ++;
@@ -9729,7 +9782,7 @@ Command_Name parameter1 parameter2 ··· parametern
 下面这个 C 程序 echo.c，它的功能是将所有命令行参数在同一行上输出。
 
 ```c
-#include<stdio.h>
+#include <stdio.h>
 
 int main(int argc, char * argv[])
 {
@@ -9761,7 +9814,7 @@ How are you?
 * ③ 建议参考 busy box 的运行模式，来理解为什么这些命令对 Unix 特别有用；不过 Window 很少情况是在命令行键入程序名字来运行程序的，但是如果创建一个快捷方式，可以指定这些可执行程序的参数，所以也是有意义的。
 
 ```c
-#include<stdio.h>
+#include <stdio.h>
 
 int main(int argc, char const *argv[])
 {
@@ -9826,14 +9879,17 @@ fun(3, 5);
 ​    函数指针很适合做那些用户输入命令，然后控制函数执行对应函数的操作。下列函数通过调用函数指针，以后扩充相似函数时，不用重新改写核心代码（如果用 switch-case 就要重写）。
 
 ```c
-#include<stdio.h>
-void f(int i){
+#include <stdio.h>
+void f(int i)
+{
     printf("in f(), %d", i);
 }
-void g(int i){
+void g(int i)
+{
     printf("in g(), %d", i);
 }
-void h(int i){
+void h(int i)
+{
     printf("in h(), %d", i);
 }
 int main()
@@ -9852,14 +9908,17 @@ int main()
 ​    如果之后有扩充新的运算函数，控制函数 cal() 函数也不用重新写过。
 
 ```c
-#include<stdio.h>
-int plus(int a, int b){
+#include <stdio.h>
+int plus(int a, int b)
+{
     return a + b;
 }
-int minus(int a, int b){
+int minus(int a, int b)
+{
     return a * b;
 }
-void cal(int (*f)(int x, int y)){
+void cal(int (*f)(int x, int y))
+{
     printf("%d\n", (*f)(2, 3));
 }
 int main()
@@ -9912,7 +9971,8 @@ Array.h 文件：
 #ifndef _ARRAY_H_
 #define _ARRAY_H_
 
-typedef struct{
+typedef struct
+{
     int *array;
     int size;
 } Array;
@@ -9955,7 +10015,8 @@ int array_size(const Array *a)
 
 int* array_at(Array *a, int index)
 {
-    if (index >= a->size){
+    if (index >= a->size)
+    {
         array_inflate(a, (index / BLOCK_SIZE + 1) * BLOCK_SIZE - a->size);
     }
     return &(a->array[index]);
@@ -9965,7 +10026,8 @@ void array_inflate(Array *a, int more_size)
 {
     int *p = (int*)malloc(sizeof(int) * (a->size + more_size));
     int i;
-    for (i = 0; i < a->size; i ++){  //可用库函数 memcpy()实现 
+    for (i = 0; i < a->size; i ++)
+    {  //可用库函数 memcpy()实现 
         p[i] = a->array[i];
     } 
     free(a->array);
@@ -9977,12 +10039,12 @@ void array_inflate(Array *a, int more_size)
 main.c 文件：
 
 ```c
-#include<stdio.h>
-#include<stdlib.h>
+#include <stdio.h>
+#include <stdlib.h>
 #include "Array.h"
 #include "Array.c" 
 
-int main(int argc, char const *argv[] )
+int main(int argc, char const *argv[])
 {
     Array a = array_create(10);
     printf("length(a) = %d\n", array_size(&a));
@@ -9990,7 +10052,8 @@ int main(int argc, char const *argv[] )
     printf("a[0] = %d\n", *array_at(&a, 0));
     int number = 0;
     int cnt = 0;
-    while (number != -1){
+    while (number != -1)
+    {
         scanf("%d", &number);
         if (number != - 1)
             *array_at(&a, cnt ++) = number;
@@ -10115,7 +10178,8 @@ $$
 **链表的定义与结构**
 
 ```c
-typedef struct _node{
+typedef struct _node
+{
     int value;
     struct _node *next;
 } Node;
@@ -10130,10 +10194,11 @@ typedef struct _node{
 **链表的构建与添加元素**
 
 ```c
-#include<stdio.h>
-#include<stdlib.h>
+#include <stdio.h>
+#include <stdlib.h>
 
-typedef struct _node{
+typedef struct _node
+{
     int value;
     struct _node *next;
 } Node;
@@ -10144,26 +10209,29 @@ int main(int argc, char const *argv[])
     int number;
     do{
         scanf("%d", &number);
-            if (number != -1)
+        if (number != -1)
+        {
+        //add to linked-list
+        Node *p = (Node*)malloc(sizeof(Node));
+        p->value = number;
+        p->next = NULL;
+        //find the last
+        Node *last = head;
+        if (last)
+        {
+            while (last->next)
             {
-            //add to linked-list
-            Node *p = (Node*)malloc(sizeof(Node));
-            p->value = number;
-            p->next = NULL;
-            //find the last
-            Node *last = head;
-                if (last)
-                {
-                    while (last->next){
-                        last = last->next;
-                    }
-                    //attach
-                    last->next = p;
-                }else{
-                    head = p;
-                }
+                last = last->next;
             }
-        }while (number != -1);
+            //attach
+            last->next = p;
+            }
+            else
+            {
+                head = p;
+            }
+        }
+    }while (number != -1);
 }
 ```
 
@@ -10204,14 +10272,15 @@ void add(Node *head, int number)
     Node *last = head;
     if (last)
     {
-        while (last->next){
+        while (last->next)
+        {
             last = last->next;
         }
         //attach
         last->next = p;
-    }else{
-        head = p;
     }
+    else
+        head = p;
 }
 
 int main(int argc, char const *argv[])
@@ -10262,7 +10331,8 @@ void add(Node** phead, int number)
     ···
         Node *last = *phead;
     ···
-        else{
+        else
+        {
             *phead = p;
         }
 }
@@ -10273,7 +10343,8 @@ void add(Node** phead, int number)
 方案四：（**最佳方案**）自定义一个新的类型 List 来代表整个链表
 
 ```c
-typedef struct _list{
+typedef struct _list
+{
     Node *head;
 } List;
 
@@ -10287,12 +10358,15 @@ void add(List *pList, int number)
     Node *last = pList->head;
     if (last)
     {
-        while (last->next){
+        while (last->next)
+        {
             last = last->next;
         }
         //attach
         last->next = p;
-    }else{
+    }
+    else
+    {
         pList->head = p;
     }
 }
@@ -10304,7 +10378,8 @@ int main(int argc, char const *argv[])
     list.head = NULL;
     do{
         scanf("%d", &number);
-        if (number != -1){
+        if (number != -1)
+        {
             add(&list, number);
         }
     }while (number != -1);
@@ -10318,7 +10393,8 @@ int main(int argc, char const *argv[])
 * 注意一下，这么做以后，初始化以及函数 add 中的 find last 操作都**会发生变化**，此处不展开。
 
 ```c
-typedef struct _list{
+typedef struct _list
+{
     Node *head;
     Node *tail;
 } List;
@@ -10340,7 +10416,8 @@ int main(···)
 
 ```c
 Node *p;
-for (p = list.head; p; p = p->next){
+for (p = list.head; p; p = p->next)
+{
     printf("%d\t", p->value);
 }
 ```
@@ -10351,7 +10428,8 @@ for (p = list.head; p; p = p->next){
 void print(List *pList)
 {
     Node *p;
-    for (p = pList->head; p; p = p->next){
+    for (p = pList->head; p; p = p->next)
+    {
         printf("%d\t", p->value);
     }
     printf("\n");
@@ -10365,8 +10443,10 @@ int search(List *pList, int number)
 {
     int ret = 0;
     Node *p;
-    for ( p = pList->head; p; p = p->next ) {
-        if ( p->value == number ) {
+    for (p = pList->head; p; p = p->next)
+    {
+        if (p->value == number)
+        {
             ret = 1;
             break;
         }
@@ -10390,9 +10470,12 @@ void del(List *pList, int number)
     {
         if (p->value == number)
         {
-            if (q){
+            if (q)
+            {
                 q->next = p->next;
-            }else{
+            }
+            else
+            {
                 pList->head = p->next;
             }
             free(p);
@@ -10420,7 +10503,8 @@ void del(List *pList, int number)
 void clear(List *pList)
 {
     Node *p, *q;
-    for (p = pList->head; p; p = q){
+    for (p = pList->head; p; p = q)
+    {
         q = p->next;
         free(p);
     }
@@ -10466,10 +10550,11 @@ void clear(List *pList)
 ​    一般先建立一个头结点有利于链表的各种操作。
 
 ```c
-#include<stdio.h>
-#include<stdlib.h>
+#include <stdio.h>
+#include <stdlib.h>
 
-typedef struct LNode{
+typedef struct LNode
+{
     int data;
     struct LNode *next;
 } Node, *LinkList;
@@ -10497,7 +10582,8 @@ void List_HeadInsert(LinkList *L)
     *L = (LinkList)malloc(sizeof(Node));
     (*L)->next = NULL;
     scanf("%d", &x);
-    while (x != -1){
+    while (x != -1)
+    {
         s = (Node *)malloc(sizeof(Node));
         s->data = x;
         s->next = (*L)->next;
@@ -10512,10 +10598,11 @@ void List_HeadInsert(LinkList *L)
 ​    不带头结点，也要把头指针初始化为 NULL，以免后续指向未知的内存位置。
 
 ```c
-#include<stdio.h>
-#include<stdlib.h>
+#include <stdio.h>
+#include <stdlib.h>
 
-typedef struct LNode{
+typedef struct LNode
+{
     int data;
     struct LNode *next;
 } Node, *LinkList;
@@ -10542,7 +10629,8 @@ void List_HeadInsert(LinkList *L)
     int x;
     scanf("%d", &x);
     *L = NULL;
-    while (x != -1){
+    while (x != -1)
+    {
         s = (Node *)malloc(sizeof(Node));
         s->data = x;
         s->next = *L;
@@ -10587,7 +10675,7 @@ mindmap
 ​    如果仅仅是像下面这样调用图形窗口和控制台，虽然用户可以在控制台输入数据，但是此时图形窗口是未响应状态，不能实现真正的交互。
 
 ```c
-#include<stdio.h>
+#include <stdio.h>
 #include "acllib.h"
 
 int Setup()
@@ -10615,7 +10703,7 @@ int Setup()
 * 将**函数指针**（比如功能是点击鼠标后执行某个函数`m()`）交付给某个地方保存，那边的程序一直在运行，直到某一刻发现的鼠标点击动作，就会回来调用函数`m()`，这就是**回调函数**。
 
 ```c
-#include<stdio.h>
+#include <stdio.h>
 #include "acllib.h" 
 
 void mouseListener(int x, int y, int button, int event)
@@ -10711,7 +10799,7 @@ void(*TimerEventCallback)(int timerID)
 上面三个函数的合并代码如下：
 
 ```c
-#include<stdio.h>
+#include <stdio.h>
 #include "acllib.h" 
 
 void mouseListener(int x, int y, int button, int event)
@@ -10996,7 +11084,8 @@ fprintf(FILE*, ...)
 * `FILE`的`struct`内部定义的成员包含了文件缓冲区的信息，这里不做具体介绍。对于一般程序员来说，不必关心`FILE`结构内部的具体内容，这些内容由系统在文件打开时填入和使用，C 程序只使用文件指针`fp`，用`fp`代表文件整体。
 
 ```c
-typedef struct{
+typedef struct
+{
     short level;           //缓冲区使用量
     unsigned flags;        //文件状态标志
     char fd;               //文件描述符
@@ -11013,10 +11102,13 @@ typedef struct{
 
 ```c
 FILE *fp = fopen("filename", "r");
-if (fp){
+if (fp)
+{
     fscanf(fp, ...);
     fclose(fp);
-}else{
+}
+else
+{
     ...
 }
 ```
@@ -11030,17 +11122,20 @@ if (fp){
 * `fopen()`函数用于打开文件，而`r`表示去读，如果它没有打开这个文件，该函数会返回`NULL`。
 
 ```c
-#include<stdio.h>
+#include <stdio.h>
 
 int main(int argc, char const *argv[])
 {
     FILE *fp = fopen("新建文本文档.txt", "r");
-    if (fp){
+    if (fp)
+    {
         int num;
         fscanf(fp, "%d", &num);
         printf("%d\n", num);
         fclose(fp);
-    }else{
+    }
+    else
+    {
         printf("无法打开文件\n");
     }
     
@@ -11093,7 +11188,8 @@ fopen("file-name", "modes-to-open-a-file");
 * 为了保证文件操作的可靠性，调用 fopen() 函数时，最好做一个判断，以确保文件正常打开后再进行读写。其形式为：
 
 ```c
-    if ((fp = fopen("abc.txt", "r")) == NULL){
+    if ((fp = fopen("abc.txt", "r")) == NULL)
+    {
         printf("File open error!\n");
         exit(0);
     }
@@ -11103,7 +11199,7 @@ fopen("file-name", "modes-to-open-a-file");
 
 * ⑦一旦文件经 fopen() 正常打开，对该文件的操作方式就被确定，并且直至文件关闭都不变，即若一个文件按`r`方式打开，则只能对该文件进行读操作，而不能进行写入操作。
 
-**关闭文件——fclose( )**
+**关闭文件——fclose()**
 
 ​    当文件操作完成后，应及时关闭它以防止不正常的操作。对于缓冲文件系统来说，文件的操作是通过缓冲区进行的。如果把数据写入文件，首先是写到文件缓冲区里，只有当写满 512B，才会由系统真正写入磁盘扇区。如果写的数据不到 512B，发生程序异常终止，那么这些**缓冲区中的数据将会被丢失**。当文件操作结束时，即使未写满 512B，通过文件关闭，能强制把缓冲区中的数据写入磁盘扇区，确保文件的正常完成。（比如：fwrite() 之后马上接 fclose()）
 
@@ -11116,7 +11212,8 @@ fclose(filepointer);
 * 该函数将返回一个整数，若该数为 0 表示正常关闭文件，否则表示无法正常关闭文件，所以关闭文件也应该使用条件判断：
 
 ```c
-if (fclose(fp)){
+if (fclose(fp))
+{
     printf("Can not close the file!\n");
     exit(0);
 }
@@ -11233,7 +11330,7 @@ fread(buffer, size, count, fp);
 fwrite(buffer, size, count, fp);
 ```
 
-* 其中 buffer 是一个指针，在函数 fread()中，它表示存放输入数据的首地址；在函数 fwrite( )中，它表示存放输出数据的首地址。size 表示数据块的字节数。
+* 其中 buffer 是一个指针，在函数 fread()中，它表示存放输入数据的首地址；在函数 fwrite()中，它表示存放输出数据的首地址。size 表示数据块的字节数。
 * count 表示要读写的数据块数。fp 表示文件指针。
 
 例如：
@@ -11250,9 +11347,9 @@ fread(fa, 4, 5, fp);
 
 **其他相关函数**
 
-​    在文件读写的整个过程中，每一次成功的操作都将改变文件指针的位置，依次完成文件数据的访问和处理。除了基本的文件读写函数之外，C 语言标准库中也提供了一系列语文件指针的位置和状态有关的函数，其中语文件定位有关的函数有：rewind( )，fseek( )和 ftell( )；检测文件指针状态的函数主要有：feof( )、ferror( )和 clearerr( )。
+​    在文件读写的整个过程中，每一次成功的操作都将改变文件指针的位置，依次完成文件数据的访问和处理。除了基本的文件读写函数之外，C 语言标准库中也提供了一系列语文件指针的位置和状态有关的函数，其中语文件定位有关的函数有：rewind()，fseek()和 ftell()；检测文件指针状态的函数主要有：feof()、ferror()和 clearerr()。
 
-①重定位文件首函数 rewind( )
+①重定位文件首函数 rewind()
 
 * 定位文件读写位置指针，**使其指向读写文件的首地址**，即打开文件时文件读写位置指针所指向的位置。当访问某个文件，进行了文件读写，使指针指向了文件中间或末尾，又想回到文件的首地址重新进行读写时，可使用该函数。其调用格式为：
 
@@ -11260,7 +11357,7 @@ fread(fa, 4, 5, fp);
 rewind(FILE *fp);
 ```
 
-②指针移动控制函数 fseek( )
+②指针移动控制函数 fseek()
 
 * fseek()是 C 语言用来控制指针移动的函数。函数调用格式为：
 
@@ -11278,7 +11375,7 @@ fseek(fp, -20L, SEEK_END);
 
 * 前者表示将文件位置指针移动到离文件首 20 字节处。后者表示将文件位置指针移动到离文件尾部前 20 字节处。
 
-③获取指针当前位置函数 ftell( )
+③获取指针当前位置函数 ftell()
 
 * ftell()函数用来获取当前文件读写位置指针的位置，即相对于文件开头的位移量（字节数）。调用形式为：
 
@@ -11288,7 +11385,7 @@ ftell(fp);
 
 * 文件指针需要是已经定义过的。此函数出错时，返回-1L。
 
-④文件末尾检测函数 feof( )
+④文件末尾检测函数 feof()
 
 * 用于判断 fp 指针是否已经到文件末尾，即读文件是否读到了文件结束的位置。其调用格式为：
 
@@ -11300,17 +11397,17 @@ feof(fp);
 
 * 有时可以利用`!feof(fp)`作为循环条件，用于判断文件是否已经结束。
 
-⑤读写错误检查函数 ferror( )
+⑤读写错误检查函数 ferror()
 
-* ferror( )函数用来检查文件在用各种输入输出函数进行读写时是否出错，若返回 0，表示未出错，否则表示有错。调用格式为：
+* ferror()函数用来检查文件在用各种输入输出函数进行读写时是否出错，若返回 0，表示未出错，否则表示有错。调用格式为：
 
 ```c
 ferror(fp);  //fp 必须已经定义过
 ```
 
-⑥出错标记清除函数 clearerr( )
+⑥出错标记清除函数 clearerr()
 
-* clearerr( )函数用来清除出错标志和文件结束标志，使它们为 0 值。调用格式为：
+* clearerr()函数用来清除出错标志和文件结束标志，使它们为 0 值。调用格式为：
 
 ```c
 clearer(fp); //fp 必须已经定义过
@@ -11358,11 +11455,11 @@ clearer(fp); //fp 必须已经定义过
 
 **程序为什么要⽂件** 
 
-* 配置 ：Unix ⽤⽂本，Windows ⽤注册表 
+* 配置：Unix ⽤⽂本，Windows ⽤注册表 
 
-* 数据 ：稍微有点量的数据都放数据库了 
+* 数据：稍微有点量的数据都放数据库了 
 
-* 媒体 ：这个只能是⼆进制的
+* 媒体：这个只能是⼆进制的
 
 * 现实是，程序通过第三⽅库来读写⽂件，很少直接读/写⼆进制⽂件了
 
@@ -11431,7 +11528,7 @@ SEEK_END：从尾开始（倒过来）
 
 **顺序文件和随机文件**
 
-​    按照 C 程序对文件访问的特点来分，文件可分为**顺序访问文件**和**随机访问文件**，分别简称为**顺序文件**和**随机文件**。前面介绍的所有例子都是顺序访问，通过使用函数 fprintf( )或 fputs( )创建的数据记录长度并不是完全一致的，这种记录长度不确定的文件访问称为顺序访问。而随机访问文件要求文件中**单个记录的长度固定**，可直接访问，这样速度快，并且无需通过其他记录即可查找特定记录。因此随机文件适合银行系统、航空售票系统、销售点系统和其他需要快速访问特定数据的事务处理系统。
+​    按照 C 程序对文件访问的特点来分，文件可分为**顺序访问文件**和**随机访问文件**，分别简称为**顺序文件**和**随机文件**。前面介绍的所有例子都是顺序访问，通过使用函数 fprintf()或 fputs()创建的数据记录长度并不是完全一致的，这种记录长度不确定的文件访问称为顺序访问。而随机访问文件要求文件中**单个记录的长度固定**，可直接访问，这样速度快，并且无需通过其他记录即可查找特定记录。因此随机文件适合银行系统、航空售票系统、销售点系统和其他需要快速访问特定数据的事务处理系统。
 
 ​    随机访问文件中的每条记录通常具有相同的长度，可以调用一个用记录关键字做参数的函数计算出某个记录相对于文件开头的位置，这对于直接访问特定的记录很有帮助。（可以参考习题集部分——个人资金账户管理）
 
@@ -11562,13 +11659,14 @@ x << -2;   /*  No!!!  */
 * **典例一：输出一个数的二进制**
 
 ```c
-#include<stdio.h>
+#include <stdio.h>
 int main(int argc, char const *argv[])
 {
     int number;
     scanf("%x", &number);
     unsigned mask = 1u<<31;
-    while (mask){
+    while (mask)
+    {
         printf("%d", number & mask ? 1 : 0);
         mask >>= 1;
     }
@@ -11628,9 +11726,10 @@ struct
 * 当所需的位超过⼀个 int 时会采⽤多个 int
 
 ```c
-#include<stdio.h>
+#include <stdio.h>
 void prtBin(unsigned int number);
-struct U0{
+struct U0
+{
     unsigned int leading : 3;
     unsigned int FLAG1 : 1;
     unsigned int FLAG2 : 1;
@@ -11650,7 +11749,8 @@ int main(int argc, char const *argv[])
 void prtBin(unsigned int number)
 {
     unsigned mask = 1u<<31;
-    while (mask){
+    while (mask)
+    {
         printf("%d", number & mask ? 1 : 0);
         mask >>= 1;
     }
